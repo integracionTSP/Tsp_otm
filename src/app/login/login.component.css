@@ -124,27 +124,44 @@ div.login {
 }
 
 
-@media (min-width: 576px) { 
+/* Medium devices (desktops, 768px and up) */
+@media (max-width:768px) {
+  div.login {
+    z-index: 0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 46%;
+    height: 450px;
+    background: #f6f6f6;
+    overflow: hidden;
+    box-shadow: 1px 3px 12px 3px #aaa;
+  }
+}
 
-  
+/* Medium devices (desktops, 992px and up) */
+
+@media (max-width: 992px) {
+  div.login {
+    z-index: 0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 65%;
+    height: 450px;
+    background: #f6f6f6;
+    overflow: hidden;
+    box-shadow: 1px 3px 12px 3px #aaa;
+  }
+}
 
 
- }
+@media (min-width: 1200px) {
 
 
-@media (min-width: 768px) { 
-  
+}
 
- }
-
-
-@media (min-width: 992px) { 
-  
-
- }
-
-
-@media (min-width: 1200px) { 
-  
-
- }
