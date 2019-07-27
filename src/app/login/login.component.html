@@ -1,0 +1,24 @@
+<section class="login">
+  <img src="/../assets/img/logo-header.png" alt="" style="margin-top: 18%; margin-left: 48%;">
+</section>
+
+<div class="login">
+  <div class="banner"></div>
+  <div class="form">
+    <div class="wrapper">
+      <div class="row">
+        <div class="label">Usuario</div>
+        <input [(ngModel)]="login.username" name="username" type="text" id="username" />
+      </div>
+      <div class="row">
+        <div class="label">Contraseña</div>
+        <input [(ngModel)]="login.password" type="password" name="password" />
+      </div>
+      <div class="row">
+        <button (click)="loginUser(login)" type="submit"> Ingresar <i class="fas fa-sign-in-alt"></i></button> 
+        
+      </div>
+    </div>
+
+  </div>
+</div>
