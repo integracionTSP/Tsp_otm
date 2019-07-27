@@ -24,7 +24,8 @@ import { FormsModule} from '@angular/forms';
 
 // declarar las rutas
 const routes: Routes = [
-  
+  // pagina principal
+  {path:'', redirectTo: 'login' , pathMatch: 'full'},
   {path:'login', component:LoginComponent},
   {path:'form', component:FormComponent},
  
