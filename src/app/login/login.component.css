@@ -96,6 +96,8 @@ div.login {
   background:transparent;
   width:100%;
 }
+
+
 .login .form .row button {
   margin-top:0px;
   font-size:13px;
@@ -108,7 +110,39 @@ div.login {
   width:100%;
   color:#fff;
   cursor:pointer;
+
+  
+  
 }
+
+.login .form .row button:hover {
+  margin-top:0px;
+  font-size:14px;
+ 
+  border:none;
+  outline:none;
+  height:40px;
+  text-transform:uppercase;
+  border: solid 2px #1c344c;
+  background: transparent;
+  
+  width:100%;
+  color:#1c344c;
+  cursor:pointer;
+
+  -webkit-animation-name: changeBtn;
+  -webkit-animation-duration: 0.5s; 
+ 
+}
+
+@-webkit-keyframes changeBtn{
+  from {color: #fff;;background:#1c344c;}
+  to {color: #1c344c;background:transparent;}
+
+}
+
+
+
 .login .form .signup {
   position:absolute;
   text-align:center;
@@ -160,8 +194,5 @@ div.login {
 }
 
 
-@media (min-width: 1200px) {
 
-
-}
 
