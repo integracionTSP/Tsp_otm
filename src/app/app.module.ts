@@ -20,8 +20,6 @@ import { FormsModule} from '@angular/forms';
 
 
 
-
-
 // declarar las rutas
 const routes: Routes = [
   // pagina principal
