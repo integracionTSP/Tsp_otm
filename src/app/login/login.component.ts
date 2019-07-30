@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.GetdataService.AllUser().subscribe(result => {
 
       this.users = result;
-      console.log(result);
+      console.log(result.response);
 
     }, error => {
       console.log(JSON.stringify(error));
