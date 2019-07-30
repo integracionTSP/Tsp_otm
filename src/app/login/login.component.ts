@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     // traer el servicio con callback y guardar el resultado
     this.GetdataService.AllUser().subscribe(result => {
 
-      this.users = result;
+      this.users = result.response;
       console.log(result.response);
 
     }, error => {
@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
     let passCorrect: string;
     for (let i in this.users) {
 
-      if (this.users[i].nit == login.username && this.users[i].contrasenia == login.password) {
-        userCorrect = this.users[i].nit;
-        passCorrect = this.users[i].contrasenia;
+      if (this.users[i].idusuario == login.username && this.users[i].claveencr == login.password) {
+        userCorrect = this.users[i].idusuario;
+        passCorrect = this.users[i].claveencr;
         console.log('usuario correcto', userCorrect);
       }
     }
