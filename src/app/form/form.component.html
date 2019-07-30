@@ -6,7 +6,7 @@
 
 
 <!-- Section Form -->
-<section class="form">
+<section class="form" >
   <div class="container pt-5 pb-5">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -19,27 +19,27 @@
         <h6 class="sub-tittle">VEHICULO Y CONDUCTOR</h6>
         <div class="row">
           <div class="col-md-12">
-            <form>
+            <form [formGroup] ='formPowerDriverGID'> 
               <div class="form-row justify-content-center">
 
 
                 <div class="form-group col-md-6">
                   <h5 class="text-left-input">Placa</h5>
-                  <input type="name" class="form-control input-out-border"  placeholder="Placa del vehiculo">
+                  <input [(ngModel)] ="powerDriverGID.powerGID" formControlName="powerGID"   type="text" class="input-out-border"  placeholder="Placa del vehiculo">
                 </div>
 
                 <div class="form-group col-md-6">
                   <h5 class="text-left-input">Identificacion</h5>
-                  <input type="email" class="form-control input-out-border"  placeholder="Identificacion">
+                  <input [(ngModel)] ="powerDriverGID.driverGID" formControlName="driverGID"   type="text" class="input-out-border"  placeholder="Identificacion">
                 </div>
 
 
 
               </div>
             
-              <h6 class="sub-tittle"> RUTAS DISPONIBLES </h6>
-              <div class="table-">
-                  
+              
+              <div  *ngIf="enableAvailableRoutes"  class="table">
+                 <h6 class="sub-tittle"> RUTAS DISPONIBLES </h6>
                   <table class="table table-header-rotated">
                       
                     
@@ -79,9 +79,9 @@
 
 
 
-              <h6 class="sub-tittle"> OTRAS RUTAS </h6>
-              <div class="table-">
-                  
+              
+              <div  *ngIf="enableOtherRoutes"  class="table">
+                  <h6 class="sub-tittle"> OTRAS RUTAS </h6>
                   <table class="table table-header-rotated">
                       
                     
@@ -104,7 +104,7 @@
                           
                           <td>EE</td>
                           <td>TT</td>
-                        s
+                        
                      
                         </tr>
 
@@ -118,13 +118,12 @@
               
               <div class="row justify-content-center" style="margin-top: 5%;">
                   <div class="col-2">
-                      <button type="submit" class="btn-form">ACEPTAR</button>
+                      <button  (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">IMPRIMIR</button>
                     </div>
                     <div class="col-2">
                       <button type="submit" class="btn-form">SALIR</button>
                     </div>
                    
-
                  
               </div>
             

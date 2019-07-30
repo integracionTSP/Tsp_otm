@@ -16,7 +16,9 @@ import {GetdataService} from './service/getdata.service';
 import {HttpClientModule  } from '@angular/common/http';
 
 // importar modulos de formulario
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 
@@ -42,6 +44,7 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule, //añadir el http modulo
     FormsModule, // añadir formularios y modelos
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),//  formularios y modelos
     RouterModule.forRoot(routes), // añadir las rutas
     
 
