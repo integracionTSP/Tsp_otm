@@ -11,7 +11,7 @@ import { FormComponent } from './form/form.component';
 import { PrincipalComponent } from './principal/principal.component';
 
 // añadir servicio
-import {GetdataService} from './service/getdata.service';
+import {GetdataService} from './service/ordenCargaService/getdata.service';
 // importar el modulo http
 import {HttpClientModule  } from '@angular/common/http';
 

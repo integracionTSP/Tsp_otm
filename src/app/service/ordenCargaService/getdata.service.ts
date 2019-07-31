@@ -24,6 +24,17 @@ export class GetdataService {
 
   }
 
+  searchPowerDriver(powerDriverGID: any):Observable<any>{
+
+
+    
+    return this.httpClient.get(URL_principal+'getAsociados/'+powerDriverGID);
+
+  }
+
+
+
+
 
 }
 

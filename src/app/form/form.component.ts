@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // importar el servicio
-import { GetdataService } from '../service/getdata.service';
+import { GetdataService } from '../service/ordenCargaService/getdata.service';
 
 import { Router } from '@angular/router';
 
@@ -16,9 +16,9 @@ export class FormComponent implements OnInit {
   formPowerDriverGID: FormGroup;
 
   //rutas disponibles 
-  enableAvailableRoutes: boolean = false;
+  enableAvailableRoutes: boolean = true;
   // otras rutas 
-  enableOtherRoutes: boolean = false;
+  enableOtherRoutes: boolean = true;
 
   // captura de datos de los input
   powerDriverGID: any = { powerGID: '', driverGID: '' }

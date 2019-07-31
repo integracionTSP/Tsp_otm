@@ -34,16 +34,17 @@
 
   
   .input-out-border {
-    margin-top:2px;
-    font-size:13px;
-    color:rgb(70,70,70);
-    border:none;
-    border-bottom:1px solid rgba(100,100,100,0.6);
-    outline:none;
-    height:25px;
-    background:transparent;
-    width:80%;
+    font-size: 13px;
+    color: rgb(70,70,70);
+    border: none;
+    border-bottom: 1px solid rgba(100,100,100,0.6);
+    outline: none;
+    height: 25px;
+    background: transparent;
+    width: 55%;
     z-index: 0;
+    margin-right: 63%;
+    
   }
 
   .btn-form {
@@ -55,7 +56,7 @@
     outline: none;
     height: 30px;
     text-transform: uppercase;
-    background: #557dbc;
+    background: #395581;
     width: 86%;
     color: #fff;
     cursor: pointer;
@@ -73,11 +74,11 @@
     outline:none;
     height: 30px;
     text-transform:uppercase;
-    border: solid 2px #557dbc;
+    border: solid 2px #395581;
     background: transparent;
     
     width: 86%;
-    color:#557dbc;
+    color:#395581;
     cursor:pointer;
   
     -webkit-animation-name: changeBtn;
@@ -91,8 +92,12 @@
     margin-top: 3%;
   } 
 
+ 
   .table-header-rotated {
     border-collapse: collapse;
+    width: 50%;
+    margin-left: 27%;
+    
   }
   .csstransforms .table-header-rotated td {
     width: 30px;
@@ -102,8 +107,10 @@
   }
   .table-header-rotated td {
     text-align: center;
-    padding: 10px 5px;
+    padding: 0px 5pX;
     border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
    
   }
   .csstransforms .table-header-rotated th.rotate {
