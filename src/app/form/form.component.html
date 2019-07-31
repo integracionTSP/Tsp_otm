@@ -36,18 +36,19 @@
 
 
               </div>
-            
+             
               
               <div  *ngIf="enableAvailableRoutes"  class="table">
                  <h6 class="sub-tittle"> RUTAS DISPONIBLES </h6>
                   <table class="table table-header-rotated">
                       
-                    
+
                     <thead style = "background: #d1dceb;">
                         <tr>
                           <!-- First column header is not rotated -->
                           
                           <!-- Following headers are rotated -->
+                          
                           <th class="rotate"><div><span>SELECCIÓN</span></div></th>
                           <th class="rotate"><div><span>ORIGEN</span></div></th>
                           <th class="rotate"><div><span>DESTINO</span></div></th>
@@ -56,18 +57,17 @@
                         </tr> 
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let powerDriver of powerDriverGIDResult; let i = index">
                        
-                          <td><input checked="checked" name="column1[]" type="radio" value="row1-column1" ></td>
-                          
-                          <td>EE</td>
-                          <td>TT</td>
-                        
-                     
+                          <td><input  name="column1"  (click)="availableRouteSelect(powerDriver)"   type="radio" ></td>
+                       
+                          <td>{{powerDriver.source_location_gid}}</td>
+                          <td>{{powerDriver.dest_location_gid}}</td>
+                 
                         </tr>
                         <tr>
                        
-                            <td><input checked="checked" name="column1[]" type="radio" value="row1-column1" ></td>
+                            <td><input  (click)="searchDistPowerDriver(powerDriverGID)" name="column1" type="radio" value="row1-column1" ></td>
                             
                             <td colspan="2"> OTRAS RUTAS</td>
                    
@@ -98,13 +98,12 @@
                         </tr> 
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let powerDriverDist of powerDriverGIDDistResult; let i = index">
                        
-                          <td><input checked="checked" name="column2[]" type="radio" value="row1-column2" ></td>
-                          
-                          <td>EE</td>
-                          <td>TT</td>
+                          <td><input (click)="otherRouteSelect(powerDriverDist)"name="column2[]" type="radio" value="row1-column2" ></td>
                         
+                          <td>{{  powerDriverDist.source_location_gid}}</td>
+                          <td>{{  powerDriverDist.dest_location_gid}}</td>
                      
                         </tr>
 
@@ -117,8 +116,13 @@
               
               
               <div class="row justify-content-center" style="margin-top: 5%;">
-                  <div class="col-2">
-                      <button  (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR</button>
+                  <div *ngIf="enableBtnAcept" class="col-2">
+                      <button  (click)=" searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR</button>
+
+                    </div>
+                    
+                    <div *ngIf="enableBtnPrint" class="col-2">
+                      <button  type="submit" class="btn-form">IMPRIMIR</button>
                     </div>
                     <div class="col-2">
                       <button type="submit" class="btn-form">SALIR</button>
