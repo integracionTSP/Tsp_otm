@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // importar el servicio
-import { GetdataService } from '../service/ordenCargaService/getdata.service';
+import { GetdataService } from '../../../service/ordenCargaService/getdata.service';
 
 import { Router } from '@angular/router';
 
@@ -58,10 +58,10 @@ export class FormComponent implements OnInit {
   }
 
 
-  // limpiar campos
-  cleanInput(): void {
-    this.powerDriverGID = { powerGID: '', driverGID: '' }
-  }
+  // // limpiar campos
+  // cleanInput(): void {
+  //   this.powerDriverGID = { powerGID: '', driverGID: '' }
+  // }
 
 
   // buscar por placa e identificacion

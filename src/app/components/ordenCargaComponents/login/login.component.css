@@ -30,7 +30,7 @@ div.login {
   left: 50%;
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  width: 26%;
+  width: 21%;
   height: 450px;
   background: #f6f6f6;
   overflow: hidden;
@@ -167,7 +167,7 @@ div.login {
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
-    width: 46%;
+    width: 58%;
     height: 450px;
     background: #f6f6f6;
     overflow: hidden;
@@ -185,7 +185,7 @@ div.login {
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
-    width: 65%;
+    width: 58%;
     height: 450px;
     background: #f6f6f6;
     overflow: hidden;

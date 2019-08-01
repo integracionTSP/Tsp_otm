@@ -6,9 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { Routes,RouterModule } from '@angular/router';
 
 // añadir los componentes
-import { LoginComponent } from './login/login.component';
-import { FormComponent } from './form/form.component';
-import { PrincipalComponent } from './principal/principal.component';
+import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
+import { FormComponent } from './components/ordenCargaComponents/form/form.component';
+import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
 
 // añadir servicio
 import {GetdataService} from './service/ordenCargaService/getdata.service';
