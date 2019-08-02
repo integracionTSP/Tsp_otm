@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // importar el observable
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 
