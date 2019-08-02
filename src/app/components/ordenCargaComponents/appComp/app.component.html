@@ -1,8 +1,13 @@
 
-<div  class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+  <app-login [enableNavBar]="enableNavBar2"></app-login>
+
+ 
+<div *ngIf="enableNavBar2" ng class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="example-toolbar">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name">Responsive App</h1>
+      <img src="/../assets/img/logo-header.png" alt="" style="margin-left: 1%;">
+      {{enableNavBar2}}
     </mat-toolbar>
   
     <mat-sidenav-container class="example-sidenav-container"

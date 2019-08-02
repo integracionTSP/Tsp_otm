@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 // importar el servicio
-import { GetdataService } from './../../service/ordenCargaService/getdata.service';
+import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
 
 import { Router } from '@angular/router';
 
@@ -24,6 +24,11 @@ export class LoginComponent implements OnInit {
    disabledBtn: boolean = true;
   //Valor del check
    checkBtn:boolean = false;
+
+   //habilitar barra horizontal
+
+   @Input() enableNavBar:boolean;
+
 
   // inicializar el servicio en el constructor
   constructor(private GetdataService: GetdataService , private router:Router) {
@@ -63,7 +68,7 @@ export class LoginComponent implements OnInit {
 
       console.log('has iniciado session');
 
-      this.router.navigate(['/form']);
+      this.router.navigate(['/home']);
 
     } else {
       console.log('incorrecto');

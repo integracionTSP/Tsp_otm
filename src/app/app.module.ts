@@ -6,7 +6,6 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import { DemoMaterialModule } from './material.module';
 import { NavBarComponent } from './components/ordenCargaComponents/nav-bar/nav-bar.component';
 import { RouterModule, Routes } from '@angular/router';
-import { CarbonComponent } from './components/ordenCargaComponents/carbon/carbon.component';
 import { FormComponent } from './components/ordenCargaComponents/form/form.component';
 import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
 import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
@@ -27,7 +26,7 @@ const appRoutes: Routes = [
     {path:'', redirectTo: 'login' , pathMatch: 'full'},
     {path:'login', component:LoginComponent},
     {path:'form', component:FormComponent},
-    { path: 'carbon', component: CarbonComponent }
+    { path: 'home', component: PrincipalComponent }
   
   ]
 
@@ -35,7 +34,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavBarComponent,
-    CarbonComponent,
     FormComponent,
     LoginComponent,
     PrincipalComponent,
@@ -47,8 +45,8 @@ const appRoutes: Routes = [
     CdkTreeModule,
     DemoMaterialModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      appRoutes
+      // ,{ enableTracing: true } // <-- debugging purposes only
     ),
     FormsModule, // añadir formularios y modelos
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),

@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-  powerDriverGID: any = { powerGID: 'SXU600', driverGID: '12541060' }
+  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
@@ -111,11 +111,7 @@ export class FormComponent implements OnInit {
       this.enableBtnPrint = false;
 
     }
-
-
     console.log(powerDriverGID);
-
-
 
   }
 

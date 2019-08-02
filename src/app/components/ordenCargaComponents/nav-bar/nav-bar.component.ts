@@ -13,8 +13,8 @@ const TREE_DATA: FoodNode[] = [
     name: 'Orden de carga',
     children: [
       {
-        name: 'Carbón',
-        route: '/carbon'
+        name: 'Autorizacion',
+        route: '/form'
       },
     ]
   }
