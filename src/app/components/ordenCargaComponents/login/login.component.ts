@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 // importar el servicio
-import { GetdataService } from '../../../service/ordenCargaService/getdata.service';
+import { GetdataService } from './../../service/ordenCargaService/getdata.service';
 
 import { Router } from '@angular/router';
 

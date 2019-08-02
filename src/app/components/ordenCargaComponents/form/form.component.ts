@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 // importar el servicio
-import { GetdataService } from '../../../service/ordenCargaService/getdata.service';
+import { GetdataService } from 'src/app/service/ordenCargaService/getdata.service';
 
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-form',
@@ -12,6 +16,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+
+
+  d: Date;
+  fecha: String = '';
   // inicializar validaciones de formularios
   formPowerDriverGID: FormGroup;
 
@@ -28,7 +36,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  powerDriverGID: any = { powerGID: 'SXU600', driverGID: '12541060' }
 
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
@@ -40,10 +48,9 @@ export class FormComponent implements OnInit {
   powerDriverGIDDistResult: any = {};
 
   // viaje seleccionado de la tabla rutas disponibles
-  selectAvailableRoutesChk: any = {}
+  selectRoutesChk: any = {}
 
-  // viaje seleccionado de la tabla rutas disponibles
-  selectOtherRoutesChk: any = {}
+
 
 
 
@@ -54,6 +61,11 @@ export class FormComponent implements OnInit {
       driverGID: ['', [Validators.required]]
     });
 
+
+    this.d = new Date();
+    this.fecha = this.d.getDate() + '-' + (this.d.getMonth() + 1) +
+     '-' + this.d.getFullYear() + ' ' + this.d.getHours() + ':' +
+      this.d.getMinutes() + ':' + this.d.getSeconds()
 
   }
 
@@ -115,10 +127,10 @@ export class FormComponent implements OnInit {
 
     this.enableBtnPrint = true;
 
- 
 
-    this.selectAvailableRoutesChk = AvailableRoutesChk;
-    console.log("ruta disponible seleccionada ", this.selectAvailableRoutesChk);
+
+    this.selectRoutesChk = AvailableRoutesChk;
+    console.log("ruta disponible seleccionada ", this.selectRoutesChk);
 
   }
 
@@ -166,9 +178,36 @@ export class FormComponent implements OnInit {
   // seleccionar otros  individual de la tabla rutas disponibles
   otherRouteSelect(otherRoutesChk: any): void {
     this.enableBtnPrint = true;
-    this.selectOtherRoutesChk = otherRoutesChk;
-    console.log("otra ruta seleccionada ", this.selectOtherRoutesChk);
+    this.selectRoutesChk = otherRoutesChk;
+    console.log("otra ruta seleccionada ", this.selectRoutesChk);
 
+  }
+
+
+  generarPDF() {
+    console.log('FECHA: ' + this.d.toLocaleDateString());
+    console.log('FECHA2: ' + this.fecha);
+    console.log(this.d.getDay());
+    console.log(this.d.getMonth() + 1);
+    console.log(this.d.getTime());
+    let nombreDoc = 'reporte_' + String(this.d.getTime()) + '.pdf';
+    console.log(nombreDoc);
+    html2canvas(document.getElementById('pdf'), {
+      // Opciones
+      allowTaint: true,
+      useCORS: false,
+      // Calidad del PDF
+      scale: 1
+    }).then(function (canvas) {
+      var imgWidth = 180;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var img = canvas.toDataURL("image/png");
+      var doc = new jsPDF('l', 'mm', 'a5');
+      doc.addImage(img, 'PNG', 12, 22, imgWidth, imgHeight);
+ 
+      doc.save(nombreDoc);
+    });
   }
 
   ngOnInit() {
