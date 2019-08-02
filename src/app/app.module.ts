@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-
-import { Routes,RouterModule } from '@angular/router';
-
-// añadir los componentes
-import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
-import { FormComponent } from './components/ordenCargaComponents/form/form.component';
-import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
+import { AppComponent } from './components/appComp/app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import { DemoMaterialModule } from './material.module';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CarbonComponent } from './components/carbon/carbon.component';
+import { FormComponent } from './components/form/form.component';
+import { LoginComponent } from './components/login/login.component';
+import { PrincipalComponent } from './components/principal/principal.component';
 
 // añadir servicio
 import {GetdataService} from './service/ordenCargaService/getdata.service';
+
 // importar el modulo http
 import {HttpClientModule  } from '@angular/common/http';
 
@@ -19,40 +21,40 @@ import {HttpClientModule  } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+const appRoutes: Routes = [
 
+    // pagina principal
+    {path:'', redirectTo: 'login' , pathMatch: 'full'},
+    {path:'login', component:LoginComponent},
+    {path:'form', component:FormComponent},
+    { path: 'carbon', component: CarbonComponent }
+  
+  ]
 
-
-// declarar las rutas
-const routes: Routes = [
-  // pagina principal
-  {path:'', redirectTo: 'login' , pathMatch: 'full'},
-  {path:'login', component:LoginComponent},
-  {path:'form', component:FormComponent},
- 
-
-]
-
-@NgModule({
+  @NgModule({
   declarations: [
-    
-    LoginComponent,
+    AppComponent,
+    NavBarComponent,
+    CarbonComponent,
     FormComponent,
-    PrincipalComponent
+    LoginComponent,
+    PrincipalComponent,
+  
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule, //añadir el http modulo
+    BrowserAnimationsModule,
+    CdkTreeModule,
+    DemoMaterialModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     FormsModule, // añadir formularios y modelos
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),//  formularios y modelos
-    RouterModule.forRoot(routes), // añadir las rutas
-    
-
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    HttpClientModule //añadir el http modulo
   ],
-  providers: [GetdataService], // añadir los servicios
-  bootstrap: [PrincipalComponent]
+  providers: [GetdataService],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-
-  
- }
+export class AppModule { }
