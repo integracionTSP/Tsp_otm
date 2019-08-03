@@ -33,10 +33,10 @@ export class GetdataService {
   }
 
   // imprimir datos del pdf
-  searchDataPrint(dataPrint: any): Observable<any> {
+  searchDataPrint(powerDriverGID: any, selectRoutesChk: any ): Observable<any> {
 
     // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(urlPrincipal + `getPrintShipment/${dataPrint.powerGID}/${dataPrint.driverGID}/${dataPrint.SOURCE_LOCATION_GID}/${dataPrint.DEST_LOCATION_GID}`);
+    return this.httpClient.get(urlPrincipal + `getPrintShipment/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}/${selectRoutesChk.source_location_gid}/${selectRoutesChk.dest_location_gid}`);
   }
 
   // datos para validaciones del conductor 

@@ -48,7 +48,16 @@ export class FormComponent implements OnInit {
   powerDriverGIDDistResult: any = {};
 
   // viaje seleccionado de la tabla rutas disponibles
-  selectRoutesChk: any = {}
+  selectRoutesChk: any = {};
+
+  // captura para imprimir
+  selectDataPrint: any = [];
+
+  //resultados de de datos para imprimir
+
+  DataPrintResult: any = {};
+
+
 
 
 
@@ -64,7 +73,7 @@ export class FormComponent implements OnInit {
 
     this.d = new Date();
     this.fecha = this.d.getDate() + '-' + (this.d.getMonth() + 1) +
-     '-' + this.d.getFullYear() + ' ' + this.d.getHours() + ':' +
+      '-' + this.d.getFullYear() + ' ' + this.d.getHours() + ':' +
       this.d.getMinutes() + ':' + this.d.getSeconds()
 
   }
@@ -122,15 +131,19 @@ export class FormComponent implements OnInit {
     this.enableOtherRoutes = false;
 
     this.enableBtnPrint = true;
-
-
-
     this.selectRoutesChk = AvailableRoutesChk;
     console.log("ruta disponible seleccionada ", this.selectRoutesChk);
 
+    // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
+
+    // console.log('parametros para imprimir', this.selectDataPrint[0].powerGID, this.selectDataPrint[0].driverGID,
+    //   this.selectDataPrint[1].source_location_gid, this.selectDataPrint[1].dest_location_gid);
+
+
+
   }
 
-  // DESTINOS DISTINTOS A LOS ASOCIADOS
+  // DESTINOS DISTINTOS A LOS ASOCIADOS otras rutas
 
   searchDistPowerDriver(powerDriverGID: any): void {
 
@@ -170,14 +183,41 @@ export class FormComponent implements OnInit {
 
   }
 
-
   // seleccionar otros  individual de la tabla rutas disponibles
   otherRouteSelect(otherRoutesChk: any): void {
     this.enableBtnPrint = true;
     this.selectRoutesChk = otherRoutesChk;
-    console.log("otra ruta seleccionada ", this.selectRoutesChk);
+    console.log("otra ruta seleccionada", this.selectRoutesChk);
+
+    // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
+
+    // console.log('parametros para imprimir', this.selectDataPrint[0].powerGID, this.selectDataPrint[0].driverGID,
+    //   this.selectDataPrint[1].source_location_gid, this.selectDataPrint[1].dest_location_gid);
+
 
   }
+
+
+
+  searchDataPrint(): void {
+ 
+    
+    this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
+
+      this.DataPrintResult = result.response[0] ;
+      console.log('datos a imprimir',this.DataPrintResult);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+
+  }
+
+
+
 
 
   generarPDF() {
@@ -201,7 +241,7 @@ export class FormComponent implements OnInit {
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('l', 'mm', 'a5');
       doc.addImage(img, 'PNG', 12, 22, imgWidth, imgHeight);
- 
+
       doc.save(nombreDoc);
     });
   }
