@@ -1,39 +1,57 @@
 import { Injectable } from '@angular/core';
-//importar servicios http
+// importar servicios http
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // importar el observable
 import { Observable } from 'rxjs';
 
+// definir la url principal
 
-
-//definir la url principal 
-const URL_principal = 'http://localhost:3000/api/ordenCarga/';
-
+const urlPrincipal = 'http://localhost:3000/api/ordenCarga/';
 
 
 @Injectable()
 export class GetdataService {
 
-  // inyectar el httoclient
+  // inyectar el httpclient
   constructor(private httpClient: HttpClient) { }
 
   // metodo para obtener registros
   AllUser(): Observable<any> {
-    return this.httpClient.get(URL_principal + 'getAllUserPass');
+    return this.httpClient.get(urlPrincipal + 'getAllUserPass');
 
   }
-
+  // rutas disponibles asociadas a la placa y conductor
   searchPowerDriver(powerDriverGID: any): Observable<any> {
 
-    return this.httpClient.get(URL_principal+`getAsociados/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
+    return this.httpClient.get(urlPrincipal + `getAsociados/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
   }
 
-
+   // otras rutas  asociadas a la placa y conductor
   searchDistPowerDriver(powerDriverGID: any): Observable<any> {
-
-    return this.httpClient.get(URL_principal +`getDistintos/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
+    return this.httpClient.get(urlPrincipal + `getDistintos/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
   }
+
+  // imprimir datos del pdf
+  searchDataPrint(dataPrint: any): Observable<any> {
+
+    // tslint:disable-next-line: max-line-length
+    return this.httpClient.get(urlPrincipal + `getPrintShipment/${dataPrint.powerGID}/${dataPrint.driverGID}/${dataPrint.SOURCE_LOCATION_GID}/${dataPrint.DEST_LOCATION_GID}`);
+  }
+
+  // datos para validaciones del conductor 
+
+  driverValid(powerDriverGID : any): Observable<any> {
+
+    return this.httpClient.get(urlPrincipal + `getDriverValid/${powerDriverGID.driverGID}`);
+  }
+
+    // datos para validaciones del conductor 
+  powerValid(powerDriverGID : any): Observable<any> {
+
+    return this.httpClient.get(urlPrincipal + `getPowerValid/${powerDriverGID.powerGID}`);
+  }
+
 
 
 

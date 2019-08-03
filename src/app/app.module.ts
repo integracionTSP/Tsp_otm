@@ -2,55 +2,50 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './components/ordenCargaComponents/appComp/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CdkTreeModule} from '@angular/cdk/tree';
+import { CdkTreeModule } from '@angular/cdk/tree';
 import { DemoMaterialModule } from './material.module';
 import { NavBarComponent } from './components/ordenCargaComponents/nav-bar/nav-bar.component';
-import { RouterModule, Routes } from '@angular/router';
+
 import { FormComponent } from './components/ordenCargaComponents/form/form.component';
 import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
 import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
 
 // añadir servicio
-import {GetdataService} from './service/ordenCargaService/getdata.service';
+import { GetdataService } from './service/ordenCargaService/getdata.service';
 
 // importar el modulo http
-import {HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // importar modulos de formulario
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// añadir modulo de rutas
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
 
-    // pagina principal
-    {path:'', redirectTo: 'login' , pathMatch: 'full'},
-    {path:'login', component:LoginComponent},
-    {path:'form', component:FormComponent},
-    { path: 'home', component: PrincipalComponent }
-  
-  ]
 
-  @NgModule({
+
+
+
+@NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     FormComponent,
     LoginComponent,
-    PrincipalComponent,
-  
+    PrincipalComponent
+    
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CdkTreeModule,
     DemoMaterialModule,
-    RouterModule.forRoot(
-      appRoutes
-      // ,{ enableTracing: true } // <-- debugging purposes only
-    ),
     FormsModule, // añadir formularios y modelos
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    HttpClientModule //añadir el http modulo
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    HttpClientModule, // añadir el http modulo
+    AppRoutingModule // modulo de rutas
   ],
   providers: [GetdataService],
   bootstrap: [AppComponent]
