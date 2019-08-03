@@ -45,17 +45,23 @@ export class FormComponent implements OnInit {
   powerDriverGIDResult: any = {};
 
   //resultados distintos rutas de la busqueda
+
   powerDriverGIDDistResult: any = {};
 
   // viaje seleccionado de la tabla rutas disponibles
   selectRoutesChk: any = {};
 
-  // captura para imprimir
-  selectDataPrint: any = [];
+  // resultados de de datos para imprimir
+  dataPrintResult: any = {};
 
-  //resultados de de datos para imprimir
+  // datos a validar del conductor
 
-  DataPrintResult: any = {};
+  dataDriverValid : any = {};
+
+   // datos a validar de la placa 
+
+   dataPowerValid : any = {};
+  
 
 
 
@@ -91,14 +97,16 @@ export class FormComponent implements OnInit {
 
 
     if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
-
+      
       this.GetdataService.searchPowerDriver(powerDriverGID).subscribe(result => {
         // capturar los datos de la url
         this.powerDriverGIDResult = result.response;
-
+        this.driverValid();
+        this.powerValid();
         // validar que el registro exista
-        if (this.powerDriverGIDResult != this.notFoundMessage) {
+        if (this.powerDriverGIDResult !== this.notFoundMessage) {
           this.enableAvailableRoutes = true;
+          
           console.log(this.powerDriverGIDResult);
 
         } else {
@@ -132,7 +140,7 @@ export class FormComponent implements OnInit {
 
     this.enableBtnPrint = true;
     this.selectRoutesChk = AvailableRoutesChk;
-    console.log("ruta disponible seleccionada ", this.selectRoutesChk);
+    console.log(" ruta disponible seleccionada ", this.selectRoutesChk);
 
     // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
 
@@ -204,8 +212,8 @@ export class FormComponent implements OnInit {
     
     this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
 
-      this.DataPrintResult = result.response[0] ;
-      console.log('datos a imprimir',this.DataPrintResult);
+      this.dataPrintResult = result.response[0] ;
+      console.log('datos a imprimir',this.dataPrintResult);
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -215,6 +223,38 @@ export class FormComponent implements OnInit {
 
 
   }
+
+
+  driverValid(): void {
+
+    this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
+
+      this.dataDriverValid = result.response ;
+      console.log('datos del conductor a validar',this.dataDriverValid);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+  }
+
+  powerValid(): void {
+
+    this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
+
+      this.dataPowerValid = result.response ;
+      console.log('datos de la placa  a validar',this.dataPowerValid);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+  }
+
 
 
 
