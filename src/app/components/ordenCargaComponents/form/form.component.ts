@@ -56,16 +56,11 @@ export class FormComponent implements OnInit {
 
   // datos a validar del conductor
 
-  dataDriverValid : any = {};
+  dataDriverValid: any = {};
 
-   // datos a validar de la placa 
+  // datos a validar de la placa 
 
-   dataPowerValid : any = {};
-  
-
-
-
-
+  dataPowerValid: any = {};
 
 
 
@@ -91,23 +86,93 @@ export class FormComponent implements OnInit {
   // }
 
 
+  driverValid(): void {
+
+    this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
+
+      this.dataDriverValid = result.response;
+
+      console.log('tipo de activacion', this.dataDriverValid[0].is_active);
+      console.log('datos del conductor a validar', this.dataDriverValid);
+
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+  }
+
+  powerValid(): void {
+
+    this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
+
+      this.dataPowerValid = result.response;
+      console.log('datos de la placa  a validar', this.dataPowerValid);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+  }
+
+
+
   // buscar por placa e identificacion
 
-  searchPowerDriver(powerDriverGID: any): void {
+  searchPowerDriver(powerDriverGID: any, driverValid: any): void {
+
+    this.driverValid();
+    this.powerValid();
+
+
 
 
     if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
-      
+
       this.GetdataService.searchPowerDriver(powerDriverGID).subscribe(result => {
         // capturar los datos de la url
         this.powerDriverGIDResult = result.response;
-        this.driverValid();
-        this.powerValid();
+
         // validar que el registro exista
         if (this.powerDriverGIDResult !== this.notFoundMessage) {
-          this.enableAvailableRoutes = true;
-          
-          console.log(this.powerDriverGIDResult);
+          console.log('fecha expiracion', this.dataDriverValid[0].expiracion_licencia);
+          console.log('estado del conductor', this.dataDriverValid[0].is_active);
+
+
+          if (this.dataDriverValid[0].expiracion_licencia > this.dataDriverValid[0].fecha_actual) {
+
+            switch (this.dataDriverValid[0].is_active) {
+              case 'N':
+                console.log('el conductor no esta activo');
+                break;
+
+              default:
+                this.enableAvailableRoutes = true;
+                console.log(this.powerDriverGIDResult);
+                break;
+            }
+
+
+          } else {
+
+            console.log('la licencia esta vencida');
+
+            switch (this.dataDriverValid[0].is_active) {
+              case 'N':
+                console.log('el conductor no esta activo');
+                break;
+
+              default:
+                console.log('el conductor esta activo');
+                break;
+            }
+
+          }
+
 
         } else {
           console.log(this.powerDriverGIDResult);
@@ -208,12 +273,12 @@ export class FormComponent implements OnInit {
 
 
   searchDataPrint(): void {
- 
-    
+
+
     this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
 
-      this.dataPrintResult = result.response[0] ;
-      console.log('datos a imprimir',this.dataPrintResult);
+      this.dataPrintResult = result.response[0];
+      console.log('datos a imprimir', this.dataPrintResult);
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -224,36 +289,6 @@ export class FormComponent implements OnInit {
 
   }
 
-
-  driverValid(): void {
-
-    this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
-
-      this.dataDriverValid = result.response ;
-      console.log('datos del conductor a validar',this.dataDriverValid);
-
-    }, error => {
-      console.log(JSON.stringify(error));
-
-    }
-    );
-
-  }
-
-  powerValid(): void {
-
-    this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
-
-      this.dataPowerValid = result.response ;
-      console.log('datos de la placa  a validar',this.dataPowerValid);
-
-    }, error => {
-      console.log(JSON.stringify(error));
-
-    }
-    );
-
-  }
 
 
 
