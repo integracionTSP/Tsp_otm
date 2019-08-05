@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-   powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
   //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
@@ -63,6 +63,9 @@ export class FormComponent implements OnInit {
   // datos a validar de la placa 
 
   dataPowerValid: any = {};
+
+  // email
+  
 
 
 
@@ -155,18 +158,19 @@ export class FormComponent implements OnInit {
             // conductor este activo
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
-                let emailTo = JSON.stringify(localStorage.getItem('email'));
-                this.GetdataService.sendMail( 'integracion@sanchezpolo.com' , 'NO valido' , 'El conductor no esta activo' ).subscribe(result => {
+                console.log('el conductor no esta activo');
+                let emailTo = JSON.parse(localStorage.getItem('email'));
+                this.GetdataService.sendMail(emailTo.email, 'NO valido', 'El conductor no esta activo').subscribe(result => {
 
                   console.log(result);
-                  
+
                 }, error => {
                   console.log(JSON.stringify(error));
 
                 }
                 );
 
-                console.log('el conductor no esta activo');
+               
                 break;
 
               default:
@@ -179,6 +183,17 @@ export class FormComponent implements OnInit {
                       case 'N':
                         console.log('la placa  no esta activa');
 
+                        let emailTo = JSON.parse(localStorage.getItem('email'));
+                        this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la placa  no esta activa').subscribe(result => {
+
+                          console.log(result);
+
+                        }, error => {
+                          console.log(JSON.stringify(error));
+
+                        }
+                        );
+
                         break;
                       // mostrar datos si todo es correcto
                       default:
@@ -190,12 +205,38 @@ export class FormComponent implements OnInit {
 
                   } else {
 
+
                     console.log('la tecnomecania esta vencida');
+
+
+                    let emailTo = JSON.parse(localStorage.getItem('email'));
+                    this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la tecnomecania esta vencida').subscribe(result => {
+
+                      console.log(result);
+
+                    }, error => {
+                      console.log(JSON.stringify(error));
+
+                    }
+                    );
                   }
 
                 } else {
 
                   console.log('el soat esta vencido');
+                  let emailTo = JSON.parse(localStorage.getItem('email'));
+                  this.GetdataService.sendMail(emailTo.email, 'NO valido', 'el soat esta vencido').subscribe(result => {
+
+                    console.log(result);
+
+                  }, error => {
+                    console.log(JSON.stringify(error));
+
+                  }
+                  );
+
+
+
                 }
 
                 break;
@@ -203,6 +244,18 @@ export class FormComponent implements OnInit {
           } else {
 
             console.log('la licencia esta vencida');
+
+
+            let emailTo = JSON.parse(localStorage.getItem('email'));
+            this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la licencia esta vencida').subscribe(result => {
+
+              console.log(result);
+
+            }, error => {
+              console.log(JSON.stringify(error));
+
+            }
+            );
 
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
