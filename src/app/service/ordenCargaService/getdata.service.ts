@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 // definir la url principal
 
-const urlPrincipal = 'http://172.16.248.120:3000/api/ordenCarga/';
+const urlPrincipal = 'http://localhost:3000/api/ordenCarga/';
 
 
 @Injectable()
