@@ -54,7 +54,7 @@ export class GetdataService {
 
   sendMail(p_to : string , p_subject  : string, p_body: string){
 
-    return this.httpClient.post('http://localhost:3000/api/mail/send',{p_to,p_subject,p_body});
+    return this.httpClient.post('http://172.16.248.185:3000/api/mail/send',{p_to,p_subject,p_body});
   }
 
 

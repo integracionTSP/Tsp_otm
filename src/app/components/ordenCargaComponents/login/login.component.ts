@@ -27,20 +27,12 @@ export class LoginComponent implements OnInit {
 
   //habilitar barra horizontal
 
-<<<<<<< HEAD
   enableNavBar: boolean;
 
 
   // inicializar el servicio en el constructor
   constructor(private GetdataService: GetdataService, private router: Router, public loginServ:LoginService) {
     this.targetMenu(false);
-=======
-  @Input() enableNavBar: boolean;
-
-
-  // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService, private router: Router) {
->>>>>>> cfd0e447290e89dd3e4368f8bea4232e08b3d94b
   }
 
 
@@ -100,13 +92,9 @@ export class LoginComponent implements OnInit {
 
   //inicializar
   ngOnInit() {
-<<<<<<< HEAD
     this.loginServ.sendEnviableState.subscribe(response =>{
       this.enableNavBar = response;
     });
-=======
-
->>>>>>> cfd0e447290e89dd3e4368f8bea4232e08b3d94b
     this.getAllUser();
     
   }
