@@ -36,9 +36,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
@@ -64,8 +64,6 @@ export class FormComponent implements OnInit {
 
   dataPowerValid: any = {};
 
-  // email
-  
 
 
 
@@ -271,6 +269,20 @@ export class FormComponent implements OnInit {
 
 
         } else {
+
+
+          // let emailTo = JSON.parse(localStorage.getItem('email'));
+          // this.GetdataService.sendMail(emailTo.email, 'NO valido', '').subscribe(result => {
+
+          //   console.log(result);
+
+          // }, error => {
+          //   console.log(JSON.stringify(error));
+
+          // }
+          // );
+
+
           console.log(this.powerDriverGIDResult);
           this.enableAvailableRoutes = false;
         }
