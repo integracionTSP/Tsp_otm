@@ -1,6 +1,6 @@
 <ul>
 
-  <li> <a [routerLink]="['/login']">Cerrar session</a> </li>
+  <li>  <button (click)="logOut()" type="button" class="btn btn-primary"> Cerrar sesion</button> </li>
 
 </ul>
 
@@ -51,8 +51,8 @@
                   <tbody>
                     <tr>
 
-                      <td>{{dataPrintResult.source_location_gid}}</td>
-                      <td>{{dataPrintResult.dest_location_gid}}</td>
+                      <td>{{selectRoutesChk.source_location_gid}}</td>
+                      <td>{{selectRoutesChk.dest_location_gid}}</td>
 
 
                     </tr>

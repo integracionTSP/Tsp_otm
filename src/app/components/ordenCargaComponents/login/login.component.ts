@@ -14,24 +14,24 @@ export class LoginComponent implements OnInit {
 
 
   // variable que guarda los datos digitados
-  login: any = { username: '', password: '' }
+  login: any = { username: '', password: '', email: '' }
 
   //variable para almacenar los usuarios
 
   users: any;
 
   //habilitar btn
-   disabledBtn: boolean = true;
+  disabledBtn: boolean = true;
   //Valor del check
-   checkBtn:boolean = false;
+  checkBtn: boolean = false;
 
-   //habilitar barra horizontal
+  //habilitar barra horizontal
 
-   @Input() enableNavBar:boolean;
+  @Input() enableNavBar: boolean;
 
 
   // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService , private router:Router) {
+  constructor(private GetdataService: GetdataService, private router: Router) {
   }
 
 
@@ -56,35 +56,41 @@ export class LoginComponent implements OnInit {
     console.log(login);
     let userCorrect: string;
     let passCorrect: string;
+    let email: string;
+
     for (let i in this.users) {
 
       if (this.users[i].idusuario == login.username && this.users[i].claveencr == login.password) {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].claveencr;
+        email = this.users[i].email;
         console.log('usuario correcto', userCorrect);
       }
     }
     if (userCorrect == login.username && passCorrect == login.password) {
+      login.email = email;
+      localStorage.setItem('email', JSON.stringify(login));
 
       console.log('has iniciado session');
 
       this.router.navigate(['/home']);
 
     } else {
+      localStorage.setItem('email', null);
       console.log('incorrecto');
 
     }
   }
   // mostrar el boton de ingresar
-  checkvalidation():void{
+  checkvalidation(): void {
     this.disabledBtn = this.checkBtn;
-   
+
   }
 
 
   //inicializar
   ngOnInit() {
-   
+
     this.getAllUser();
 
   }

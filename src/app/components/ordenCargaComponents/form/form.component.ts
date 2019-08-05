@@ -36,9 +36,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-  // powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+   powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
@@ -86,6 +86,11 @@ export class FormComponent implements OnInit {
   // cleanInput(): void {
   //   this.powerDriverGID = { powerGID: '', driverGID: '' }
   // }
+
+  logOut() {
+    localStorage.setItem('email', null);
+    this.router.navigate(['/login']);
+  }
 
 
   driverValid(): void {
@@ -150,6 +155,17 @@ export class FormComponent implements OnInit {
             // conductor este activo
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
+                let emailTo = JSON.stringify(localStorage.getItem('email'));
+                this.GetdataService.sendMail( 'integracion@sanchezpolo.com' , 'NO valido' , 'El conductor no esta activo' ).subscribe(result => {
+
+                  console.log(result);
+                  
+                }, error => {
+                  console.log(JSON.stringify(error));
+
+                }
+                );
+
                 console.log('el conductor no esta activo');
                 break;
 
@@ -229,7 +245,7 @@ export class FormComponent implements OnInit {
   // seleccionar el viaje disponible individual de la tabla rutas disponibles
   availableRouteSelect(AvailableRoutesChk: any): void {
     this.enableOtherRoutes = false;
-
+    this.selectRoutesChk = {};
     this.enableBtnPrint = true;
     this.selectRoutesChk = AvailableRoutesChk;
     console.log(" ruta disponible seleccionada ", this.selectRoutesChk);
@@ -255,7 +271,7 @@ export class FormComponent implements OnInit {
         this.powerDriverGIDDistResult = result.response;
 
         // validar que el registro exista
-        if (this.powerDriverGIDDistResult != this.notFoundMessage) {
+        if (this.powerDriverGIDDistResult !== this.notFoundMessage) {
           this.enableOtherRoutes = true;
           console.log("resultados distintos ", this.powerDriverGIDDistResult);
 
@@ -286,6 +302,7 @@ export class FormComponent implements OnInit {
   // seleccionar otros  individual de la tabla rutas disponibles
   otherRouteSelect(otherRoutesChk: any): void {
     this.enableBtnPrint = true;
+    this.selectRoutesChk = {};
     this.selectRoutesChk = otherRoutesChk;
     console.log("otra ruta seleccionada", this.selectRoutesChk);
 
