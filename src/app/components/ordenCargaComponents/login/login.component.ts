@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   @Output() usuarioSeleccionado = new EventEmitter();
   // variable que guarda los datos digitados
-  login: any = { username: '', password: '' }
+  login: any = { username: '', password: '', email: '' }
 
   //variable para almacenar los usuarios
 
@@ -27,12 +27,20 @@ export class LoginComponent implements OnInit {
 
   //habilitar barra horizontal
 
+<<<<<<< HEAD
   enableNavBar: boolean;
 
 
   // inicializar el servicio en el constructor
   constructor(private GetdataService: GetdataService, private router: Router, public loginServ:LoginService) {
     this.targetMenu(false);
+=======
+  @Input() enableNavBar: boolean;
+
+
+  // inicializar el servicio en el constructor
+  constructor(private GetdataService: GetdataService, private router: Router) {
+>>>>>>> cfd0e447290e89dd3e4368f8bea4232e08b3d94b
   }
 
 
@@ -57,22 +65,28 @@ export class LoginComponent implements OnInit {
     console.log(login);
     let userCorrect: string;
     let passCorrect: string;
+    let email: string;
+
     for (let i in this.users) {
 
       if (this.users[i].idusuario == login.username && this.users[i].claveencr == login.password) {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].claveencr;
+        email = this.users[i].email;
         console.log('usuario correcto', userCorrect);
 
       }
     }
     if (userCorrect == login.username && passCorrect == login.password) {
+      login.email = email;
+      localStorage.setItem('email', JSON.stringify(login));
 
       console.log('has iniciado session');
       this.targetMenu(true);
       this.router.navigate(['/home']);
 
     } else {
+      localStorage.setItem('email', null);
       console.log('incorrecto');
 
     }
@@ -86,9 +100,13 @@ export class LoginComponent implements OnInit {
 
   //inicializar
   ngOnInit() {
+<<<<<<< HEAD
     this.loginServ.sendEnviableState.subscribe(response =>{
       this.enableNavBar = response;
     });
+=======
+
+>>>>>>> cfd0e447290e89dd3e4368f8bea4232e08b3d94b
     this.getAllUser();
     
   }

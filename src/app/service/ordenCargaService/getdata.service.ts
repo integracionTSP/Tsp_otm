@@ -52,6 +52,11 @@ export class GetdataService {
     return this.httpClient.get(urlPrincipal + `getPowerValid/${powerDriverGID.powerGID}`);
   }
 
+  sendMail(p_to : string , p_subject  : string, p_body: string){
+
+    return this.httpClient.post('http://localhost:3000/api/mail/send',{p_to,p_subject,p_body});
+  }
+
 
 
 
