@@ -1,10 +1,12 @@
 
 .form {
-    background-color: #e7ecff;
-    box-shadow: 1px 3px 12px 3px rgb(70,70,70);
-    font-style: italic;
-    font-weight: bold;
-    font-family: 'Cairo', sans-serif;
+  background-color: #e7ecff;
+  box-shadow: 1px 3px 12px 3px rgb(70,70,70);
+  font-style: italic;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+  width: 89%;
+  margin-left: 5%;
   }
   
   .tittle {
