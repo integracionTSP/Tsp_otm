@@ -3,11 +3,11 @@
   <!-- <app-login [enableNavBar]="enableNavBar2"></app-login> -->
 
  
-<div *ngIf="enableNavBar2" ng class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div *ngIf="enableNavBar" ng class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="example-toolbar">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
       <img src="/../assets/img/logo-header.png" alt="" style="margin-left: 1%;">
-      {{enableNavBar2}}
+      {{enableNavBar}}
     </mat-toolbar>
   
     <mat-sidenav-container class="example-sidenav-container"
@@ -22,6 +22,11 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
+
+  <app-login *ngIf="!enableNavBar">
+
+  </app-login>
+
 
   <!-- Copyright 2019 Google Inc. All Rights Reserved.
       Use of this source code is governed by an MIT-style license that

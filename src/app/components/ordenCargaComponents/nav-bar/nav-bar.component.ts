@@ -17,6 +17,10 @@ const TREE_DATA: FoodNode[] = [
         route: '/form'
       },
     ]
+  },
+  {
+    name: 'Salir',
+    route: '/login'
   }
 ];
 

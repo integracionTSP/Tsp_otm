@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, HostBinding } from '@angular/core';
 
 // importar el servicio
 import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
+import {LoginService} from '../../../service/Login/login.service';
 
 import { Router } from '@angular/router';
 
@@ -11,8 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-
+  @Output() usuarioSeleccionado = new EventEmitter();
   // variable que guarda los datos digitados
   login: any = { username: '', password: '' }
 
@@ -21,17 +21,18 @@ export class LoginComponent implements OnInit {
   users: any;
 
   //habilitar btn
-   disabledBtn: boolean = true;
+  disabledBtn: boolean = true;
   //Valor del check
-   checkBtn:boolean = false;
+  checkBtn: boolean = false;
 
-   //habilitar barra horizontal
+  //habilitar barra horizontal
 
-   @Input() enableNavBar:boolean;
+  enableNavBar: boolean;
 
 
   // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService , private router:Router) {
+  constructor(private GetdataService: GetdataService, private router: Router, public loginServ:LoginService) {
+    this.targetMenu(false);
   }
 
 
@@ -62,12 +63,13 @@ export class LoginComponent implements OnInit {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].claveencr;
         console.log('usuario correcto', userCorrect);
+
       }
     }
     if (userCorrect == login.username && passCorrect == login.password) {
 
       console.log('has iniciado session');
-
+      this.targetMenu(true);
       this.router.navigate(['/home']);
 
     } else {
@@ -76,17 +78,23 @@ export class LoginComponent implements OnInit {
     }
   }
   // mostrar el boton de ingresar
-  checkvalidation():void{
+  checkvalidation(): void {
     this.disabledBtn = this.checkBtn;
-   
+
   }
 
 
   //inicializar
   ngOnInit() {
-   
+    this.loginServ.sendEnviableState.subscribe(response =>{
+      this.enableNavBar = response;
+    });
     this.getAllUser();
+    
+  }
 
+  targetMenu(state){
+    this.loginServ.isLogged(state);
   }
 
 }
