@@ -25,7 +25,7 @@
                 <p><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
                 <p><strong>Fecha: </strong>{{fecha}} </p>
                 <p><strong>Placa: </strong>{{dataPrintResult.power_unit_gid | slice:4}} <strong>Conductor:
-                  </strong>{{dataPrintResult.driver_gid | slice:4}}</p>
+                  </strong>{{dataDriverValid[0].driver_full_name}}</p>
               </div>
               <div id="cuerpo">
                 <h4 class="text-center"><strong>Ruta de cargue</strong></h4>

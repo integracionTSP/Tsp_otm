@@ -36,7 +36,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los inzut
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  // powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+
+  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
@@ -92,7 +94,7 @@ export class FormComponent implements OnInit {
 
       this.dataDriverValid = result.response;
 
-      console.log('tipo de activacion', this.dataDriverValid[0].is_active);
+
       console.log('datos del conductor a validar', this.dataDriverValid);
 
 
@@ -124,12 +126,8 @@ export class FormComponent implements OnInit {
   // buscar por placa e identificacion
 
   searchPowerDriver(powerDriverGID: any, driverValid: any): void {
-
-    this.driverValid();
     this.powerValid();
-
-
-
+    this.driverValid();
 
     if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
 
@@ -139,24 +137,53 @@ export class FormComponent implements OnInit {
 
         // validar que el registro exista
         if (this.powerDriverGIDResult !== this.notFoundMessage) {
-          console.log('fecha expiracion', this.dataDriverValid[0].expiracion_licencia);
-          console.log('estado del conductor', this.dataDriverValid[0].is_active);
 
+          console.log('fecha expiracion licencia: ', this.dataDriverValid[0].expiracion_licencia);
+          console.log('estado del conductor: ', this.dataDriverValid[0].is_active);
+          console.log('fecha soat: ', this.dataPowerValid[0].vence_soat);
+          console.log('fecha tecnomecanica: ', this.dataPowerValid[0].vence_tecnomecanica);
+          console.log('estado de la placa: ', this.dataPowerValid[0].is_active);
+
+          // licencia sea vigente
 
           if (this.dataDriverValid[0].expiracion_licencia > this.dataDriverValid[0].fecha_actual) {
-
+            // conductor este activo
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
                 console.log('el conductor no esta activo');
                 break;
 
               default:
-                this.enableAvailableRoutes = true;
-                console.log(this.powerDriverGIDResult);
+                // soat vigente
+                if (this.dataPowerValid[0].vence_soat > this.dataPowerValid[0].fecha_actual) {
+                  // tecnomecanica vigente
+                  if (this.dataPowerValid[0].vence_tecnomecanica > this.dataPowerValid[0].fecha_actual) {
+                    // placa activa
+                    switch (this.dataPowerValid[0].is_active) {
+                      case 'N':
+                        console.log('la placa  no esta activa');
+
+                        break;
+                      // mostrar datos si todo es correcto
+                      default:
+                        this.enableAvailableRoutes = true;
+                        console.log('rutas disponible ', this.powerDriverGIDResult);
+                        break;
+                    }
+
+
+                  } else {
+
+                    console.log('la tecnomecania esta vencida');
+                  }
+
+                } else {
+
+                  console.log('el soat esta vencido');
+                }
+
                 break;
             }
-
-
           } else {
 
             console.log('la licencia esta vencida');
