@@ -1,6 +1,6 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true" *ngIf="dataPrintResult">
+aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
     <div class="modal-header">
@@ -19,7 +19,7 @@ aria-hidden="true" *ngIf="dataPrintResult">
           <div id="encabezado">
             <p><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
             <p><strong>Fecha: </strong>{{fecha}} </p>
-            <p><strong>Placa: </strong>{{dataPrintResult.power_unit_gid | slice:4}} <strong>Conductor:
+            <p><strong>Placa: </strong>{{powerDriverGID.powerGID | slice:4}} <strong>Conductor:
               </strong>{{dataDriverValid[0].driver_full_name}}</p>
           </div>
           <div id="cuerpo">
@@ -75,8 +75,6 @@ aria-hidden="true" *ngIf="dataPrintResult">
     <div class="row">
       <div class="col-md-12 text-center">
         <h3 class="tittle-mark">
-
-          <br>
           <span class="tittle">AUTORIZACION ORDEN DE CARGA</span>
         </h3>
 
@@ -197,8 +195,7 @@ aria-hidden="true" *ngIf="dataPrintResult">
 
               <div class="row justify-content-center" style="margin-top: 5%;">
                 <div *ngIf="enableBtnAcept" class="col-2">
-                  <button (click)=" searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR <i
-                      class="far fa-check-circle"></i></button>
+                  <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR <i class="far fa-check-circle"></i></button>
 
                 </div>
 

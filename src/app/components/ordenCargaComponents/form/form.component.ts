@@ -42,6 +42,8 @@ export class FormComponent implements OnInit {
 
   powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
+  //powerDriverGID: any = { powerGID: '', driverGID: '' }
+
   // mensaje no encontrado
   notFoundMessage: String = "No existe movimiento con datos ingresados";
 
@@ -133,7 +135,7 @@ export class FormComponent implements OnInit {
 
   // buscar por placa e identificacion
 
-  searchPowerDriver(powerDriverGID: any, driverValid: any): void {
+  searchPowerDriver(powerDriverGID: any, driverValid?: any): void {
     this.powerValid();
     this.driverValid();
 
@@ -159,6 +161,17 @@ export class FormComponent implements OnInit {
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
                 console.log('el conductor no esta activo');
+
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'el conductor no esta activo',
+                  customClass: {
+                    popup: 'animated tada'
+                  }
+          
+                })
+
                 let emailTo = JSON.parse(localStorage.getItem('email'));
                 this.GetdataService.sendMail(emailTo.email, 'NO valido', 'El conductor no esta activo').subscribe(result => {
 
@@ -182,6 +195,17 @@ export class FormComponent implements OnInit {
                     switch (this.dataPowerValid[0].is_active) {
                       case 'N':
                         console.log('la placa  no esta activa');
+
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'la placa  no esta activa',
+                          customClass: {
+                            popup: 'animated tada'
+                          }
+                  
+                        })
+    
 
                         let emailTo = JSON.parse(localStorage.getItem('email'));
                         this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la placa  no esta activa').subscribe(result => {
@@ -207,6 +231,15 @@ export class FormComponent implements OnInit {
 
 
                     console.log('la tecnomecania esta vencida');
+                    Swal.fire({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: 'la tecnomecania esta vencida',
+                      customClass: {
+                        popup: 'animated tada'
+                      }
+              
+                    })
 
 
                     let emailTo = JSON.parse(localStorage.getItem('email'));
@@ -224,6 +257,15 @@ export class FormComponent implements OnInit {
                 } else {
 
                   console.log('el soat esta vencido');
+                  Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'el soat esta vencido',
+                    customClass: {
+                      popup: 'animated tada'
+                    }
+            
+                  })
                   let emailTo = JSON.parse(localStorage.getItem('email'));
                   this.GetdataService.sendMail(emailTo.email, 'NO valido', 'el soat esta vencido').subscribe(result => {
 
@@ -245,6 +287,16 @@ export class FormComponent implements OnInit {
 
             console.log('la licencia esta vencida');
 
+            Swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'la licencia esta vencida',
+              customClass: {
+                popup: 'animated tada'
+              }
+      
+            })
+
 
             let emailTo = JSON.parse(localStorage.getItem('email'));
             this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la licencia esta vencida').subscribe(result => {
@@ -260,6 +312,15 @@ export class FormComponent implements OnInit {
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
                 console.log('el conductor no esta activo');
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'el conductor no esta activo',
+                  customClass: {
+                    popup: 'animated tada'
+                  }
+          
+                })
                 break;
 
               default:
@@ -284,8 +345,17 @@ export class FormComponent implements OnInit {
           // }
           // );
 
-
           console.log(this.powerDriverGIDResult);
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: this.powerDriverGIDResult,
+            customClass: {
+              popup: 'animated tada'
+            }
+    
+          })
+          
           this.enableAvailableRoutes = false;
         }
 
@@ -298,6 +368,7 @@ export class FormComponent implements OnInit {
 
     } else {
 
+      console.log('rellene los campos');
       Swal.fire({
         type: 'error',
         title: 'Oops...',
@@ -307,7 +378,7 @@ export class FormComponent implements OnInit {
         }
 
       })
-      console.log('rellene los campos');
+     
       this.enableAvailableRoutes = false;
       this.enableOtherRoutes = false;
       this.enableBtnPrint = false;
