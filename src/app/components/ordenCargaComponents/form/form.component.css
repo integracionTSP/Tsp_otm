@@ -6,7 +6,7 @@
   font-style: italic;
   font-weight: bold;
   font-family: 'Cairo', sans-serif;
-  width: 89%;
+  max-width: 89%;
   margin-left: 5%;
   margin-top: 3%;
   }
@@ -29,7 +29,7 @@
     padding-bottom: -1%;
     padding-top: 0%;
     margin-bottom: 0%;
-    height: 15%;
+    max-height: 15%;
   }
 
 
@@ -45,6 +45,11 @@
     .text-left-input{
     color: #003399;
     margin-right: 100%;
+  }
+
+  .text-input-uppercase{
+
+    text-transform: uppercase;
   }
 
   

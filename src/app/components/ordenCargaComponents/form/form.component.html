@@ -19,7 +19,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
           <div id="encabezado">
             <p><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
             <p><strong>Fecha: </strong>{{fecha}} </p>
-            <p><strong>Placa: </strong>{{powerDriverGID.powerGID | slice:4}} <strong>Conductor:
+            <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
               </strong>{{dataDriverValid[0].driver_full_name}}</p>
           </div>
           <div id="cuerpo">
@@ -88,13 +88,13 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                 <div class="col-md-3">
                   <h5 class="text-left-input">Placa</h5>
                   <input [(ngModel)]="powerDriverGID.powerGID" formControlName="powerGID" type="text"
-                    class="input-out-border" placeholder="Placa del vehiculo">
+                    class="input-out-border text-input-uppercase" placeholder="Placa ">
                 </div>
 
                 <div class="col-md-3">
                   <h5 class="text-left-input">Identificacion</h5>
                   <input [(ngModel)]="powerDriverGID.driverGID" formControlName="driverGID" type="text"
-                    class="input-out-border" placeholder="Identificacion">
+                    class="input-out-border " placeholder="Identificacion">
                 </div>
 
 
@@ -193,7 +193,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
               </div>
 
 
-              <div class="row justify-content-center" style="margin-top: 5%;">
+              <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
                 <div *ngIf="enableBtnAcept" class="col-2">
                   <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR <i class="far fa-check-circle"></i></button>
 
