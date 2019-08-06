@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 
+import Swal from "sweetalert2";
+
 
 @Component({
   selector: 'app-form',
@@ -35,7 +37,7 @@ export class FormComponent implements OnInit {
   // btn aceptar
   enableBtnAcept: boolean = true;
 
-  // captura de datos de los inzut
+  // captura de datos de los input
   //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
   powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
@@ -168,7 +170,7 @@ export class FormComponent implements OnInit {
                 }
                 );
 
-               
+
                 break;
 
               default:
@@ -295,6 +297,16 @@ export class FormComponent implements OnInit {
       );
 
     } else {
+
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Rellene los campos',
+        customClass: {
+          popup: 'animated tada'
+        }
+
+      })
       console.log('rellene los campos');
       this.enableAvailableRoutes = false;
       this.enableOtherRoutes = false;

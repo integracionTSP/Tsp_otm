@@ -1,7 +1,5 @@
 
 
-
-
 .form {
   background-color: #e7ecff;
   box-shadow: 1px 3px 12px 3px rgb(70,70,70);
@@ -10,6 +8,7 @@
   font-family: 'Cairo', sans-serif;
   width: 89%;
   margin-left: 5%;
+  margin-top: 3%;
   }
   
   .tittle {
@@ -26,9 +25,11 @@
     background: #000066;
     color: #e7ecff;
     border-radius: 50px 10px 10px 50px;
-    width: 101%;
-    padding-bottom: 2%;
-    margin-bottom: 3%;
+    width: 100%;
+    padding-bottom: -1%;
+    padding-top: 0%;
+    margin-bottom: 0%;
+    height: 13%;
   }
 
 
