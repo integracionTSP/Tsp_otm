@@ -38,9 +38,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
@@ -267,7 +267,7 @@ export class FormComponent implements OnInit {
             
                   })
                   let emailTo = JSON.parse(localStorage.getItem('email'));
-                  this.GetdataService.sendMail(emailTo.email, 'NO valido', 'el soat esta vencido').subscribe(result => {
+                  this.GetdataService.sendMail(emailTo.email, 'No valido', 'el soat esta vencido').subscribe(result => {
 
                     console.log(result);
 
@@ -285,12 +285,12 @@ export class FormComponent implements OnInit {
             }
           } else {
 
-            console.log('la licencia esta vencida');
+            console.log('La licencia esta vencida');
 
             Swal.fire({
               type: 'error',
               title: 'Oops...',
-              text: 'la licencia esta vencida',
+              text: 'La licencia esta vencida',
               customClass: {
                 popup: 'animated tada'
               }
@@ -299,7 +299,7 @@ export class FormComponent implements OnInit {
 
 
             let emailTo = JSON.parse(localStorage.getItem('email'));
-            this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la licencia esta vencida').subscribe(result => {
+            this.GetdataService.sendMail(emailTo.email, 'No valido', 'La licencia esta vencida').subscribe(result => {
 
               console.log(result);
 
@@ -311,11 +311,11 @@ export class FormComponent implements OnInit {
 
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
-                console.log('el conductor no esta activo');
+                console.log('El conductor no esta activo');
                 Swal.fire({
                   type: 'error',
                   title: 'Oops...',
-                  text: 'el conductor no esta activo',
+                  text: 'El conductor no esta activo',
                   customClass: {
                     popup: 'animated tada'
                   }
@@ -350,9 +350,7 @@ export class FormComponent implements OnInit {
             type: 'error',
             title: 'Oops...',
             text: this.powerDriverGIDResult,
-            customClass: {
-              popup: 'animated tada'
-            }
+          
     
           })
           
@@ -368,7 +366,9 @@ export class FormComponent implements OnInit {
 
     } else {
 
-      console.log('rellene los campos');
+      console.log('Rellene los campos');
+
+
       Swal.fire({
         type: 'error',
         title: 'Oops...',
@@ -396,7 +396,7 @@ export class FormComponent implements OnInit {
     this.selectRoutesChk = {};
     this.enableBtnPrint = true;
     this.selectRoutesChk = AvailableRoutesChk;
-    console.log(" ruta disponible seleccionada ", this.selectRoutesChk);
+    console.log("Ruta disponible seleccionada ", this.selectRoutesChk);
 
     // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
 
@@ -421,7 +421,7 @@ export class FormComponent implements OnInit {
         // validar que el registro exista
         if (this.powerDriverGIDDistResult !== this.notFoundMessage) {
           this.enableOtherRoutes = true;
-          console.log("resultados distintos ", this.powerDriverGIDDistResult);
+          console.log("Resultados distintos ", this.powerDriverGIDDistResult);
 
         } else {
           console.log(this.powerDriverGIDDistResult);
@@ -452,7 +452,7 @@ export class FormComponent implements OnInit {
     this.enableBtnPrint = true;
     this.selectRoutesChk = {};
     this.selectRoutesChk = otherRoutesChk;
-    console.log("otra ruta seleccionada", this.selectRoutesChk);
+    console.log("Otra ruta seleccionada", this.selectRoutesChk);
 
     // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
 
@@ -470,7 +470,7 @@ export class FormComponent implements OnInit {
     this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
 
       this.dataPrintResult = result.response[0];
-      console.log('datos a imprimir', this.dataPrintResult);
+      console.log('Datos a imprimir', this.dataPrintResult);
 
     }, error => {
       console.log(JSON.stringify(error));

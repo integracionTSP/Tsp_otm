@@ -36,10 +36,21 @@
   .sub-tittle{
     font-weight: bold;
     font-style: italic;
-    color: #000066;
-    margin-right: 80%;
     margin-top: 2%;
   }
+
+  .sub-tittle-mark{
+
+    background: #000066;
+    color: #e7ecff;
+    border-radius: 50px 10px 10px 50px;
+    width: 21%;
+    padding: .5%;
+    margin-top: 1%;
+   
+    
+  }
+
 
 
     .text-left-input{
@@ -54,7 +65,7 @@
 
   
   .input-out-border {
-    font-size: 13px;
+    font-size: 16px;
     color: rgb(70,70,70);
     border: none;
     border-bottom: 1px solid rgba(100,100,100,0.6);
@@ -64,6 +75,8 @@
     width: 55%;
     z-index: 0;
     margin-right: 63%;
+    font-family: arial;
+    
     
   }
 
