@@ -41,12 +41,13 @@
 
   .sub-tittle-mark{
 
-    background: #000066;
-    color: #e7ecff;
+    background: #d1dceb;
+    color: #000066;
     border-radius: 50px 10px 10px 50px;
     width: 21%;
     padding: .5%;
     margin-top: 1%;
+  
    
     
   }
@@ -76,8 +77,16 @@
     z-index: 0;
     margin-right: 63%;
     font-family: arial;
+
     
     
+    
+  }
+
+  .thead-color{
+
+    background: #2f6bb2;
+    color: #e7ecff;
   }
 
   .btn-form {
@@ -121,8 +130,8 @@
 
 
   .form-row{
-    margin-left: 5%;
-    margin-top: 3%;
+    margin-left: 0%;
+    margin-bottom: 2%;
   } 
 
  

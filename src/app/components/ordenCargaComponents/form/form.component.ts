@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -38,9 +38,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
@@ -67,6 +67,40 @@ export class FormComponent implements OnInit {
   // datos a validar de la placa 
 
   dataPowerValid: any = {};
+
+  // lista de mensajes
+
+  listMessageError: any = [{
+    id: 0,
+    message: 'El conductor no esta activo',
+
+  },
+  {
+    id: 1,
+    message: 'La placa  no esta activa'
+  },
+  {
+    id: 2,
+    message: 'La tecnomecania esta vencida'
+  },
+  {
+    id: 3,
+    message: 'El soat esta vencido'
+  },
+  {
+    id: 4,
+    message: 'La licencia esta vencida'
+  },
+  {
+    id:5,
+    message:'Rellene los campos'
+  }
+
+  ];
+
+
+  // mensajes de error
+  messageError: string;
 
 
 
@@ -131,6 +165,39 @@ export class FormComponent implements OnInit {
 
   }
 
+  // envio de correos
+
+  sendMessageMail(messageError: string): void {
+
+    let emailTo = JSON.parse(localStorage.getItem('email'));
+    this.GetdataService.sendMail(emailTo.email, 'NO valido', messageError).subscribe(result => {
+
+      console.log(result);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+
+  }
+
+  //alertas de mensaje de error
+
+  alertMessageError(messageError: string){
+
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: messageError,
+      customClass: {
+        popup: 'animated tada'
+      }
+
+    })
+  }
+
 
 
   // buscar por placa e identificacion
@@ -161,28 +228,11 @@ export class FormComponent implements OnInit {
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
                 console.log('el conductor no esta activo');
+                this.messageError = this.listMessageError[0].message;
 
-                Swal.fire({
-                  type: 'error',
-                  title: 'Oops...',
-                  text: 'el conductor no esta activo',
-                  customClass: {
-                    popup: 'animated tada'
-                  }
-          
-                })
-
-                let emailTo = JSON.parse(localStorage.getItem('email'));
-                this.GetdataService.sendMail(emailTo.email, 'NO valido', 'El conductor no esta activo').subscribe(result => {
-
-                  console.log(result);
-
-                }, error => {
-                  console.log(JSON.stringify(error));
-
-                }
-                );
-
+                this.sendMessageMail(this.messageError);
+                this.alertMessageError(this.messageError);
+            
 
                 break;
 
@@ -196,27 +246,11 @@ export class FormComponent implements OnInit {
                       case 'N':
                         console.log('la placa  no esta activa');
 
-                        Swal.fire({
-                          type: 'error',
-                          title: 'Oops...',
-                          text: 'la placa  no esta activa',
-                          customClass: {
-                            popup: 'animated tada'
-                          }
-                  
-                        })
-    
+                        this.messageError = this.listMessageError[1].message;
+                        this.sendMessageMail(this.messageError);
+                        this.alertMessageError(this.messageError);
 
-                        let emailTo = JSON.parse(localStorage.getItem('email'));
-                        this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la placa  no esta activa').subscribe(result => {
 
-                          console.log(result);
-
-                        }, error => {
-                          console.log(JSON.stringify(error));
-
-                        }
-                        );
 
                         break;
                       // mostrar datos si todo es correcto
@@ -231,52 +265,21 @@ export class FormComponent implements OnInit {
 
 
                     console.log('la tecnomecania esta vencida');
-                    Swal.fire({
-                      type: 'error',
-                      title: 'Oops...',
-                      text: 'la tecnomecania esta vencida',
-                      customClass: {
-                        popup: 'animated tada'
-                      }
-              
-                    })
+                    this.messageError = this.listMessageError[2].message;
+                    this.sendMessageMail(this.messageError);
+                    this.alertMessageError(this.messageError);
 
 
-                    let emailTo = JSON.parse(localStorage.getItem('email'));
-                    this.GetdataService.sendMail(emailTo.email, 'NO valido', 'la tecnomecania esta vencida').subscribe(result => {
 
-                      console.log(result);
-
-                    }, error => {
-                      console.log(JSON.stringify(error));
-
-                    }
-                    );
                   }
 
                 } else {
 
                   console.log('el soat esta vencido');
-                  Swal.fire({
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'el soat esta vencido',
-                    customClass: {
-                      popup: 'animated tada'
-                    }
-            
-                  })
-                  let emailTo = JSON.parse(localStorage.getItem('email'));
-                  this.GetdataService.sendMail(emailTo.email, 'No valido', 'el soat esta vencido').subscribe(result => {
+                  this.messageError = this.listMessageError[3].message;
 
-                    console.log(result);
-
-                  }, error => {
-                    console.log(JSON.stringify(error));
-
-                  }
-                  );
-
+                  this.sendMessageMail(this.messageError);
+                  this.alertMessageError(this.messageError);
 
 
                 }
@@ -287,73 +290,20 @@ export class FormComponent implements OnInit {
 
             console.log('La licencia esta vencida');
 
-            Swal.fire({
-              type: 'error',
-              title: 'Oops...',
-              text: 'La licencia esta vencida',
-              customClass: {
-                popup: 'animated tada'
-              }
-      
-            })
+            this.messageError = this.listMessageError[4].message;
+            this.sendMessageMail(this.messageError);
+            this.alertMessageError(this.messageError);
 
 
-            let emailTo = JSON.parse(localStorage.getItem('email'));
-            this.GetdataService.sendMail(emailTo.email, 'No valido', 'La licencia esta vencida').subscribe(result => {
-
-              console.log(result);
-
-            }, error => {
-              console.log(JSON.stringify(error));
-
-            }
-            );
-
-            switch (this.dataDriverValid[0].is_active) {
-              case 'N':
-                console.log('El conductor no esta activo');
-                Swal.fire({
-                  type: 'error',
-                  title: 'Oops...',
-                  text: 'El conductor no esta activo',
-                  customClass: {
-                    popup: 'animated tada'
-                  }
-          
-                })
-                break;
-
-              default:
-                console.log('el conductor esta activo');
-                break;
-            }
 
           }
 
 
         } else {
 
-
-          // let emailTo = JSON.parse(localStorage.getItem('email'));
-          // this.GetdataService.sendMail(emailTo.email, 'NO valido', '').subscribe(result => {
-
-          //   console.log(result);
-
-          // }, error => {
-          //   console.log(JSON.stringify(error));
-
-          // }
-          // );
-
           console.log(this.powerDriverGIDResult);
-          Swal.fire({
-            type: 'error',
-            title: 'Oops...',
-            text: this.powerDriverGIDResult,
-          
-    
-          })
-          
+          this.alertMessageError(this.powerDriverGIDResult);
+
           this.enableAvailableRoutes = false;
         }
 
@@ -367,18 +317,9 @@ export class FormComponent implements OnInit {
     } else {
 
       console.log('Rellene los campos');
+      this.messageError = this.listMessageError[5].message;
+      this.alertMessageError(this.messageError);
 
-
-      Swal.fire({
-        type: 'error',
-        title: 'Oops...',
-        text: 'Rellene los campos',
-        customClass: {
-          popup: 'animated tada'
-        }
-
-      })
-     
       this.enableAvailableRoutes = false;
       this.enableOtherRoutes = false;
       this.enableBtnPrint = false;
@@ -397,12 +338,6 @@ export class FormComponent implements OnInit {
     this.enableBtnPrint = true;
     this.selectRoutesChk = AvailableRoutesChk;
     console.log("Ruta disponible seleccionada ", this.selectRoutesChk);
-
-    // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
-
-    // console.log('parametros para imprimir', this.selectDataPrint[0].powerGID, this.selectDataPrint[0].driverGID,
-    //   this.selectDataPrint[1].source_location_gid, this.selectDataPrint[1].dest_location_gid);
-
 
 
   }
@@ -454,15 +389,10 @@ export class FormComponent implements OnInit {
     this.selectRoutesChk = otherRoutesChk;
     console.log("Otra ruta seleccionada", this.selectRoutesChk);
 
-    // this.selectDataPrint.push(this.powerDriverGID, this.selectRoutesChk);
-
-    // console.log('parametros para imprimir', this.selectDataPrint[0].powerGID, this.selectDataPrint[0].driverGID,
-    //   this.selectDataPrint[1].source_location_gid, this.selectDataPrint[1].dest_location_gid);
-
-
   }
 
 
+  // buscar datos a imprimir
 
   searchDataPrint(): void {
 
