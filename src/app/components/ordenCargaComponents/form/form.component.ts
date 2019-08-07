@@ -18,8 +18,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
-
+  // usuario 
+  userName = JSON.parse(localStorage.getItem('email'));
   d: Date;
   fecha: String = '';
   // inicializar validaciones de formularios
@@ -92,45 +92,45 @@ export class FormComponent implements OnInit {
     message: 'La licencia esta vencida'
   },
   {
-    id:5,
-    message:'Rellene los campos'
+    id: 5,
+    message: 'Rellene los campos'
   }
 
   ];
 
-//
+  //
 
-  listEmailTemplate : any = [{
+  listEmailTemplate: any = [{
     id: 0,
-    subject : this.listMessageError[0].message,
+    subject: this.listMessageError[0].message,
     body: `El conductor no esta activo con la placa  ${this.powerDriverGID.powerGID}`
 
   },
   {
     id: 1,
-    subject : this.listMessageError[1].message,
+    subject: this.listMessageError[1].message,
     body: `La placa ${this.powerDriverGID.powerGID}  no esta activa `
   },
   {
     id: 2,
-    subject : this.listMessageError[2].message,
-    body: `La tecnomecania esta vencida: ${this.dataPowerValid[0].vence_tecnomecanica} con placa ${this.powerDriverGID.powerGID}` 
+    subject: this.listMessageError[2].message,
+    body: `La tecnomecania esta vencida: ${this.dataPowerValid[0].vence_tecnomecanica} con placa ${this.powerDriverGID.powerGID}`
 
-    
+
   },
   {
     id: 3,
-    subject : this.listMessageError[3].message,
+    subject: this.listMessageError[3].message,
     body: `El soat esta vencido: ${this.dataPowerValid[0].vence_soat} con placa ${this.powerDriverGID.powerGID}`
   },
   {
     id: 4,
-    subject : this.listMessageError[3].message,
+    subject: this.listMessageError[3].message,
     body: `EL conductor: ${this.dataDriverValid[0].driver_full_name} con placa ${this.powerDriverGID.powerGID}
            tiene la licencia esta vencida: ${this.dataDriverValid[0].expiracion_licencia} `
-   
+
   }
- 
+
 
   ];
 
@@ -205,8 +205,7 @@ export class FormComponent implements OnInit {
 
   sendMessageMail(messageError: string): void {
 
-    let emailTo = JSON.parse(localStorage.getItem('email'));
-    this.GetdataService.sendMail(emailTo.email,this.listEmailTemplate.subject, this.listEmailTemplate.body).subscribe(result => {
+    this.GetdataService.sendMail(this.userName.email, messageError, this.listEmailTemplate.body).subscribe(result => {
 
       console.log(result);
 
@@ -220,9 +219,7 @@ export class FormComponent implements OnInit {
   }
 
   //alertas de mensaje de error
-
-  alertMessageError(messageError: string){
-
+  alertMessageError(messageError: string) {
     Swal.fire({
       type: 'error',
       title: 'Oops...',
@@ -233,15 +230,11 @@ export class FormComponent implements OnInit {
 
     })
   }
-
-
-
   // buscar por placa e identificacion
 
   searchPowerDriver(powerDriverGID: any, driverValid?: any): void {
     this.powerValid();
     this.driverValid();
-
     if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
 
       this.GetdataService.searchPowerDriver(powerDriverGID).subscribe(result => {
@@ -268,7 +261,6 @@ export class FormComponent implements OnInit {
 
                 this.sendMessageMail(this.messageError);
                 this.alertMessageError(this.messageError);
-            
 
                 break;
 
@@ -285,8 +277,6 @@ export class FormComponent implements OnInit {
                         this.messageError = this.listEmailTemplate[1].subject;
                         this.sendMessageMail(this.messageError);
                         this.alertMessageError(this.messageError);
-
-
 
                         break;
                       // mostrar datos si todo es correcto
@@ -427,7 +417,6 @@ export class FormComponent implements OnInit {
 
   }
 
-
   // buscar datos a imprimir
 
   searchDataPrint(): void {
@@ -446,11 +435,6 @@ export class FormComponent implements OnInit {
 
 
   }
-
-
-
-
-
 
 
   generarPDF() {
@@ -477,7 +461,33 @@ export class FormComponent implements OnInit {
 
       doc.save(nombreDoc);
     });
+
+    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.usuario);
+
   }
+
+
+  // log de reportes
+
+  OperationReports(shipmentGID: string, driverGID: string, powerGID: string, insertDate: string, insertUser: any): void {
+
+    this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser).subscribe(result => {
+
+      console.log(result);
+
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    }
+    );
+
+
+  }
+
+
+
+
+
 
   ngOnInit() {
   }
