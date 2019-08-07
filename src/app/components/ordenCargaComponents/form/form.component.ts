@@ -98,6 +98,42 @@ export class FormComponent implements OnInit {
 
   ];
 
+//
+
+  listEmailTemplate : any = [{
+    id: 0,
+    subject : this.listMessageError[0].message,
+    body: `El conductor no esta activo con la placa  ${this.powerDriverGID.powerGID}`
+
+  },
+  {
+    id: 1,
+    subject : this.listMessageError[1].message,
+    body: `La placa ${this.powerDriverGID.powerGID}  no esta activa `
+  },
+  {
+    id: 2,
+    subject : this.listMessageError[2].message,
+    body: `La tecnomecania esta vencida: ${this.dataPowerValid[0].vence_tecnomecanica} con placa ${this.powerDriverGID.powerGID}` 
+
+    
+  },
+  {
+    id: 3,
+    subject : this.listMessageError[3].message,
+    body: `El soat esta vencido: ${this.dataPowerValid[0].vence_soat} con placa ${this.powerDriverGID.powerGID}`
+  },
+  {
+    id: 4,
+    subject : this.listMessageError[3].message,
+    body: `EL conductor: ${this.dataDriverValid[0].driver_full_name} con placa ${this.powerDriverGID.powerGID}
+           tiene la licencia esta vencida: ${this.dataDriverValid[0].expiracion_licencia} `
+   
+  }
+ 
+
+  ];
+
 
   // mensajes de error
   messageError: string;
@@ -170,7 +206,7 @@ export class FormComponent implements OnInit {
   sendMessageMail(messageError: string): void {
 
     let emailTo = JSON.parse(localStorage.getItem('email'));
-    this.GetdataService.sendMail(emailTo.email, 'NO valido', messageError).subscribe(result => {
+    this.GetdataService.sendMail(emailTo.email,this.listEmailTemplate.subject, this.listEmailTemplate.body).subscribe(result => {
 
       console.log(result);
 
@@ -228,7 +264,7 @@ export class FormComponent implements OnInit {
             switch (this.dataDriverValid[0].is_active) {
               case 'N':
                 console.log('el conductor no esta activo');
-                this.messageError = this.listMessageError[0].message;
+                this.messageError = this.listEmailTemplate[0].subject;
 
                 this.sendMessageMail(this.messageError);
                 this.alertMessageError(this.messageError);
@@ -246,7 +282,7 @@ export class FormComponent implements OnInit {
                       case 'N':
                         console.log('la placa  no esta activa');
 
-                        this.messageError = this.listMessageError[1].message;
+                        this.messageError = this.listEmailTemplate[1].subject;
                         this.sendMessageMail(this.messageError);
                         this.alertMessageError(this.messageError);
 
@@ -265,7 +301,7 @@ export class FormComponent implements OnInit {
 
 
                     console.log('la tecnomecania esta vencida');
-                    this.messageError = this.listMessageError[2].message;
+                    this.messageError = this.listEmailTemplate[2].subject;
                     this.sendMessageMail(this.messageError);
                     this.alertMessageError(this.messageError);
 
@@ -276,7 +312,7 @@ export class FormComponent implements OnInit {
                 } else {
 
                   console.log('el soat esta vencido');
-                  this.messageError = this.listMessageError[3].message;
+                  this.messageError = this.listEmailTemplate[3].subject;
 
                   this.sendMessageMail(this.messageError);
                   this.alertMessageError(this.messageError);
@@ -290,7 +326,7 @@ export class FormComponent implements OnInit {
 
             console.log('La licencia esta vencida');
 
-            this.messageError = this.listMessageError[4].message;
+            this.messageError = this.listEmailTemplate[4].subject;
             this.sendMessageMail(this.messageError);
             this.alertMessageError(this.messageError);
 
