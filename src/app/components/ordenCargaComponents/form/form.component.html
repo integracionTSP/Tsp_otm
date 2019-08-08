@@ -17,8 +17,10 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             <h3>Transporte Sanchez Polo</h3>
           </div>
           <div id="encabezado">
-            <p><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
-            <p><strong>Fecha: </strong>{{fecha}} </p>
+            <p *ngIf="dataPrintResult.shipment_gid"><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
+            <p *ngIf="!dataPrintResult.shipment_gid"><strong>Orden de Carga:</strong> No dispobible</p>
+            <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
+            <p><strong>Fecha de autorización: </strong>{{fecha | date: 'yyyy-mm-dd'}} </p>
             <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
               </strong>{{dataDriverValid[0].driver_full_name}}</p>
           </div>
@@ -198,6 +200,16 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
 
                   </tbody>
                 </table>
+
+                <h6 class="sub-tittle-mark">
+                    <span class="sub-tittle">  FECHA ORDEN  </span>
+                  </h6>
+
+                  <div class="col-6  col-md-offset-3" style="margin-left: 30%;">
+                      <input  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  
+                
 
               </div>
 

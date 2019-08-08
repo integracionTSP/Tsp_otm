@@ -20,6 +20,8 @@ import Swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   // usuario 
   userName = JSON.parse(localStorage.getItem('email'));
+  orderDate:Date;
+  
   d: Date;
   fecha: String = '';
   // inicializar validaciones de formularios
@@ -38,9 +40,11 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+   powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+
+   //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '1121871119' }
 
   //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
@@ -358,11 +362,13 @@ export class FormComponent implements OnInit {
 
 
         } else {
+          // mostrar otras rutas
 
-          console.log(this.powerDriverGIDResult);
-          this.alertMessageError(this.powerDriverGIDResult);
-
+         // console.log(this.powerDriverGIDResult);
+         // this.alertMessageError(this.powerDriverGIDResult);
+          this.searchDistPowerDriver(powerDriverGID);
           this.enableAvailableRoutes = false;
+          this.enableOtherRoutes = true;
         }
 
 
@@ -445,6 +451,9 @@ export class FormComponent implements OnInit {
     this.enableBtnPrint = true;
     this.selectRoutesChk = {};
     this.selectRoutesChk = otherRoutesChk;
+  
+     
+      
     console.log("Otra ruta seleccionada", this.selectRoutesChk);
 
   }
@@ -453,12 +462,12 @@ export class FormComponent implements OnInit {
 
   searchDataPrint(): void {
 
-
+    
     this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
 
       this.dataPrintResult = result.response[0];
       console.log('Datos a imprimir', this.dataPrintResult);
-
+      console.log(this.orderDate);
     }, error => {
       console.log(JSON.stringify(error));
 
@@ -470,6 +479,8 @@ export class FormComponent implements OnInit {
 
 
   generarPDF() {
+
+    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,this.orderDate, this.selectRoutesChk.source_location_gid,this.selectRoutesChk.dest_location_gid);
     console.log('FECHA: ' + this.d.toLocaleDateString());
     console.log('FECHA2: ' + this.fecha);
     console.log(this.d.getDay());
@@ -494,16 +505,16 @@ export class FormComponent implements OnInit {
       doc.save(nombreDoc);
     });
 
-    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username);
+    
 
   }
 
 
   // log de reportes
 
-  OperationReports(shipmentGID: string, driverGID: string, powerGID: string, insertDate: string, insertUser: any): void {
+  OperationReports(shipmentGID: string, driverGID: string, powerGID: string, insertDate: string, insertUser: any, orderDate:any,sourceLocationGID:any,destLocationGID:any): void {
 
-    this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser).subscribe(result => {
+    this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser, orderDate,sourceLocationGID,destLocationGID).subscribe(result => {
 
       console.log(result);
 
@@ -515,11 +526,6 @@ export class FormComponent implements OnInit {
 
 
   }
-
-
-
-
-
 
   ngOnInit() {
   }

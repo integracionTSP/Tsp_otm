@@ -59,9 +59,9 @@ export class GetdataService {
     return this.httpClient.post(urlPrincipalEM+'send',{p_to,p_subject,p_body});
   }
 
-  OperationReports(shipmentGID: string, driverGID: string, powerGID:string, insertDate: string ,insertUser: any): Observable<any>{
+  OperationReports(shipment_gid: string, driver_gid: string, power_unit_gid:string, insert_date: string ,insert_user: any, order_date:any, source_location_gid:any ,dest_location_gid:any): Observable<any>{
 
-    return this.httpClient.post(urlPrincipalOC+'saveReports',{shipmentGID, driverGID, powerGID, insertDate, insertUser});
+    return this.httpClient.post(urlPrincipalOC+'saveReports',{shipment_gid, driver_gid, power_unit_gid, insert_date, insert_user,order_date,source_location_gid ,dest_location_gid});
 
   }
 
