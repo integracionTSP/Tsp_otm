@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   // captura de datos de los input
   powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
- // powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+  //powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
