@@ -38,9 +38,9 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
+ // powerDriverGID: any = { powerGID: 'SSG351', driverGID: '1121871119' }
 
   //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
@@ -67,6 +67,17 @@ export class FormComponent implements OnInit {
   // datos a validar de la placa 
 
   dataPowerValid: any = {};
+
+  tecnodate: any;
+
+  soatdate:any;
+
+  licendate:any;
+
+  divername:any;
+
+
+  
 
   // lista de mensajes
 
@@ -98,7 +109,7 @@ export class FormComponent implements OnInit {
 
   ];
 
-  //
+  //lista de mensajes de correo
 
   listEmailTemplate: any = [{
     id: 0,
@@ -109,25 +120,25 @@ export class FormComponent implements OnInit {
   {
     id: 1,
     subject: this.listMessageError[1].message,
-    body: `La placa ${this.powerDriverGID.powerGID}  no esta activa `
+    body: `EL conductor: ${this.divername} con La placa ${this.powerDriverGID.powerGID}  no esta activa `
   },
   {
     id: 2,
     subject: this.listMessageError[2].message,
-    body: `La tecnomecania esta vencida: ${this.dataPowerValid[0].vence_tecnomecanica} con placa ${this.powerDriverGID.powerGID}`
+    body: `La tecnomecania esta vencida: con placa ${this.powerDriverGID.powerGID}`
 
 
   },
   {
     id: 3,
     subject: this.listMessageError[3].message,
-    body: `El soat esta vencido: ${this.dataPowerValid[0].vence_soat} con placa ${this.powerDriverGID.powerGID}`
+    body: `El soat esta vencido: con placa ${this.powerDriverGID.powerGID}`
   },
   {
     id: 4,
     subject: this.listMessageError[3].message,
-    body: `EL conductor: ${this.dataDriverValid[0].driver_full_name} con placa ${this.powerDriverGID.powerGID}
-           tiene la licencia esta vencida: ${this.dataDriverValid[0].expiracion_licencia} `
+    body: `EL conductor: con placa ${this.powerDriverGID.powerGID}
+           tiene la licencia esta vencida: `
 
   }
 
@@ -137,6 +148,11 @@ export class FormComponent implements OnInit {
 
   // mensajes de error
   messageError: string;
+
+
+  // mensaje del cuerpo
+
+  messageBody: string;
 
 
 
@@ -174,8 +190,11 @@ export class FormComponent implements OnInit {
 
       this.dataDriverValid = result.response;
 
-
+      this.divername = this.dataDriverValid[0].driver_full_name;
       console.log('datos del conductor a validar', this.dataDriverValid);
+
+      console.log('nombre del conductor',this.divername );
+      
 
 
     }, error => {
@@ -191,6 +210,7 @@ export class FormComponent implements OnInit {
     this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
 
       this.dataPowerValid = result.response;
+    
       console.log('datos de la placa  a validar', this.dataPowerValid);
 
     }, error => {
@@ -203,9 +223,9 @@ export class FormComponent implements OnInit {
 
   // envio de correos
 
-  sendMessageMail(messageError: string): void {
+  sendMessageMail(messageError: string, messageBody:string): void {
 
-    this.GetdataService.sendMail(this.userName.email, messageError, this.listEmailTemplate.body).subscribe(result => {
+    this.GetdataService.sendMail(this.userName.email, messageError, messageBody).subscribe(result => {
 
       console.log(result);
 
@@ -235,6 +255,7 @@ export class FormComponent implements OnInit {
   searchPowerDriver(powerDriverGID: any, driverValid?: any): void {
     this.powerValid();
     this.driverValid();
+    
     if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
 
       this.GetdataService.searchPowerDriver(powerDriverGID).subscribe(result => {
@@ -258,8 +279,9 @@ export class FormComponent implements OnInit {
               case 'N':
                 console.log('el conductor no esta activo');
                 this.messageError = this.listEmailTemplate[0].subject;
+                this.messageBody = this.listEmailTemplate[0].body;
 
-                this.sendMessageMail(this.messageError);
+                this.sendMessageMail(this.messageError,this.messageBody);
                 this.alertMessageError(this.messageError);
 
                 break;
@@ -274,8 +296,15 @@ export class FormComponent implements OnInit {
                       case 'N':
                         console.log('la placa  no esta activa');
 
+                        
                         this.messageError = this.listEmailTemplate[1].subject;
-                        this.sendMessageMail(this.messageError);
+                        this.messageBody = this.listEmailTemplate[1].body;
+
+                    //     setTimeout(()=>{   
+                    //        this.sendMessageMail(this.messageError,this.messageBody);
+                    //  }, 300);
+                       
+                        this.sendMessageMail(this.messageError,this.messageBody);
                         this.alertMessageError(this.messageError);
 
                         break;
@@ -292,7 +321,8 @@ export class FormComponent implements OnInit {
 
                     console.log('la tecnomecania esta vencida');
                     this.messageError = this.listEmailTemplate[2].subject;
-                    this.sendMessageMail(this.messageError);
+                    this.messageBody = this.listEmailTemplate[2].body;
+                    this.sendMessageMail(this.messageError, this.messageBody);
                     this.alertMessageError(this.messageError);
 
 
@@ -303,8 +333,9 @@ export class FormComponent implements OnInit {
 
                   console.log('el soat esta vencido');
                   this.messageError = this.listEmailTemplate[3].subject;
+                  this.messageBody = this.listEmailTemplate[3].body;
 
-                  this.sendMessageMail(this.messageError);
+                  this.sendMessageMail(this.messageError, this.messageBody );
                   this.alertMessageError(this.messageError);
 
 
@@ -317,7 +348,8 @@ export class FormComponent implements OnInit {
             console.log('La licencia esta vencida');
 
             this.messageError = this.listEmailTemplate[4].subject;
-            this.sendMessageMail(this.messageError);
+            this.messageBody = this.listEmailTemplate[4].body;
+            this.sendMessageMail(this.messageError,  this.messageBody);
             this.alertMessageError(this.messageError);
 
 
@@ -457,12 +489,12 @@ export class FormComponent implements OnInit {
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('l', 'mm', 'a5');
-      doc.addImage(img, 'PNG', 12, 22, imgWidth, imgHeight);
+      doc.addImage(img, 'jpg', 12, 22, imgWidth, imgHeight);
 
       doc.save(nombreDoc);
     });
 
-    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.usuario);
+    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username);
 
   }
 

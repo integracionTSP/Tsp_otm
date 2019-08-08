@@ -61,13 +61,9 @@ export class GetdataService {
 
   OperationReports(shipmentGID: string, driverGID: string, powerGID:string, insertDate: string ,insertUser: any): Observable<any>{
 
-    return this.httpClient.post(urlPrincipalEM+'saveReports',{shipmentGID, driverGID, powerGID, insertDate, insertUser});
+    return this.httpClient.post(urlPrincipalOC+'saveReports',{shipmentGID, driverGID, powerGID, insertDate, insertUser});
 
   }
-
-
-
-
 
 
 }
