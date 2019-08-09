@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, HostBinding } from '@angular/core';
-
+import * as crypto from 'crypto-js';
 // importar el servicio
 import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
 import {LoginService} from '../../../service/Login/login.service';
@@ -51,25 +51,27 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // validar si el usuario y contraseña coincidan
+  // validar si el usuario y contraseña coincidan 
   loginUser(login: any): void {
 
     console.log(login);
     let userCorrect: string;
     let passCorrect: string;
     let email: string;
-
+    // Encrypt password provide for user
+    let pwd = crypto.SHA512(login.password);
+    
     for (let i in this.users) {
 
-      if (this.users[i].idusuario == login.username && this.users[i].claveencr == login.password) {
+      if (this.users[i].idusuario == login.username && this.users[i].angular_password == pwd) {
         userCorrect = this.users[i].idusuario;
-        passCorrect = this.users[i].claveencr;
+        passCorrect = this.users[i].angular_password;
         email = this.users[i].email;
         console.log('usuario correcto', userCorrect);
 
       }
     }
-    if (userCorrect == login.username && passCorrect == login.password) {
+    if (userCorrect == login.username && passCorrect == pwd) {
       login.email = email;
       localStorage.setItem('email', JSON.stringify(login));
 
