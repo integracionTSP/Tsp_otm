@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 
 // definir la url principal
 
-const urlPrincipalOC = 'http://172.16.248.185:3000/api/ordenCarga/';
+const urlPrincipalOC = 'http://192.168.1.97:3000/api/ordenCarga/';
 
-const urlPrincipalEM = 'http://172.16.248.185:3000/api/mail/';
+const urlPrincipalEM = 'http://192.168.1.97:3000/api/mail/';
 
 
 @Injectable()
