@@ -293,11 +293,11 @@ export class FormComponent implements OnInit {
         // validar que el registro exista
         if (this.powerDriverGIDResult !== this.notFoundMessage) {
 
-          console.log('fecha expiracion licencia: ', this.dataDriverValid[0].expiracion_licencia);
-          console.log('estado del conductor: ', this.dataDriverValid[0].is_active);
-          console.log('fecha soat: ', this.dataPowerValid[0].vence_soat);
-          console.log('fecha tecnomecanica: ', this.dataPowerValid[0].vence_tecnomecanica);
-          console.log('estado de la placa: ', this.dataPowerValid[0].is_active);
+          console.log('fecha expiracion licencia: ', this.driverlicDate);
+          console.log('estado del conductor: ', this.driverStatus);
+          console.log('fecha soat: ', this.powerSoatDate);
+          console.log('fecha tecnomecanica: ', this.powerTecnoDate);
+          console.log('estado de la placa: ', this.powerStatus);
 
           // licencia sea vigente
 
