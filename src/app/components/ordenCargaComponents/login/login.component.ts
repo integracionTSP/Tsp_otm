@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   login: any = { username: '', password: '', email: '' }
 
   //variable para almacenar los usuarios
-
+  ami = crypto.SHA512('tsp2019').toString();
   users: any;
 
   //habilitar btn
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   // inicializar el servicio en el constructor
   constructor(private GetdataService: GetdataService, private router: Router, public loginServ:LoginService) {
     this.targetMenu(false);
+    console.log(this.ami);
   }
 
 
@@ -54,13 +55,15 @@ export class LoginComponent implements OnInit {
   // validar si el usuario y contraseña coincidan 
   loginUser(login: any): void {
 
-    console.log(login);
+  
     let userCorrect: string;
     let passCorrect: string;
     let email: string;
     // Encrypt password provide for user
-    let pwd = crypto.SHA512(login.password);
+    let pwd = crypto.SHA512(login.password).toString;
     
+
+
     for (let i in this.users) {
 
       if (this.users[i].idusuario == login.username && this.users[i].angular_password == pwd) {
