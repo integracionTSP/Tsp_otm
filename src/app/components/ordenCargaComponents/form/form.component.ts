@@ -198,11 +198,32 @@ export class FormComponent implements OnInit {
     this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
 
       this.dataDriverValid = result.response;
+
+     
         
 
        this.driverName = this.dataDriverValid[0].driver_full_name;
        this.driverlicDate =  this.dataDriverValid[0].expiracion_licencia;
        this.driverStatus= this.dataDriverValid[0].is_active;
+
+       if(this.driverlicDate < this.dataDriverValid[0].fecha_actual){
+
+        this.messageError = this.listEmailTemplate[4].subject;
+                            setTimeout(()=>{   
+                              this.alertMessageError(this.messageError);
+                       }, 300);
+
+       
+ 
+       }
+
+       if(this.driverStatus ='N'){
+        this.messageError = this.listEmailTemplate[0].subject;
+        setTimeout(()=>{   
+          this.alertMessageError(this.messageError);
+   }, 300);
+
+       }
 
       
       console.log('datos del conductor a validar', this.dataDriverValid);
@@ -231,6 +252,38 @@ export class FormComponent implements OnInit {
            this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
            this.powerSoatDate = this.dataPowerValid[0].vence_soat;
            this.powerStatus = this.dataPowerValid[0].is_active;
+
+           if(this.powerSoatDate < this.dataPowerValid[0].fecha_actual){
+
+            this.messageError = this.listEmailTemplate[3].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+             }, 300);
+
+           }
+
+
+           if( this.powerTecnoDate < this.dataPowerValid[0].fecha_actual){
+
+            this.messageError = this.listEmailTemplate[2].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+             }, 300);
+
+           }
+
+
+           if(this.powerStatus='N'){
+            this.messageError = this.listEmailTemplate[1].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+       }, 300);
+    
+           }
+    
+            
+         
+
 
  
         
@@ -373,7 +426,7 @@ export class FormComponent implements OnInit {
                     fecha vencimiento del soat: ${this.powerSoatDate}
                     fecha de la tecnomecanica: ${this.powerTecnoDate}
                     estado de la placa: ${this.powerStatus} `
-                    
+
                     this.messageError = this.listEmailTemplate[2].subject;
                     this.messageBody = this.listEmailTemplate[2].body;
                     this.sendMessageMail(this.messageError, this.messageBody);
