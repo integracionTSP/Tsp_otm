@@ -42,7 +42,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
   //powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
 
 
 
-  //powerDriverGID: any = { powerGID: '', driverGID: '' }
+  powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 

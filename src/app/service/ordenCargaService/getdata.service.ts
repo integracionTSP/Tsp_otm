@@ -21,9 +21,9 @@ import { Observable } from 'rxjs';
 
 //------------ ´PRUEBAS locales--------//
 
-const urlPrincipalOC = 'http://localhost:4000/api/ordenCarga/';
+const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
 
-const urlPrincipalEM = 'http://localhost:4000/api/mail/';
+const urlPrincipalEM = 'http://localhost:3000/api/mail/';
 
 
 @Injectable()
