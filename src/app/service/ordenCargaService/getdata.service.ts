@@ -5,11 +5,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // importar el observable
 import { Observable } from 'rxjs';
 
-// definir la url principal
+// definir la url principal produccion
 
-const urlPrincipalOC = 'http://192.168.1.97:3000/api/ordenCarga/';
+// const urlPrincipalOC = 'http://192.168.1.222:3000/api/ordenCarga/';
 
-const urlPrincipalEM = 'http://192.168.1.97:3000/api/mail/';
+// const urlPrincipalEM = 'http://192.168.1.222:3000/api/mail/';
+
+
+
+// definir la url test
+
+// const urlPrincipalOC = 'http://192.168.1.97:3000/api/ordenCarga/';
+
+// const urlPrincipalEM = 'http://192.168.1.97:3000/api/mail/';
+
+//------------ ´PRUEBAS locales--------//
+
+const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
+
+const urlPrincipalEM = 'http://localhost:3000/api/mail/';
 
 
 @Injectable()
@@ -53,6 +67,8 @@ export class GetdataService {
 
     return this.httpClient.get(urlPrincipalOC + `getPowerValid/${powerDriverGID.powerGID}`);
   }
+
+  
 
   sendMail(p_to : string , p_subject  : string, p_body: string){
 
