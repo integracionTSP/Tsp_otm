@@ -17,10 +17,13 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             <h3>Transporte Sanchez Polo</h3>
           </div>
           <div id="encabezado">
+            <P><strong>Tiquete de carga: </strong>{{consecutivo}}</P>
+            <P><strong>Cedula conductor: </strong>{{powerDriverGID.driverGID}}</P>
+            <P><strong>Elaborado por: </strong>{{user}}</P>
             <p *ngIf="dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
             <p *ngIf="!dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> No dispobible</p>
             <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
-            <p><strong>Fecha de autorización: </strong>{{fecha | date: 'yyyy-mm-dd'}} </p>
+           <!-- <p><strong>Fecha de autorización: </strong>{{fecha}} </p>-->
             <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
               </strong>{{dataDriverValid[0].driver_full_name}}</p>
           </div>
@@ -216,7 +219,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
 
               <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
                 <div *ngIf="enableBtnAcept" class="col-2">
-                  <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">ACEPTAR <i class="far fa-check-circle"></i></button>
+                  <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>
 
                 </div>
 

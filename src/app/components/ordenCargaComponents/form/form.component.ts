@@ -20,6 +20,7 @@ import Swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   // usuario 
   userName = JSON.parse(localStorage.getItem('user'));
+  user = this.userName.username;
   orderDate: Date;
 
   d: Date;
@@ -29,6 +30,7 @@ export class FormComponent implements OnInit {
 
   //rutas disponibles 
   enableAvailableRoutes: boolean = false;
+
 
   // otras rutas 
   enableOtherRoutes: boolean = false;
@@ -40,7 +42,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+  powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
   //powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
@@ -48,7 +50,7 @@ export class FormComponent implements OnInit {
 
 
 
-   powerDriverGID: any = { powerGID: '', driverGID: '' }
+  //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 
@@ -76,6 +78,8 @@ export class FormComponent implements OnInit {
   dataPowerValid: any = [];
 
   powerTecnoDate: any = '';
+
+  consecutivo: number;
 
   powerSoatDate: any = '';
 
@@ -198,16 +202,16 @@ export class FormComponent implements OnInit {
     this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
 
       this.dataDriverValid = result.response;
-        
 
-       this.driverName = this.dataDriverValid[0].driver_full_name;
-       this.driverlicDate =  this.dataDriverValid[0].expiracion_licencia;
-       this.driverStatus= this.dataDriverValid[0].is_active;
 
-      
+      this.driverName = this.dataDriverValid[0].driver_full_name;
+      this.driverlicDate = this.dataDriverValid[0].expiracion_licencia;
+      this.driverStatus = this.dataDriverValid[0].is_active;
+
+
       console.log('datos del conductor a validar', this.dataDriverValid);
 
-   
+
 
 
 
@@ -224,16 +228,16 @@ export class FormComponent implements OnInit {
     this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
 
       this.dataPowerValid = result.response;
- 
-         
-      
-      
-           this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
-           this.powerSoatDate = this.dataPowerValid[0].vence_soat;
-           this.powerStatus = this.dataPowerValid[0].is_active;
 
- 
-        
+
+
+
+      this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
+      this.powerSoatDate = this.dataPowerValid[0].vence_soat;
+      this.powerStatus = this.dataPowerValid[0].is_active;
+
+
+
 
 
 
@@ -247,12 +251,12 @@ export class FormComponent implements OnInit {
 
   }
 
-  
+
   // envio de correos
 
   sendMessageMail(messageError: string, messageBody: string): void {
-    
-    
+
+
     this.GetdataService.sendMail(this.userName.email, messageError, messageBody).subscribe(result => {
 
       console.log(result);
@@ -293,11 +297,13 @@ export class FormComponent implements OnInit {
         // validar que el registro exista
         if (this.powerDriverGIDResult !== this.notFoundMessage) {
 
-          console.log('fecha expiracion licencia: ', this.driverlicDate );
+          //LOG ---------------------------------------------------
+          console.log('fecha expiracion licencia: ', this.driverlicDate);
           console.log('estado del conductor: ', this.driverStatus);
           console.log('fecha soat: ', this.powerSoatDate);
-          console.log('fecha tecnomecanica: ',this.powerTecnoDate );
-          console.log('estado de la placa: ',  this.powerStatus);
+          console.log('fecha tecnomecanica: ', this.powerTecnoDate);
+          console.log('estado de la placa: ', this.powerStatus);
+          //LOG ---------------------------------------------------
 
           // licencia sea vigente
 
@@ -373,7 +379,7 @@ export class FormComponent implements OnInit {
                     fecha vencimiento del soat: ${this.powerSoatDate}
                     fecha de la tecnomecanica: ${this.powerTecnoDate}
                     estado de la placa: ${this.powerStatus} `
-                    
+
                     this.messageError = this.listEmailTemplate[2].subject;
                     this.messageBody = this.listEmailTemplate[2].body;
                     this.sendMessageMail(this.messageError, this.messageBody);
@@ -386,7 +392,7 @@ export class FormComponent implements OnInit {
                 } else {
 
                   console.log('el soat esta vencido');
-                
+
                   this.listEmailTemplate[3].body = `El soat esta vencido: ${this.powerSoatDate} con placa ${this.powerDriverGID.powerGID} 
 
                   fecha expiracion licencia:  ${this.driverlicDate}
@@ -409,7 +415,7 @@ export class FormComponent implements OnInit {
 
             console.log('La licencia esta vencida');
 
-            this.listEmailTemplate[4].body =  `EL conductor: ${this.driverName} con placa ${this.powerDriverGID.powerGID}
+            this.listEmailTemplate[4].body = `EL conductor: ${this.driverName} con placa ${this.powerDriverGID.powerGID}
             tiene la licencia esta vencida: ${this.driverlicDate}
             
             fecha expiracion licencia:  ${this.driverlicDate}
@@ -431,23 +437,23 @@ export class FormComponent implements OnInit {
         } else {
           // mostrar otras rutas
 
-   
-       
 
-         if( this.dataPowerValid !== this.notFoundMessage && this.dataDriverValid !== this.notFoundMessage ){
-           
+
+
+          if (this.dataPowerValid !== this.notFoundMessage && this.dataDriverValid !== this.notFoundMessage) {
+
             this.searchDistPowerDriver(powerDriverGID);
             this.enableAvailableRoutes = false;
             this.enableOtherRoutes = true;
 
-          }else{
+          } else {
             this.alertMessageError(this.powerDriverGIDResult);
             console.log(this.powerDriverGIDResult);
             this.enableAvailableRoutes = false;
             this.enableOtherRoutes = false;
           }
-         
-     
+
+
         }
 
 
@@ -553,18 +559,30 @@ export class FormComponent implements OnInit {
     }
     );
 
+      this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+      this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+      this.orderDate, this.selectRoutesChk.source_location_gid,
+      this.selectRoutesChk.dest_location_gid)
+      
+      
+      ;
+
 
   }
 
 
   generarPDF() {
 
-    this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID, this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username, this.orderDate, this.selectRoutesChk.source_location_gid, this.selectRoutesChk.dest_location_gid);
+    //LOGS _________________________________________
     console.log('FECHA: ' + this.d.toLocaleDateString());
     console.log('FECHA2: ' + this.fecha);
     console.log(this.d.getDay());
     console.log(this.d.getMonth() + 1);
     console.log(this.d.getTime());
+
+    //LOGS _________________________________________
+
+
     let nombreDoc = 'reporte_' + String(this.d.getTime()) + '.pdf';
     console.log(nombreDoc);
     html2canvas(document.getElementById('pdf'), {
@@ -591,11 +609,15 @@ export class FormComponent implements OnInit {
 
   // log de reportes
 
-  OperationReports(shipmentGID: string, driverGID: string, powerGID: string, insertDate: string, insertUser: any, orderDate: any, sourceLocationGID: any, destLocationGID: any): void {
+  OperationReports(shipmentGID: string, driverGID: string, powerGID: string, insertDate: string, 
+    insertUser: any, orderDate: any, sourceLocationGID: any, destLocationGID: any): void {
 
-    this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser, orderDate, sourceLocationGID, destLocationGID).subscribe(result => {
-
+    this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser, 
+      orderDate, sourceLocationGID, destLocationGID).subscribe(result => {
+        this.consecutivo = result.data.order_id;
+      //LOGS _________________________________________
       console.log(result);
+      //LOGS _________________________________________
 
     }, error => {
       console.log(JSON.stringify(error));
