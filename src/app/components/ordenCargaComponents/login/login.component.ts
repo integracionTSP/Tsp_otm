@@ -91,14 +91,14 @@ export class LoginComponent implements OnInit {
 
     if (userCorrect == login.username && passCorrect == pwd) {
       login.email = email;
-      localStorage.setItem('email', JSON.stringify(login));
+      localStorage.setItem('user', JSON.stringify(login));
 
       console.log('has iniciado session');
       this.targetMenu(true);
       this.router.navigate(['/home']);
 
     } else {
-      localStorage.setItem('email', null);
+      localStorage.setItem('user', null);
       console.log('incorrecto');
 
     }

@@ -1,10 +1,10 @@
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, OnInit} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, OnInit } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 interface FoodNode {
   name: string;
-  route?:string;
+  route?: string;
   children?: FoodNode[];
 }
 
@@ -21,7 +21,6 @@ const TREE_DATA: FoodNode[] = [
   {
     name: 'Salir',
     route: '/login'
-    
   }
 ];
 
@@ -49,7 +48,7 @@ interface ExampleFlatNode {
 
 
 export class NavBarComponent implements OnInit {
-  ngOnInit(){
+  ngOnInit() {
   }
   private _transformer = (node: FoodNode, level: number) => {
     return {
@@ -61,10 +60,10 @@ export class NavBarComponent implements OnInit {
   }
 
   treeControl = new FlatTreeControl<ExampleFlatNode>(
-      node => node.level, node => node.expandable);
+    node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(
-      this._transformer, node => node.level, node => node.expandable, node => node.children);
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -74,6 +73,11 @@ export class NavBarComponent implements OnInit {
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
-
+  eventHandler(node: FoodNode) {
+    if (node.route == "/login") {
+      localStorage.setItem('user', null);
+  
+    }
+  }
 
 }

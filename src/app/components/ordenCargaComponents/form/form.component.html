@@ -17,8 +17,8 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             <h3>Transporte Sanchez Polo</h3>
           </div>
           <div id="encabezado">
-            <p *ngIf="dataPrintResult.shipment_gid"><strong>Orden de Carga:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
-            <p *ngIf="!dataPrintResult.shipment_gid"><strong>Orden de Carga:</strong> No dispobible</p>
+            <p *ngIf="dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
+            <p *ngIf="!dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> No dispobible</p>
             <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
             <p><strong>Fecha de autorización: </strong>{{fecha | date: 'yyyy-mm-dd'}} </p>
             <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
