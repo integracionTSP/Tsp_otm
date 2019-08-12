@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   enableBtnAcept: boolean = true;
 
   // captura de datos de los input
-  //powerDriverGID: any = { powerGID: 'SUJ965', driverGID: '93292503' }
+  powerDriverGID: any = { powerGID: 'SUJ965', driverGID: '93292503' }
 
   //powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
 
 
 
-  powerDriverGID: any = { powerGID: '', driverGID: '' }
+ // powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 
@@ -200,9 +200,9 @@ export class FormComponent implements OnInit {
       this.dataDriverValid = result.response;
         
 
-      this.driverName = this.dataDriverValid[0].driver_full_name;
-      this.driverlicDate =  this.dataDriverValid[0].expiracion_licencia;
-      this.driverStatus= this.dataDriverValid[0].is_active;
+      // this.driverName = this.dataDriverValid[0].driver_full_name;
+      // this.driverlicDate =  this.dataDriverValid[0].expiracion_licencia;
+      // this.driverStatus= this.dataDriverValid[0].is_active;
 
       
       console.log('datos del conductor a validar', this.dataDriverValid);
@@ -228,9 +228,9 @@ export class FormComponent implements OnInit {
          
       
       
-          this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
-          this.powerSoatDate = this.dataPowerValid[0].vence_soat;
-          this.powerStatus = this.dataPowerValid[0].is_active;
+          // this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
+          // this.powerSoatDate = this.dataPowerValid[0].vence_soat;
+          // this.powerStatus = this.dataPowerValid[0].is_active;
 
  
         
@@ -293,11 +293,11 @@ export class FormComponent implements OnInit {
         // validar que el registro exista
         if (this.powerDriverGIDResult !== this.notFoundMessage) {
 
-          console.log('fecha expiracion licencia: ', this.driverlicDate);
-          console.log('estado del conductor: ', this.driverStatus);
-          console.log('fecha soat: ', this.powerSoatDate);
-          console.log('fecha tecnomecanica: ', this.powerTecnoDate);
-          console.log('estado de la placa: ', this.powerStatus);
+          console.log('fecha expiracion licencia: ', this.dataDriverValid[0].expiracion_licencia);
+          console.log('estado del conductor: ', this.dataDriverValid[0].is_active);
+          console.log('fecha soat: ', this.dataPowerValid[0].vence_soat);
+          console.log('fecha tecnomecanica: ', this.dataPowerValid[0].vence_tecnomecanica );
+          console.log('estado de la placa: ', this.dataPowerValid[0].is_active);
 
           // licencia sea vigente
 
@@ -399,10 +399,20 @@ export class FormComponent implements OnInit {
           // mostrar otras rutas
 
           console.log(this.powerDriverGIDResult);
-          this.alertMessageError(this.powerDriverGIDResult);
-          this.searchDistPowerDriver(powerDriverGID);
-          this.enableAvailableRoutes = false;
-          this.enableOtherRoutes = true;
+       
+
+         if( this.powerDriverGIDResult !== this.notFoundMessage){
+            console.log(this.powerDriverGIDResult);
+            this.searchDistPowerDriver(powerDriverGID);
+            this.enableAvailableRoutes = false;
+            this.enableOtherRoutes = true;
+
+          }else{
+            this.alertMessageError(this.powerDriverGIDResult);
+            console.log(this.powerDriverGIDResult);
+          }
+         
+     
         }
 
 

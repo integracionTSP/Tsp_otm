@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, HostBinding } from '@an
 import * as crypto from 'crypto-js';
 // importar el servicio
 import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
-import {LoginService} from '../../../service/Login/login.service';
+import { LoginService } from '../../../service/Login/login.service';
 
 import { Router } from '@angular/router';
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
 
   // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService, private router: Router, public loginServ:LoginService) {
+  constructor(private GetdataService: GetdataService, private router: Router, public loginServ: LoginService) {
     this.targetMenu(false);
   }
 
@@ -60,7 +60,10 @@ export class LoginComponent implements OnInit {
     let email: string;
     // Encrypt password provide for user
     let pwd = crypto.SHA512(login.password);
+   
     
+    //let pwd = login.password;
+
     for (let i in this.users) {
 
       if (this.users[i].idusuario == login.username && this.users[i].angular_password == pwd) {
@@ -71,6 +74,21 @@ export class LoginComponent implements OnInit {
 
       }
     }
+
+
+    // for (let i in this.users) {
+
+    //   if (this.users[i].idusuario == login.username && this.users[i].claveencr == pwd) {
+    //     userCorrect = this.users[i].idusuario;
+    //     passCorrect = this.users[i].claveencr;
+    //     email = this.users[i].email;
+    //     console.log('usuario correcto', userCorrect);
+
+    //   }
+    // }
+
+
+
     if (userCorrect == login.username && passCorrect == pwd) {
       login.email = email;
       localStorage.setItem('email', JSON.stringify(login));
@@ -94,14 +112,14 @@ export class LoginComponent implements OnInit {
 
   //inicializar
   ngOnInit() {
-    this.loginServ.sendEnviableState.subscribe(response =>{
+    this.loginServ.sendEnviableState.subscribe(response => {
       this.enableNavBar = response;
     });
     this.getAllUser();
-    
+
   }
 
-  targetMenu(state){
+  targetMenu(state) {
     this.loginServ.isLogged(state);
   }
 

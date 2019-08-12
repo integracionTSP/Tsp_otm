@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 
 // definir la url principal produccion
 
-// const urlPrincipalOC = 'http://192.168.1.222:3000/api/ordenCarga/';
+ const urlPrincipalOC = 'http://192.168.1.222:3000/api/ordenCarga/';
 
-// const urlPrincipalEM = 'http://192.168.1.222:3000/api/mail/';
+ const urlPrincipalEM = 'http://192.168.1.222:3000/api/mail/';
 
 
 
@@ -21,9 +21,9 @@ import { Observable } from 'rxjs';
 
 //------------ ´PRUEBAS locales--------//
 
-const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
+//const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
 
-const urlPrincipalEM = 'http://localhost:3000/api/mail/';
+//const urlPrincipalEM = 'http://localhost:3000/api/mail/';
 
 
 @Injectable()
@@ -62,13 +62,22 @@ export class GetdataService {
     return this.httpClient.get(urlPrincipalOC + `getDriverValid/${powerDriverGID.driverGID}`);
   }
 
-    // datos para validaciones del conductor 
+    // datos para validaciones placas
   powerValid(powerDriverGID : any): Observable<any> {
 
     return this.httpClient.get(urlPrincipalOC + `getPowerValid/${powerDriverGID.powerGID}`);
   }
 
-  
+
+    // datos para validaciones del conductor y placas
+  powerDriverValid(powerDriverGID : any): Observable<any> {
+
+    return this.httpClient.get(urlPrincipalOC + `getPowerDriverValid/${powerDriverGID.powerGID}/${powerDriverGID.powerGID}`);
+  }
+
+    
+
+
 
   sendMail(p_to : string , p_subject  : string, p_body: string){
 
