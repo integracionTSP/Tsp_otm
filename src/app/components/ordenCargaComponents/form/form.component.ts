@@ -203,12 +203,35 @@ export class FormComponent implements OnInit {
 
       this.dataDriverValid = result.response;
 
+     
+        
+
 
       this.driverName = this.dataDriverValid[0].driver_full_name;
       this.driverlicDate = this.dataDriverValid[0].expiracion_licencia;
       this.driverStatus = this.dataDriverValid[0].is_active;
 
 
+       if(this.driverlicDate < this.dataDriverValid[0].fecha_actual){
+
+        this.messageError = this.listEmailTemplate[4].subject;
+                            setTimeout(()=>{   
+                              this.alertMessageError(this.messageError);
+                       }, 300);
+
+       
+ 
+       }
+
+       if(this.driverStatus ='N'){
+        this.messageError = this.listEmailTemplate[0].subject;
+        setTimeout(()=>{   
+          this.alertMessageError(this.messageError);
+   }, 300);
+
+       }
+
+      
       console.log('datos del conductor a validar', this.dataDriverValid);
 
 
@@ -238,6 +261,40 @@ export class FormComponent implements OnInit {
 
 
 
+           if(this.powerSoatDate < this.dataPowerValid[0].fecha_actual){
+
+            this.messageError = this.listEmailTemplate[3].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+             }, 300);
+
+           }
+
+
+           if( this.powerTecnoDate < this.dataPowerValid[0].fecha_actual){
+
+            this.messageError = this.listEmailTemplate[2].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+             }, 300);
+
+           }
+
+
+           if(this.powerStatus='N'){
+            this.messageError = this.listEmailTemplate[1].subject;
+            setTimeout(()=>{   
+              this.alertMessageError(this.messageError);
+       }, 300);
+    
+           }
+    
+            
+         
+
+
+ 
+        
 
 
 
