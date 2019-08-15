@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     this.GetdataService.AllUser().subscribe(result => {
 
       this.users = result.response;
-      console.log(result.response);
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -75,19 +74,6 @@ export class LoginComponent implements OnInit {
 
       }
     }
-
-
-    // for (let i in this.users) {
-
-    //   if (this.users[i].idusuario == login.username && this.users[i].claveencr == pwd) {
-    //     userCorrect = this.users[i].idusuario;
-    //     passCorrect = this.users[i].claveencr;
-    //     email = this.users[i].email;
-    //     console.log('usuario correcto', userCorrect);
-
-    //   }
-    // }
-
 
 
     if (userCorrect == login.username && passCorrect == pwd) {

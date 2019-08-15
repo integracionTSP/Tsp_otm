@@ -169,10 +169,11 @@ export class FormComponent {
     this.powerSoatDate='';
     this.powerTecnoDate ='';
     this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
-      this.dataPowerValid = result.response;
-      let res = result.response;
-      console.log(res)
+     
       if (result.response != null) {
+        this.dataPowerValid = result.response;
+        let res = result.response;
+        console.log(res)
         this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
         this.powerSoatDate = this.dataPowerValid[0].vence_soat;
         this.powerStatus = this.dataPowerValid[0].is_active;
@@ -388,7 +389,7 @@ export class FormComponent {
     }).then((result) => {
       if (
         /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.timer
+        result.dismiss == Swal.DismissReason.timer
       ) {
 
         return true
