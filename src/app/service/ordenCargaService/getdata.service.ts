@@ -5,9 +5,9 @@ import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // definir la url principal produccion
 
- //const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
+ const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
 
- //const urlPrincipalEM = 'http://172.16.3.222:3000/api/mail/';
+ const urlPrincipalEM = 'http://172.16.3.222:3000/api/mail/';
 
 
 
@@ -19,9 +19,9 @@ import { Observable } from 'rxjs';
 
 //------------ ´PRUEBAS locales--------//
 
-const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
+//const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
 
-const urlPrincipalEM = 'http://localhost:3000/api/mail/';
+//const urlPrincipalEM = 'http://localhost:3000/api/mail/';
 
 
 @Injectable()

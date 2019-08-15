@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
-import { FormModel } from 'src/app/service/ordenCargaService/form.service';
 
 class listMessageError {
   id: number;
@@ -306,8 +305,7 @@ export class FormComponent {
   // mensaje del cuerpo
 
   messageBody: string;
-  constructor(private GetdataService: GetdataService, private router: Router, public fb: FormBuilder,
-    private formModel: FormModel) {
+  constructor(private GetdataService: GetdataService, private router: Router, public fb: FormBuilder) {
 
     this.formPowerDriverGID = this.fb.group({
       powerGID: ['', [Validators.required]],
@@ -482,7 +480,6 @@ export class FormComponent {
       this.alertMessageError(
           //this.messageToString('',this.AlertMessages)
           this.msString
-          
         );
         this.sendMessageMail(this.msMailString)
       }
@@ -598,14 +595,18 @@ export class FormComponent {
       this. msString = this.messageToString('<br>',`
       ¡Atención! Se le informa que para combinacion,<br>
       Placa: ${this.powerDriverGID.powerGID}<br>
+      Origen:${this.selectRoutesChk.source_location_gid}<br>
+      Destino:${this.selectRoutesChk.dest_location_gid}<br>
       Conductor: ${this.powerDriverGID.driverGID}<br>
-      Se presentaron los siguientes errores:` ,this.AlertMessages);
+      Se presentaron las siguientes novedades:` ,this.AlertMessages);
         
       this. msMailString = this.messageToString('\n',`
       ¡Atención! Se le informa que para combinacion,
       Placa: ${this.powerDriverGID.powerGID}
       Conductor: ${this.powerDriverGID.driverGID}
-      Se presentaron los siguientes errores:` ,this.AlertMessages);
+      Origen:${this.selectRoutesChk.source_location_gid}
+      Destino:${this.selectRoutesChk.dest_location_gid}
+      Se presentaron las siguientes novedades:` ,this.AlertMessages);
       this.alertMessageError(
         //this.messageToString('',this.AlertMessages)
         
