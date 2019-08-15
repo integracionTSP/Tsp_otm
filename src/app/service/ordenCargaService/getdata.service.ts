@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 // importar servicios http
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 // importar el observable
 import { Observable } from 'rxjs';
-
 // definir la url principal produccion
 
  //const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
@@ -40,7 +38,8 @@ export class GetdataService {
   // rutas disponibles asociadas a la placa y conductor
   searchPowerDriver(powerDriverGID: any): Observable<any> {
 
-    return this.httpClient.get(urlPrincipalOC + `getAsociados/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
+    return this.httpClient.get(urlPrincipalOC + `getAsociados/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`)
+
   }
 
    // otras rutas  asociadas a la placa y conductor
@@ -54,6 +53,7 @@ export class GetdataService {
     // tslint:disable-next-line: max-line-length
     return this.httpClient.get(urlPrincipalOC + `getPrintShipment/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}/${selectRoutesChk.source_location_gid}/${selectRoutesChk.dest_location_gid}`);
   }
+
 
   // datos para validaciones del conductor 
 
