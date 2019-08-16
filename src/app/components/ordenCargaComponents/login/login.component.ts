@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   // inicializar el servicio en el constructor
   constructor(private GetdataService: GetdataService, private router: Router, public loginServ: LoginService) {
     this.targetMenu(false);
-    console.log(this.ami);
   }
 
 
@@ -70,7 +69,6 @@ export class LoginComponent implements OnInit {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].angular_password;
         email = this.users[i].email;
-        console.log('usuario correcto', userCorrect);
 
       }
     }
@@ -80,13 +78,11 @@ export class LoginComponent implements OnInit {
       login.email = email;
       localStorage.setItem('user', JSON.stringify(login));
 
-      console.log('has iniciado session');
       this.targetMenu(true);
       this.router.navigate(['/home']);
 
     } else {
       localStorage.setItem('user', null);
-      console.log('incorrecto');
 
     }
   }

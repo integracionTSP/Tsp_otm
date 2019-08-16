@@ -46,7 +46,7 @@ export class FormComponent {
   // captura de datos de los input
   //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
+  // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
   //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
@@ -59,11 +59,10 @@ export class FormComponent {
   Se presentaron los siguientes errores:
   messageToString() */
 
-  //powerDriverGID: any = { powerGID: '', driverGID: '' }
+  powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 
-  notFoundMessage: String = "No existe movimiento con datos ingresados";
 
   //resultados de la busqueda
   powerDriverGIDResult: any = [{}];
@@ -158,25 +157,24 @@ export class FormComponent {
   listEmailTemplate: any;
 
 
-  msString:string;
-  msMailString:string;
-  
+  msString: string;
+  msMailString: string;
+
 
   //Cargan los datos de powerUnit
   getPowerUnit() {
     this.powerStatus = 'N';
-    this.powerSoatDate='';
-    this.powerTecnoDate ='';
+    this.powerSoatDate = '';
+    this.powerTecnoDate = '';
     this.GetdataService.powerValid(this.powerDriverGID).subscribe(result => {
-     
+
       if (result.response != null) {
         this.dataPowerValid = result.response;
         let res = result.response;
-        console.log(res)
         this.powerTecnoDate = this.dataPowerValid[0].vence_tecnomecanica;
         this.powerSoatDate = this.dataPowerValid[0].vence_soat;
         this.powerStatus = this.dataPowerValid[0].is_active;
-        this.powerValid(res[0].vence_soat,res[0].vence_tecnomecanica,res[0].is_active,this.fecha)
+        this.powerValid(res[0].vence_soat, res[0].vence_tecnomecanica, res[0].is_active, this.fecha)
       } else {
         this.AlertMessages.push(6);
       }
@@ -193,10 +191,10 @@ export class FormComponent {
     if (soat < now) {
       this.AlertMessages.push(3)
       return false
-    } else{
-  
-    return true
-  }
+    } else {
+
+      return true
+    }
   }
 
   // Valida Tecnomecanica Retorna True si el Tecnomecanica esta activo
@@ -225,21 +223,19 @@ export class FormComponent {
     this.driverStatus = 'N'
     this.driverlicDate = ''
     this.GetdataService.driverValid(this.powerDriverGID).subscribe(result => {
-      
+
       if (result.response != null) {
         this.dataDriverValid = result.response;
         let res = result.response;
-        console.log(res);
-        
         this.driverName = this.dataDriverValid[0].driver_full_name;
         this.driverlicDate = this.dataDriverValid[0].expiracion_licencia;
         this.driverStatus = this.dataDriverValid[0].is_active;
         this.fecha = res[0].fecha_actual;
-       
+
         this.driverValid(res[0].expiracion_licencia, res[0].fecha_actual, res[0].is_active);
-       
+
       } else {
-        
+
         this.AlertMessages.push(7);
       }
 
@@ -275,9 +271,9 @@ export class FormComponent {
     let status = this.driverStatusValid(st);
     if (license && status) {
       return true
-    } 
-      return false
-    
+    }
+    return false
+
   }
 
 
@@ -286,20 +282,20 @@ export class FormComponent {
 
 
     let soatv = this.SoatValid(soat, now)
-    let tecnov =this.TecnoValid(tecno, now)
-    let stv =this.PowerStatusValid(st)
+    let tecnov = this.TecnoValid(tecno, now)
+    let stv = this.PowerStatusValid(st)
 
 
     if (soatv && tecnov && stv) {
       return true
-    } 
-      return false
-    
+    }
+    return false
+
   }
 
   // mensajes de error
   messageError: string;
-  
+
 
 
   // mensaje del cuerpo
@@ -342,8 +338,6 @@ export class FormComponent {
 
 
     this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
-      console.log(this.userName.email)
-      console.log(result);
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -413,147 +407,136 @@ export class FormComponent {
       let res = result.response;
       if (res != null) {
         this.dataPrintResult.shipmentGID = res.shipment_gid;
-        this.orderDate = res.fecha_order_release;
-        console.log(this.orderDate);
-        console.log("-->",this.dataPrintResult.shipmentGID)
-        console.log(this.driverValid(this.driverlicDate, this.fecha, this.driverStatus),
-        this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha))
-
         if (this.driverValid(this.driverlicDate, this.fecha, this.driverStatus) &&
           this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha)) {
-            console.log(this.driverValid(this.driverlicDate, this.fecha, this.driverStatus), "&&",
-            this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha));
-          console.log("Tiene Rutas activas");
           this.enableAvailableRoutes = true;
         }
       } else {
         this.AlertMessages.push(8);
 
 
-        let driverV =this.driverValid(this.driverlicDate, this.fecha, this.driverStatus)
-        let powerV =this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha)
-        console.log(driverV,"&&", powerV);
+        let driverV = this.driverValid(this.driverlicDate, this.fecha, this.driverStatus)
+        let powerV = this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha)
 
 
         if (driverV && powerV) {
-            
-            this.enableOtherRoutes = true;
-            this.enableAvailableRoutes = false;
-            this.searchDistPowerDriver(this.powerDriverGID);
-            console.log("No tiene rutas activas")
-          
+
+          this.enableOtherRoutes = true;
+          this.enableAvailableRoutes = false;
+          this.searchDistPowerDriver(this.powerDriverGID);
+
         } else {
-          
+
           this.enableOtherRoutes = false;
           this.enableAvailableRoutes = false;
 
         }
       }
     })
+
   }
-    
+
 
 
 
   searchPowerDriver(powerDriverGID: any) {
-    this.powerStatus, this.driverStatus = 'N','N';
-    this.AlertMessages = []
-    this.getDriver()
-    this.getPowerUnit()
+    if (this.powerDriverGID.driverGID && this.powerDriverGID.powerGID) {
+      this.powerStatus, this.driverStatus = 'N', 'N';
+      this.AlertMessages = []
+      this.getDriver()
+      this.getPowerUnit()
 
-    this.waitingMessage("Validando credenciales...");
-    
-    setTimeout(() => {
-      if (this.AlertMessages.length > 0) {
-        this. msString = this.messageToString('<br>',`
+      this.waitingMessage("Validando credenciales...");
+
+      setTimeout(() => {
+        if (this.AlertMessages.length > 0) {
+          this.msString = this.messageToString('<br>', `
       ¡Atención! Se le informa que para combinacion,<br>
       Placa: ${this.powerDriverGID.powerGID}<br>
       Conductor: ${this.powerDriverGID.driverGID}<br>
-      Se presentaron los siguientes errores:` ,this.AlertMessages);
-        
-      this. msMailString = this.messageToString('\n',`
+      Se presentaron los siguientes errores:` , this.AlertMessages);
+
+          this.msMailString = this.messageToString('\n', `
       ¡Atención! Se le informa que para combinacion,
       Placa: ${this.powerDriverGID.powerGID}
       Conductor: ${this.powerDriverGID.driverGID}
-      Se presentaron los siguientes errores:` ,this.AlertMessages);
-      
+      Se presentaron los siguientes errores:` , this.AlertMessages);
+
+          this.alertMessageError(
+            //this.messageToString('',this.AlertMessages)
+            this.msString
+          );
+          this.sendMessageMail(this.msMailString)
+        }
+
+        // Valida campos llenos
+        if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
+
+          this.getRoutes();
+          // mostrar otras 
+        }
+      }, 600)
+    }else {
       this.alertMessageError(
-          //this.messageToString('',this.AlertMessages)
-          this.msString
-        );
-        this.sendMessageMail(this.msMailString)
-      }
+        `¡Rellenas todos los campos o aquí nos quedamos!<br> 
+        Att: El sistema`
+      );
+    }
 
-      // Valida campos llenos
-      if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
-
-        this.getRoutes();
-        // mostrar otras 
-      }
-    }, 600);
-
-  }
+    }
 
 
-  messageToString(space:string,base:string,listMessageError: number[]) {
-    let text = base + space + space;
-    listMessageError.forEach(element => {
-      text +=  '--> ' + this.getMessageID(this.listMessageError, element) + space;
-    });
-    return text
-  }
+    messageToString(space: string, base: string, listMessageError: number[]) {
+      let text = base + space + space;
+      listMessageError.forEach(element => {
+        text += '--> ' + this.getMessageID(this.listMessageError, element) + space;
+      });
+      return text
+    }
 
-  getMessageID(listMessageError: listMessageError[], id: number): string {
-    let mess = '';
-    listMessageError.forEach(element => {
-      if (element.id == id) {
-        mess = element.message
-      }
-    });
-    return mess
-  }
-
-
-  // seleccionar el viaje disponible individual de la tabla rutas disponibles
-  availableRouteSelect(AvailableRoutesChk: any): void {
-    this.enableOtherRoutes = false;
-    this.selectRoutesChk = {};
-    this.enableBtnPrint = true;
-    this.selectRoutesChk = AvailableRoutesChk;
-    console.log("Ruta disponible seleccionada ", this.selectRoutesChk);
+    getMessageID(listMessageError: listMessageError[], id: number): string {
+      let mess = '';
+      listMessageError.forEach(element => {
+        if (element.id == id) {
+          mess = element.message
+        }
+      });
+      return mess
+    }
 
 
-  }
+    // seleccionar el viaje disponible individual de la tabla rutas disponibles
+    availableRouteSelect(AvailableRoutesChk: any): void {
+      this.enableOtherRoutes = false;
+      this.selectRoutesChk = {};
+      this.enableBtnPrint = true;
+      this.selectRoutesChk = AvailableRoutesChk;
 
-  clear(){
-    this.driverName = null
-    this.driverStatus = null
-    this.driverlicDate = null
-    this.powerSoatDate = null
-    this.powerTecnoDate = null 
-    this.powerStatus= null 
-    
-    this.selectRoutesChk = null
-    
-  }
 
-  // DESTINOS DISTINTOS A LOS ASOCIADOS otras rutas
+    }
 
-  searchDistPowerDriver(powerDriverGID: any): void {
-    
-    if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
+    clear(){
+      this.enableBtnPrint = false
+      this.enableOtherRoutes = false
+      this.enableAvailableRoutes = false
+     
+    }
+
+    // DESTINOS DISTINTOS A LOS ASOCIADOS otras rutas
+
+    searchDistPowerDriver(powerDriverGID: any): void {
+
+      if(powerDriverGID.powerGID && powerDriverGID.driverGID) {
 
       this.GetdataService.searchDistPowerDriver(powerDriverGID).subscribe(result => {
 
         this.powerDriverGIDDistResult = result.response;
 
         // validar que el registro exista
-        if (this.powerDriverGIDDistResult != this.notFoundMessage) {
+        if (this.powerDriverGIDDistResult != null) {
           this.enableOtherRoutes = true;
-          console.log("Resultados distintos ", this.powerDriverGIDDistResult);
 
         } else {
-          console.log(this.powerDriverGIDDistResult);
           this.enableOtherRoutes = false;
         }
 
@@ -581,97 +564,82 @@ export class FormComponent {
     this.enableBtnPrint = true;
     this.selectRoutesChk = {};
     this.selectRoutesChk = otherRoutesChk;
-
-
-
-    console.log("Otra ruta seleccionada", this.selectRoutesChk);
-
   }
 
   // buscar datos a imprimir
 
   searchDataPrint(): Boolean {
+    if(this.orderDate){
     if (this.AlertMessages.length > 0) {
-      this. msString = this.messageToString('<br>',`
+      this.msString = this.messageToString('<br>', `
       ¡Atención! Se le informa que para combinacion,<br>
       Placa: ${this.powerDriverGID.powerGID}<br>
       Origen:${this.selectRoutesChk.source_location_gid}<br>
       Destino:${this.selectRoutesChk.dest_location_gid}<br>
       Conductor: ${this.powerDriverGID.driverGID}<br>
-      Se presentaron las siguientes novedades:` ,this.AlertMessages);
-        
-      this. msMailString = this.messageToString('\n',`
+      Se presentaron las siguientes novedades:` , this.AlertMessages);
+
+      this.msMailString = this.messageToString('\n', `
       ¡Atención! Se le informa que para combinacion,
       Placa: ${this.powerDriverGID.powerGID}
       Conductor: ${this.powerDriverGID.driverGID}
       Origen:${this.selectRoutesChk.source_location_gid}
       Destino:${this.selectRoutesChk.dest_location_gid}
-      Se presentaron las siguientes novedades:` ,this.AlertMessages);
+      Se presentaron las siguientes novedades:` , this.AlertMessages);
       this.alertMessageError(
-        //this.messageToString('',this.AlertMessages)
         
-
-
-
         this.msString
-        
+
       );
       this.sendMessageMail(this.msMailString)
     }
 
-
-
-      this.dataPrintResult.shipment_gid = null;
-      if(!this.enableOtherRoutes){
-      console.log(this.orderDate)
+    this.dataPrintResult.shipment_gid = null;
+    
+    if (!this.enableOtherRoutes) {
       this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
-      if(result.response != null){
-        this.dataPrintResult = result.response[0];
-        this.orderDate = this.dataPrintResult.fecha_order_release;
-        console.log('Datos a imprimir', this.dataPrintResult);
-        console.log(this.orderDate);
-      
-        this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-        this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-        this.orderDate, this.selectRoutesChk.source_location_gid,
-        this.selectRoutesChk.dest_location_gid)
-        return true
-      }else{
-      
+        if (result.response != null) {
+          this.dataPrintResult = result.response[0];
+          this.orderDate = this.dataPrintResult.fecha_order_release;
+
+          this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+            this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+            this.orderDate, this.selectRoutesChk.source_location_gid,
+            this.selectRoutesChk.dest_location_gid)
+          return true
+        }
+      }, error => {
+        console.log(JSON.stringify(error));
+        return false
       }
-    }, error => {
-      console.log(JSON.stringify(error));
-      return false
-    }
-    );}else{
+      );
+    } else {
       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
         this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
         this.orderDate, this.selectRoutesChk.source_location_gid,
         this.selectRoutesChk.dest_location_gid)
     }
-    
 
-    console.log(this.orderDate)
+
+    this.clear()
     return false
-
-
+  
+  }else{
+    this.alertMessageError(`
+    ¡De seguro lo haces a proposito!<br>
+    Para poder continuar selecciona la fecha de la orden...<br>
+    Pulsa okay para ver el estado del formato, pero, este no es un documento valido.<br><br>
+    <strong>¡<span style ="color:red">No</span> esta registrado en el sistema!</strong> <br>
+    `);
+  }
   }
 
 
   generarPDF() {
 
-    //LOGS _________________________________________
-    console.log('FECHA: ' + this.d.toLocaleDateString());
-    console.log('FECHA2: ' + this.fecha);
-    console.log(this.d.getDay());
-    console.log(this.d.getMonth() + 1);
-    console.log(this.d.getTime());
-
-    //LOGS _________________________________________
-
+ 
 
     let nombreDoc = 'reporte_' + String(this.d.getTime()) + '.pdf';
-    console.log(nombreDoc);
     html2canvas(document.getElementById('pdf'), {
       // Opciones
       allowTaint: true,
@@ -702,9 +670,7 @@ export class FormComponent {
     this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser,
       orderDate, sourceLocationGID, destLocationGID).subscribe(result => {
         this.consecutivo = result.data.order_id;
-        //LOGS _________________________________________
-        console.log(result);
-        //LOGS _________________________________________
+        
 
       }, error => {
         console.log(JSON.stringify(error));
@@ -715,7 +681,14 @@ export class FormComponent {
 
   }
 
+
   ngOnInit() {
   }
+
+
+
+
+
+
 
 }
