@@ -478,8 +478,7 @@ export class FormComponent {
       }, 600)
     }else {
       this.alertMessageError(
-        `¡Rellenas todos los campos o aquí nos quedamos!<br> 
-        Att: El sistema`
+        `¡Rellenas todos los campos!<br>` 
       );
     }
 
@@ -626,9 +625,8 @@ export class FormComponent {
   
   }else{
     this.alertMessageError(`
-    ¡De seguro lo haces a proposito!<br>
     Para poder continuar selecciona la fecha de la orden...<br>
-    Pulsa okay para ver el estado del formato, pero, este no es un documento valido.<br><br>
+    Pulsa <strong><span style ="color:red">OK</span></strong> para ver el estado del formato, pero, este no es un documento valido.<br><br>
     <strong>¡<span style ="color:red">No</span> esta registrado en el sistema!</strong> <br>
     `);
   }
