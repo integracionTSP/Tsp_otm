@@ -48,7 +48,7 @@ export class FormComponent {
 
   // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
-  //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
+  powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
 
 
@@ -59,7 +59,7 @@ export class FormComponent {
   Se presentaron los siguientes errores:
   messageToString() */
 
-  powerDriverGID: any = { powerGID: '', driverGID: '' }
+ // powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 
@@ -331,13 +331,10 @@ export class FormComponent {
 
 
 
-
-
-
   sendMessageMail(messageBody: string): void {
 
 
-    this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
+    this.GetdataService.sendMail('ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com', '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
 
     }, error => {
       console.log(JSON.stringify(error));

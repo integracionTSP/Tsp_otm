@@ -3,8 +3,12 @@ import * as crypto from 'crypto-js';
 // importar el servicio
 import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
 import { LoginService } from '../../../service/Login/login.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +16,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Output() usuarioSeleccionado = new EventEmitter();
+
+  formLogin: FormGroup;
   // variable que guarda los datos digitados
   login: any = { username: '', password: '', email: '' }
-
-  //variable para almacenar los usuarios
-  ami = crypto.SHA512('tsp2019').toString();
-  users: any;
+  // todos usuarios traidos del servicio
+  users: any ;
 
   //habilitar btn
   disabledBtn: boolean = true;
@@ -30,11 +33,53 @@ export class LoginComponent implements OnInit {
   enableNavBar: boolean;
 
 
+
+
   // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService, private router: Router, public loginServ: LoginService) {
+  constructor(private GetdataService: GetdataService, private router: Router, public loginServ: LoginService, public FormBuilder:FormBuilder) {
     this.targetMenu(false);
+   
+
+    this.formLogin = this.FormBuilder.group({
+
+      username:['', [Validators.required] ],
+      password:['', [Validators.required] ]
+
+
+    });
+
   }
 
+  
+  //alertas de mensaje de error
+  alertMessageError(messageError: string) {
+    Swal.fire({
+      type: 'error',
+      title: 'Alerta',
+      text: messageError,
+      html: messageError,
+      customClass: {
+        popup: 'animated tada'
+      }
+
+    })
+  }
+
+ notifyMessageUser(userLoged){
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000
+  })
+  
+  Toast.fire({
+    type: 'success',
+    title: `Bienvenido ${userLoged} `
+  })
+}
+  
 
   //funcion traer  el servicio
   getAllUser(): void {
@@ -42,6 +87,8 @@ export class LoginComponent implements OnInit {
     this.GetdataService.AllUser().subscribe(result => {
 
       this.users = result.response;
+      //console.log(this.users);
+      
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -51,24 +98,28 @@ export class LoginComponent implements OnInit {
   }
 
   // validar si el usuario y contraseña coincidan 
-  loginUser(login: any): void {
+  loginUser(login: any) {
 
-  
+    
     let userCorrect: string;
     let passCorrect: string;
     let email: string;
     // Encrypt password provide for user
     let pwd = crypto.SHA512(login.password);
-   
-    
-    //let pwd = login.password;
+ 
 
+    console.log(this.formLogin.value);
+    
+   
+  
+// recorrer  a todos los usuarios 
     for (let i in this.users) {
 
       if (this.users[i].idusuario == login.username && this.users[i].angular_password == pwd) {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].angular_password;
         email = this.users[i].email;
+        //console.log('usuario correcto', userCorrect);
 
       }
     }
@@ -76,13 +127,19 @@ export class LoginComponent implements OnInit {
 
     if (userCorrect == login.username && passCorrect == pwd) {
       login.email = email;
-      localStorage.setItem('user', JSON.stringify(login));
 
+      localStorage.setItem('user', JSON.stringify(login));
+     
+
+      this.notifyMessageUser(userCorrect);
+      console.log('has iniciado session');
       this.targetMenu(true);
       this.router.navigate(['/home']);
-
+      
     } else {
-      localStorage.setItem('user', null);
+      localStorage.setItem('user', '{"username":"","password":"","email":""}');
+      this.alertMessageError('Usuario y/o contraseña incorrecto');
+     // console.log('usuario y/o contraseña incorrecto');
 
     }
   }
@@ -100,6 +157,7 @@ export class LoginComponent implements OnInit {
     });
     this.getAllUser();
 
+    
   }
 
   targetMenu(state) {

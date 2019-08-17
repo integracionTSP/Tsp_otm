@@ -135,43 +135,6 @@
   } 
 
  
-  .table-header-rotated {
-    border-collapse: collapse;
-    width: 50%;
-    margin-left: 27%;
-    
-  }
-  .csstransforms .table-header-rotated td {
-    width: 30px;
-  }
-  .no-csstransforms .table-header-rotated th {
-    padding: 5px 10px;
-  }
-  .table-header-rotated td {
-    text-align: center;
-    padding: 0px 5pX;
-    border: 1px solid #ccc;
-    border-left: none;
-    border-right: none;
-   
-  }
-  .csstransforms .table-header-rotated th.rotate {
-    height: 140px;
-    white-space: nowrap;
-  }
-  .csstransforms .table-header-rotated th.rotate > div {
-    -webkit-transform: translate(25px, 51px) rotate(315deg);
-            transform: translate(25px, 51px) rotate(315deg);
-    width: 30px;
-  }
-  .csstransforms .table-header-rotated th.rotate > div > span {
-    border-bottom: 1px solid #ccc;
-    padding: 5px 10px;
-  }
-  .table-header-rotated th.row-header {
-    padding: 0 10px;
-    border-bottom: 1px solid #ccc;
-  }
 
   
  .modal-backdrop {
@@ -179,3 +142,57 @@
     /* bug fix - no overlay */
     display: none;
  }
+
+ 
+/* Medium devices (desktops, 768px and up) */
+@media (max-width:768px) {
+
+  .tittle {
+    color: #e7ecff;
+    margin-left: 0%;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 22px;
+}
+.sub-tittle-mark {
+  background: #d1dceb;
+  color: #000066;
+  border-radius: 50px 10px 10px 50px;
+  width: 50%;
+  padding: .5%;
+  margin-top: 5%;
+}
+
+.table-header-rotated{
+  border-collapse: collapse;
+  width: 0%;
+  margin-left: -2%;
+}
+.table-header-rotated td {
+  /* text-align: center; */
+  padding: 1px 2pX;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+}
+
+
+.btn-form {
+  margin-bottom: 5px;
+}
+
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (max-width: 992px) {
+
+}
+
+
+
+
+
+
+

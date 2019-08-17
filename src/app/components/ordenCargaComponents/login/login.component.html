@@ -1,21 +1,22 @@
 <section class="login">
-    <img src="/../assets/img/logo-header.png" style="margin-top: 18%; margin-left: 48%;">
-  </section>
-  
+  <img src="/../assets/img/logo-header.png" style="margin-top: 18%; margin-left: 48%;">
+</section>
+
+<form [formGroup]='formLogin'   (ngSubmit)="loginUser(login)" >
   <div class="login">
     <div class="banner"></div>
     <div class="form">
       <div class="wrapper">
         <div class="row">
-          <div class="label">Usuario</div>
-          <input [(ngModel)]="login.username" name="username" type="text" id="username" />
+          <div class="label ">Usuario</div>
+          <input  formControlName="username"  [(ngModel)]="login.username" name="username" type="text"  class="text-input-uppercase" />
         </div>
         <div class="row">
           <div class="label">Contraseña</div>
-          <input [(ngModel)]="login.password" type="password" name="password" />
+          <input formControlName="password" [(ngModel)]="login.password" type="password" name="password" />
         </div>
         <div class="row">
-          <button  (click)="loginUser(login)" type="submit"> Ingresar <i class="fas fa-sign-in-alt"></i></button> 
+          <button  [disabled]="formLogin.invalid"  type="submit"> Ingresar <i class="fas fa-sign-in-alt"></i></button> 
           
         </div>
       </div>
@@ -23,3 +24,4 @@
     </div>
   </div>
   
+</form>
