@@ -333,8 +333,8 @@ export class FormComponent {
 
   sendMessageMail(messageBody: string): void {
 
-
-    this.GetdataService.sendMail('ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com', '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
+    //ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com
+    this.GetdataService.sendMail('auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com', '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -598,10 +598,10 @@ export class FormComponent {
           this.dataPrintResult = result.response[0];
           this.orderDate = this.dataPrintResult.fecha_order_release;
 
-          this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-            this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-            this.orderDate, this.selectRoutesChk.source_location_gid,
-            this.selectRoutesChk.dest_location_gid)
+           this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+             this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+             this.orderDate, this.selectRoutesChk.source_location_gid,
+             this.selectRoutesChk.dest_location_gid)
           return true
         }
       }, error => {
@@ -610,10 +610,10 @@ export class FormComponent {
       }
       );
     } else {
-      this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
         this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-        this.orderDate, this.selectRoutesChk.source_location_gid,
-        this.selectRoutesChk.dest_location_gid)
+         this.orderDate, this.selectRoutesChk.source_location_gid,
+         this.selectRoutesChk.dest_location_gid)
     }
 
 
@@ -642,12 +642,12 @@ export class FormComponent {
       // Calidad del PDF
       scale: 1
     }).then(function (canvas) {
-      var imgWidth = 180;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var imgWidth = 90;
+      var imgHeight = 120;
+     // var imgHeight = canvas.height * imgWidth / canvas.width;
       var img = canvas.toDataURL("image/png");
-      var doc = new jsPDF('l', 'mm', 'a5');
-      doc.addImage(img, 'jpg', 12, 22, imgWidth, imgHeight);
+      var doc = new jsPDF('p', 'mm', 'a6');
+      doc.addImage(img, 'jpg', 0, 15, imgWidth, imgHeight);
 
       doc.save(nombreDoc);
     });

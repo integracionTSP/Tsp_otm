@@ -64,6 +64,10 @@
     text-transform: uppercase;
   }
 
+  .under-line{
+    border-bottom: 2px solid #000066; max-width:100mm
+  }
+
   
   .input-out-border {
     font-size: 16px;

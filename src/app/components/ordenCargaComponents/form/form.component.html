@@ -1,7 +1,7 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-sm-3" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Reportes Autorización Orden de carga</h5>
@@ -14,7 +14,9 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
         <div id="hoja">
           <div id="titulo" class="text-center page-header">
             <!--img src="logo1.png" alt=""-->
-            <h3>Transportes Sanchez Polo</h3>
+            <h3 class="text-left" ><strong>   Transportes Sanchez Polo</strong></h3>
+            <p class="under-line"></p>
+            
           </div>
           <div id="encabezado">
             <P><strong>Tiquete de carga: </strong>{{consecutivo}}</P>
@@ -24,43 +26,16 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             <p *ngIf="!dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> No dispobible</p>
             <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
            <!-- <p><strong>Fecha de autorización: </strong>{{fecha}} </p>-->
-            <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
-              </strong>{{dataDriverValid[0].driver_full_name}}</p>
+            <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} </p>
+             <p><strong>Conductor: </strong>{{dataDriverValid[0].driver_full_name}}</p>
           </div>
           <div id="cuerpo">
-            <h4 class="text-center"><strong>Ruta de cargue</strong></h4>
-            <table class="table table-header-rotated">
+            <h4 class="text-left">Ruta de cargue</h4>
 
+            <P><strong>Origen: </strong>{{selectRoutesChk.source_location_gid}}</P>
+            <P><strong>Destino: </strong>{{selectRoutesChk.dest_location_gid}}</P>
+          
 
-              <thead class="thead-color">
-                <tr>
-                  <!-- First column header is not rotated -->
-
-                  <!-- Following headers are rotated -->
-
-                  <th class="rotate">
-                    <div><span>ORIGEN</span></div>
-                  </th>
-                  <th class="rotate">
-                    <div><span>DESTINO</span></div>
-                  </th>
-
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-
-                  
-                  <td>{{selectRoutesChk.source_location_gid}}</td>
-                  <td>{{selectRoutesChk.dest_location_gid}}</td>
-
-
-                </tr>
-                
-
-              </tbody>
-            </table>
           </div>
         </div>
 

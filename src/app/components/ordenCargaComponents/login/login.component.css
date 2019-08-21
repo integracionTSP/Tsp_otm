@@ -157,6 +157,12 @@ div.login {
   font-weight:600;
 }
 
+.text-input-uppercase{
+
+  text-transform: uppercase;
+}
+
+
 
 /* Medium devices (desktops, 768px and up) */
 @media (max-width:768px) {
