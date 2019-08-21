@@ -48,8 +48,9 @@ export class FormComponent {
 
   // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
-  powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
+  // powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
+  powerDriverGID: any = { powerGID: '', driverGID: '' }
 
 
 
@@ -59,7 +60,7 @@ export class FormComponent {
   Se presentaron los siguientes errores:
   messageToString() */
 
- // powerDriverGID: any = { powerGID: '', driverGID: '' }
+
 
   // mensaje no encontrado
 
@@ -473,56 +474,56 @@ export class FormComponent {
           // mostrar otras 
         }
       }, 600)
-    }else {
+    } else {
       this.alertMessageError(
-        `¡Rellenas todos los campos!<br>` 
+        `¡Rellenas todos los campos!<br>`
       );
     }
 
-    }
+  }
 
 
-    messageToString(space: string, base: string, listMessageError: number[]) {
-      let text = base + space + space;
-      listMessageError.forEach(element => {
-        text += '--> ' + this.getMessageID(this.listMessageError, element) + space;
-      });
-      return text
-    }
+  messageToString(space: string, base: string, listMessageError: number[]) {
+    let text = base + space + space;
+    listMessageError.forEach(element => {
+      text += '--> ' + this.getMessageID(this.listMessageError, element) + space;
+    });
+    return text
+  }
 
-    getMessageID(listMessageError: listMessageError[], id: number): string {
-      let mess = '';
-      listMessageError.forEach(element => {
-        if (element.id == id) {
-          mess = element.message
-        }
-      });
-      return mess
-    }
-
-
-    // seleccionar el viaje disponible individual de la tabla rutas disponibles
-    availableRouteSelect(AvailableRoutesChk: any): void {
-      this.enableOtherRoutes = false;
-      this.selectRoutesChk = {};
-      this.enableBtnPrint = true;
-      this.selectRoutesChk = AvailableRoutesChk;
+  getMessageID(listMessageError: listMessageError[], id: number): string {
+    let mess = '';
+    listMessageError.forEach(element => {
+      if (element.id == id) {
+        mess = element.message
+      }
+    });
+    return mess
+  }
 
 
-    }
+  // seleccionar el viaje disponible individual de la tabla rutas disponibles
+  availableRouteSelect(AvailableRoutesChk: any): void {
+    this.enableOtherRoutes = false;
+    this.selectRoutesChk = {};
+    this.enableBtnPrint = true;
+    this.selectRoutesChk = AvailableRoutesChk;
 
-    clear(){
-      this.enableBtnPrint = false
-      this.enableOtherRoutes = false
-      this.enableAvailableRoutes = false
-     
-    }
 
-    // DESTINOS DISTINTOS A LOS ASOCIADOS otras rutas
+  }
 
-    searchDistPowerDriver(powerDriverGID: any): void {
+  clear() {
+    this.enableBtnPrint = false
+    this.enableOtherRoutes = false
+    this.enableAvailableRoutes = false
 
-      if(powerDriverGID.powerGID && powerDriverGID.driverGID) {
+  }
+
+  // DESTINOS DISTINTOS A LOS ASOCIADOS otras rutas
+
+  searchDistPowerDriver(powerDriverGID: any): void {
+
+    if (powerDriverGID.powerGID && powerDriverGID.driverGID) {
 
       this.GetdataService.searchDistPowerDriver(powerDriverGID).subscribe(result => {
 
@@ -565,9 +566,9 @@ export class FormComponent {
   // buscar datos a imprimir
 
   searchDataPrint(): Boolean {
-    if(this.orderDate){
-    if (this.AlertMessages.length > 0) {
-      this.msString = this.messageToString('<br>', `
+    if (this.orderDate) {
+      if (this.AlertMessages.length > 0) {
+        this.msString = this.messageToString('<br>', `
       ¡Atención! Se le informa que para combinacion,<br>
       Placa: ${this.powerDriverGID.powerGID}<br>
       Origen:${this.selectRoutesChk.source_location_gid}<br>
@@ -575,64 +576,64 @@ export class FormComponent {
       Conductor: ${this.powerDriverGID.driverGID}<br>
       Se presentaron las siguientes novedades:` , this.AlertMessages);
 
-      this.msMailString = this.messageToString('\n', `
+        this.msMailString = this.messageToString('\n', `
       ¡Atención! Se le informa que para combinacion,
       Placa: ${this.powerDriverGID.powerGID}
       Conductor: ${this.powerDriverGID.driverGID}
       Origen:${this.selectRoutesChk.source_location_gid}
       Destino:${this.selectRoutesChk.dest_location_gid}
       Se presentaron las siguientes novedades:` , this.AlertMessages);
-      this.alertMessageError(
-        
-        this.msString
+        this.alertMessageError(
 
-      );
-      this.sendMessageMail(this.msMailString)
-    }
+          this.msString
 
-    this.dataPrintResult.shipment_gid = null;
-    
-    if (!this.enableOtherRoutes) {
-      this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
-        if (result.response != null) {
-          this.dataPrintResult = result.response[0];
-          this.orderDate = this.dataPrintResult.fecha_order_release;
-
-           this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-             this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-             this.orderDate, this.selectRoutesChk.source_location_gid,
-             this.selectRoutesChk.dest_location_gid)
-          return true
-        }
-      }, error => {
-        console.log(JSON.stringify(error));
-        return false
+        );
+        this.sendMessageMail(this.msMailString)
       }
-      );
+
+      this.dataPrintResult.shipment_gid = null;
+
+      if (!this.enableOtherRoutes) {
+        this.GetdataService.searchDataPrint(this.powerDriverGID, this.selectRoutesChk).subscribe(result => {
+          if (result.response != null) {
+            this.dataPrintResult = result.response[0];
+            this.orderDate = this.dataPrintResult.fecha_order_release;
+
+            this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+              this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+              this.orderDate, this.selectRoutesChk.source_location_gid,
+              this.selectRoutesChk.dest_location_gid)
+            return true
+          }
+        }, error => {
+          console.log(JSON.stringify(error));
+          return false
+        }
+        );
+      } else {
+        this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+          this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+          this.orderDate, this.selectRoutesChk.source_location_gid,
+          this.selectRoutesChk.dest_location_gid)
+      }
+
+
+      this.clear()
+      return false
+
     } else {
-       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-        this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-         this.orderDate, this.selectRoutesChk.source_location_gid,
-         this.selectRoutesChk.dest_location_gid)
-    }
-
-
-    this.clear()
-    return false
-  
-  }else{
-    this.alertMessageError(`
+      this.alertMessageError(`
     Para poder continuar selecciona la fecha de la orden...<br>
     Pulsa <strong><span style ="color:red">OK</span></strong> para ver el estado del formato, pero, este no es un documento valido.<br><br>
     <strong>¡<span style ="color:red">No</span> esta registrado en el sistema!</strong> <br>
     `);
-  }
+    }
   }
 
 
   generarPDF() {
 
- 
+
 
     let nombreDoc = 'reporte_' + String(this.d.getTime()) + '.pdf';
     html2canvas(document.getElementById('pdf'), {
@@ -644,7 +645,7 @@ export class FormComponent {
     }).then(function (canvas) {
       var imgWidth = 90;
       var imgHeight = 120;
-     // var imgHeight = canvas.height * imgWidth / canvas.width;
+      // var imgHeight = canvas.height * imgWidth / canvas.width;
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('p', 'mm', 'a6');
       doc.addImage(img, 'jpg', 0, 15, imgWidth, imgHeight);
@@ -665,7 +666,7 @@ export class FormComponent {
     this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser,
       orderDate, sourceLocationGID, destLocationGID).subscribe(result => {
         this.consecutivo = result.data.order_id;
-        
+
 
       }, error => {
         console.log(JSON.stringify(error));
