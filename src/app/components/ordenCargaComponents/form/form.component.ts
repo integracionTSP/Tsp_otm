@@ -24,7 +24,7 @@ export class FormComponent {
   // usuario 
   userName = JSON.parse(localStorage.getItem('user'));
   user = this.userName.username;
-  orderDate: Date;
+  orderDate: Date = new Date();
   d: Date;
   fecha: String = '';
   // inicializar validaciones de formularios
@@ -48,9 +48,9 @@ export class FormComponent {
 
   // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
-  // powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
+   //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
-  powerDriverGID: any = { powerGID: '', driverGID: '' }
+ powerDriverGID: any = { powerGID: '', driverGID: '' }
 
 
 
@@ -334,8 +334,8 @@ export class FormComponent {
 
   sendMessageMail(messageBody: string): void {
 
-    //ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com
-    this.GetdataService.sendMail('auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com', '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
+    let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
+    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -438,6 +438,9 @@ export class FormComponent {
 
 
   searchPowerDriver(powerDriverGID: any) {
+   
+
+    
     if (this.powerDriverGID.driverGID && this.powerDriverGID.powerGID) {
       this.powerStatus, this.driverStatus = 'N', 'N';
       this.AlertMessages = []
@@ -611,8 +614,9 @@ export class FormComponent {
         }
         );
       } else {
+
         this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-          this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+       this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
           this.orderDate, this.selectRoutesChk.source_location_gid,
           this.selectRoutesChk.dest_location_gid)
       }
@@ -643,12 +647,12 @@ export class FormComponent {
       // Calidad del PDF
       scale: 1
     }).then(function (canvas) {
-      var imgWidth = 90;
-      var imgHeight = 120;
+      var imgWidth = 88;
+      var imgHeight = 115;
       // var imgHeight = canvas.height * imgWidth / canvas.width;
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('p', 'mm', 'a6');
-      doc.addImage(img, 'jpg', 0, 15, imgWidth, imgHeight);
+      doc.addImage(img, 'jpg', 10, 15, imgWidth, imgHeight,'NONE', 'FAST', 0);
 
       doc.save(nombreDoc);
     });
@@ -679,8 +683,8 @@ export class FormComponent {
 
 
   ngOnInit() {
-  }
 
+  }
 
 
 

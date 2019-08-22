@@ -19,21 +19,27 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             
           </div>
           <div id="encabezado">
-            <P><strong>Tiquete de carga: </strong>{{consecutivo}}</P>
-            <P><strong>Cedula conductor: </strong>{{powerDriverGID.driverGID}}</P>
-            <P><strong>Elaborado por: </strong>{{user}}</P>
-            <p *ngIf="dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
-            <p *ngIf="!dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> No dispobible</p>
-            <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
-           <!-- <p><strong>Fecha de autorización: </strong>{{fecha}} </p>-->
-            <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} </p>
-             <p><strong>Conductor: </strong>{{dataDriverValid[0].driver_full_name}}</p>
+            <P>Tiquete de carga: <span>{{consecutivo}}</span></P> 
+            <p>Placa:   <span>{{powerDriverGID.powerGID}}</span> </p>
+            <P>Cedula conductor: <span>{{powerDriverGID.driverGID}}</span></P> 
+            <p>Conductor: <span> {{dataDriverValid[0].driver_full_name}} </span></p>
+           
+           
+            <p *ngIf="dataPrintResult.shipment_gid">Viajes Disponibles:    <span> {{dataPrintResult.shipment_gid | slice:4}}</span> </p>
+            <p *ngIf="!dataPrintResult.shipment_gid">Viajes Disponibles: <span> No dispobible</span> </p>
+       
+           <!-- <p>Fecha de autorización: {{fecha}} </p>-->
+             <h4 class="text-left"> <strong> Ruta de cargue </strong></h4>
+             <p class="under-line"></p>
+             <P>Origen:   <span> {{selectRoutesChk.source_location_gid}}</span></P>
+             <P>Destino:  <span>{{selectRoutesChk.dest_location_gid}}</span> </P>
+             <p>Fecha de orden:  <span>{{orderDate| date:'yyyy-MM-dd'}} </span> </p>
+             <P>Elaborado por: <span>{{user}}</span></P>
           </div>
           <div id="cuerpo">
-            <h4 class="text-left">Ruta de cargue</h4>
+          
 
-            <P><strong>Origen: </strong>{{selectRoutesChk.source_location_gid}}</P>
-            <P><strong>Destino: </strong>{{selectRoutesChk.dest_location_gid}}</P>
+           
           
 
           </div>
@@ -156,7 +162,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                   </h6>
 
                   <div class="col-10 col-md-6 mx-auto col-md-offset-3" >
-                      <input  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input" [ngModelOptions]="{standalone: true}" required>
+                      <input [ngModelOptions]="{standalone: false}"  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input"  value="{{orderDate| date:'yyyy-MM-dd'}}" required>
                   </div>
                   
                 
