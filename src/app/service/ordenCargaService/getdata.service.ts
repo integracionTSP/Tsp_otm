@@ -5,9 +5,16 @@ import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // definir la url principal produccion
 
-// const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
+//const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
 
 // const urlPrincipalEM = 'http://172.16.3.222:3000/api/mail/';
+
+const urlPrincipalOC = 'http://172.16.248.120:4000/api/ordenCarga/';
+
+const urlPrincipalEM = 'http://172.16.248.120:4000/api/mail/';
+ 
+
+
 
 // definir la url principal produccion publica
  
@@ -15,9 +22,9 @@ import { Observable } from 'rxjs';
 
  //const urlPrincipalEM = 'http://190.217.96.105:3000/api/mail/';
 
-const urlPrincipalOC = 'http://172.16.248.185:3000/api/ordenCarga/';
+//const urlPrincipalOC = 'http://172.16.248.185:3000/api/ordenCarga/';
 
- const urlPrincipalEM = 'http://172.16.248.185:3000/api/mail/';
+ //const urlPrincipalEM = 'http://172.16.248.185:3000/api/mail/';
  
  
 

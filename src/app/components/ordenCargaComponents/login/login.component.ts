@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
   // validar si el usuario y contraseña coincidan 
   loginUser(login: any) {
 
-    
+    let userUpper = login.username.toString().toUpperCase()
     let userCorrect: string;
     let passCorrect: string;
     let email: string;
@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
 // recorrer  a todos los usuarios 
     for (let i in this.users) {
 
-      if (this.users[i].idusuario == login.username && this.users[i].angular_password == pwd) {
+      if (this.users[i].idusuario == userUpper && this.users[i].angular_password == pwd) {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].angular_password;
         email = this.users[i].email;
@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
     }
 
 
-    if (userCorrect == login.username && passCorrect == pwd) {
+    if (userCorrect == userUpper && passCorrect == pwd) {
       login.email = email;
 
       localStorage.setItem('user', JSON.stringify(login));
