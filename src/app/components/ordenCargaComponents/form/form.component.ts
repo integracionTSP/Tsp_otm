@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 // importar el servicio
 import { GetdataService } from 'src/app/service/ordenCargaService/getdata.service';
 import { Router } from '@angular/router';
@@ -42,6 +42,8 @@ export class FormComponent {
 
   // btn aceptar
   enableBtnAcept: boolean = true;
+
+
 
   // captura de datos de los input
   //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
@@ -181,7 +183,7 @@ export class FormComponent {
     }, error => {
       console.log(JSON.stringify(error));
 
-    });
+    })
   }
 
 
@@ -337,7 +339,7 @@ export class FormComponent {
   sendMessageMail(messageBody: string): void {
 
 
-    this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
+    this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -646,7 +648,6 @@ export class FormComponent {
       scale: 1
     }).then(function (canvas) {
       var imgWidth = 180;
-      var pageHeight = 295;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('l', 'mm', 'a5');
