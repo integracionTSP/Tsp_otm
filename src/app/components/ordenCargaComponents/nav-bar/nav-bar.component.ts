@@ -75,7 +75,9 @@ export class NavBarComponent implements OnInit {
 
   eventHandler(node: FoodNode) {
     if (node.route == "/login") {
-      localStorage.setItem('user', null);
+      localStorage.setItem('user', '{"username":"","password":"","email":""}');
+      //localStorage.clear();
+    
   
     }
   }

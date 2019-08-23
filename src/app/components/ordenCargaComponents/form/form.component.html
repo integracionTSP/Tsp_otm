@@ -1,7 +1,7 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-sm-3" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Reportes Autorización Orden de carga</h5>
@@ -14,52 +14,34 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
         <div id="hoja">
           <div id="titulo" class="text-center page-header">
             <!--img src="logo1.png" alt=""-->
-            <h3>Transporte Sanchez Polo</h3>
+            <h3 class="text-left" ><strong>   Transportes Sanchez Polo</strong></h3>
+            <p class="under-line"></p>
+            
           </div>
           <div id="encabezado">
-            <P><strong>Tiquete de carga: </strong>{{consecutivo}}</P>
-            <P><strong>Cedula conductor: </strong>{{powerDriverGID.driverGID}}</P>
-            <P><strong>Elaborado por: </strong>{{user}}</P>
-            <p *ngIf="dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> {{dataPrintResult.shipment_gid | slice:4}}</p>
-            <p *ngIf="!dataPrintResult.shipment_gid"><strong>Viajes Disponibles:</strong> No dispobible</p>
-            <p><strong>Fecha de orden: </strong>{{orderDate}} </p>
-           <!-- <p><strong>Fecha de autorización: </strong>{{fecha}} </p>-->
-            <p><strong>Placa: </strong>{{powerDriverGID.powerGID}} <strong>Conductor:
-              </strong>{{dataDriverValid[0].driver_full_name}}</p>
+            <P>Tiquete de carga: <span>{{consecutivo}}</span></P> 
+            <p>Placa:   <span>{{powerDriverGID.powerGID}}</span> </p>
+            <P>Cedula conductor: <span>{{powerDriverGID.driverGID}}</span></P> 
+            <p>Conductor: <span> {{dataDriverValid[0].driver_full_name}} </span></p>
+           
+           
+            <p *ngIf="dataPrintResult.shipment_gid">Viajes Disponibles:    <span> {{dataPrintResult.shipment_gid | slice:4}}</span> </p>
+            <p *ngIf="!dataPrintResult.shipment_gid">Viajes Disponibles: <span> No dispobible</span> </p>
+       
+           <!-- <p>Fecha de autorización: {{fecha}} </p>-->
+             <h4 class="text-left"> <strong> Ruta de cargue </strong></h4>
+             <p class="under-line"></p>
+             <P>Origen:   <span> {{selectRoutesChk.source_location_gid}}</span></P>
+             <P>Destino:  <span>{{selectRoutesChk.dest_location_gid}}</span> </P>
+             <p>Fecha de orden:  <span>{{orderDate| date:'yyyy-MM-dd'}} </span> </p>
+             <P>Elaborado por: <span>{{user}}</span></P>
           </div>
           <div id="cuerpo">
-            <h4 class="text-center"><strong>Ruta de cargue</strong></h4>
-            <table class="table table-header-rotated">
+          
 
+           
+          
 
-              <thead class="thead-color">
-                <tr>
-                  <!-- First column header is not rotated -->
-
-                  <!-- Following headers are rotated -->
-
-                  <th class="rotate">
-                    <div><span>ORIGEN</span></div>
-                  </th>
-                  <th class="rotate">
-                    <div><span>DESTINO</span></div>
-                  </th>
-
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-
-                  
-                  <td>{{selectRoutesChk.source_location_gid}}</td>
-                  <td>{{selectRoutesChk.dest_location_gid}}</td>
-
-
-                </tr>
-
-              </tbody>
-            </table>
           </div>
         </div>
 
@@ -117,119 +99,88 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                       <span class="sub-tittle"> RUTAS DISPONIBLES  </span>
                     </h6>
               
-                <table class="table table-header-rotated">
+                    <table class="table col-md-8 mx-auto">
+                        <thead class="thead-color">
+                          <tr>
+                              <th scope="col">SELECCIONAR</th>
+                            <th scope="col ">ORIGEN</th>
+                            <th scope="col">DESTINO</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr  *ngFor="let powerDriverDist of powerDriverGIDResult; let i = index">
+                            <td><input (click)="otherRouteSelect(powerDriverDist)" name="column2[]" type="radio"
+                            value="row1-column2"></td>
+                            <td>{{  powerDriverDist.source_location_gid}}</td>
+                            <td>{{  powerDriverDist.dest_location_gid}}</td>
+                          </tr>
+                          <tr>
 
-
-                  <thead class="thead-color">
-                    <tr>
-                      <!-- First column header is not rotated -->
-
-                      <!-- Following headers are rotated -->
-
-                      <th class="rotate">
-                        <div><span>SELECCIÓN</span></div>
-                      </th>
-                      <th class="rotate">
-                        <div><span>ORIGEN</span></div>
-                      </th>
-                      <th class="rotate">
-                        <div><span>DESTINO</span></div>
-                      </th>
-
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let powerDriver of powerDriverGIDResult; let i = index">
-
-                      <td><input name="column1" (click)="availableRouteSelect(powerDriver)" type="radio"></td>
-
-                      <td>{{powerDriver.source_location_gid}}</td>
-                      <td>{{powerDriver.dest_location_gid}}</td>
-
-                    </tr>
-                    <tr>
-
-                      <td><input (click)="searchDistPowerDriver(powerDriverGID)" name="column1" type="radio"
-                          value="row1-column1"></td>
-
-                      <td colspan="2"> OTRAS RUTAS</td>
-
-                    </tr>
-                  </tbody>
-                </table>
+                              <td><input (click)="searchDistPowerDriver(powerDriverGID)" name="column1" type="radio"
+                                  value="row1-column1"></td>
+        
+                              <td colspan="2"> OTRAS RUTAS</td>
+        
+                            </tr>
+                          <tr>
+                        </tbody>
+                      </table>
 
               </div>
 
 
 
-
+              
               <div *ngIf="enableOtherRoutes" class="table">
                   <h6 class="sub-tittle-mark">
                       <span class="sub-tittle"> OTRAS RUTAS  </span>
                     </h6>
-               
-                <table class="table table-header-rotated">
-
-
-                  <thead class="thead-color">
-                    <tr>
-                      <!-- First column header is not rotated -->
-
-                      <!-- Following headers are rotated -->
-                      <th class="rotate">
-                        <div><span>SELECCIÓN</span></div>
-                      </th>
-                      <th class="rotate">
-                        <div><span>ORIGEN</span></div>
-                      </th>
-                      <th class="rotate">
-                        <div><span>DESTINO</span></div>
-                      </th>
-
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let powerDriverDist of powerDriverGIDDistResult; let i = index">
-
-                      <td><input (click)="otherRouteSelect(powerDriverDist)" name="column2[]" type="radio"
+                    <div class="table-responsive">
+                      
+                    <table class="table col-md-8 mx-auto">
+                      <thead class="thead-color">
+                        <tr>
+                            <th scope="col">SELECCIONAR</th>
+                          <th scope="col ">ORIGEN</th>
+                          <th scope="col">DESTINO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr  *ngFor="let powerDriverDist of powerDriverGIDDistResult; let i = index">
+                          <td><input (click)="otherRouteSelect(powerDriverDist)" name="column2[]" type="radio"
                           value="row1-column2"></td>
-
-                      <td>{{  powerDriverDist.source_location_gid}}</td>
-                      <td>{{  powerDriverDist.dest_location_gid}}</td>
-
-                    </tr>
-
-
-
-                  </tbody>
-                </table>
-
+                          <td>{{  powerDriverDist.source_location_gid}}</td>
+                          <td>{{  powerDriverDist.dest_location_gid}}</td>
+                        </tr>
+                        <tr>
+                      </tbody>
+                    </table>
+                  
+                  </div>
                 <h6 class="sub-tittle-mark">
                     <span class="sub-tittle">  FECHA ORDEN  </span>
                   </h6>
 
-                  <div class="col-6  col-md-offset-3" style="margin-left: 30%;">
-                      <input  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input" [ngModelOptions]="{standalone: true}" required>
+                  <div class="col-10 col-md-6 mx-auto col-md-offset-3" >
+                      <input [ngModelOptions]="{standalone: false}"  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input"  value="{{orderDate| date:'yyyy-MM-dd'}}" required>
                   </div>
                   
                 
 
               </div>
-
+            
 
               <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
-                <div *ngIf="enableBtnAcept" class="col-2">
+                <div *ngIf="enableBtnAcept" class="col-12 col-md-4 ">
                   <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>
 
                 </div>
 
-                <div *ngIf="enableBtnPrint" class="col-2">
+                <div *ngIf="enableBtnPrint" class="col-12 col-md-4 ">
                   <button (click)="searchDataPrint()"  data-toggle="modal" data-target="#exampleModal" type="submit" class="btn-form">IMPRIMIR <i
                       class="fas fa-print"></i></button>
                 </div>
-                <div class="col-2">
+                <div class="col-12 col-md-4">
                   <button (click)="logOut()"   type="submit" class="btn-form">SALIR <i class="fas fa-sign-out-alt"></i></button>
                 </div>
 
