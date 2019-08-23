@@ -48,7 +48,7 @@ export class FormComponent {
   // captura de datos de los input
   //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-   powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
+  // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
   //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
@@ -64,7 +64,7 @@ export class FormComponent {
   Se presentaron los siguientes errores:
   messageToString() */
 
-  //powerDriverGID: any = { powerGID: '', driverGID: '' }
+  powerDriverGID: any = { powerGID: '', driverGID: '' }
 
   // mensaje no encontrado
 
@@ -341,8 +341,8 @@ export class FormComponent {
 
   sendMessageMail(messageBody: string): void {
 
-
-    this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
+    let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
+    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -656,11 +656,12 @@ export class FormComponent {
       // Calidad del PDF
       scale: 1
     }).then(function (canvas) {
-      var imgWidth = 180;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
+
+      var imgWidth = 88;
+      var imgHeight = 115;
       var img = canvas.toDataURL("image/png");
-      var doc = new jsPDF('l', 'mm', 'a5');
-      doc.addImage(img, 'jpg', 12, 22, imgWidth, imgHeight);
+      var doc = new jsPDF('p', 'mm', 'a6');
+      doc.addImage(img, 'jpg', 10, 15, imgWidth, imgHeight,'NONE', 'FAST', 0);
 
       doc.save(nombreDoc);
     });
