@@ -48,11 +48,11 @@ export class FormComponent {
   // captura de datos de los input
   //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
+  //powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
-   //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
+  powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
- powerDriverGID: any = { powerGID: '', driverGID: '' }
+  //powerDriverGID: any = { powerGID: '', driverGID: '' }
 
 
 
@@ -336,13 +336,8 @@ export class FormComponent {
 
   sendMessageMail(messageBody: string): void {
 
-<<<<<<< HEAD
-
-    this.GetdataService.sendMail(this.userName.email, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
-=======
-    let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
+    let emails = 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
     this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(result => {
->>>>>>> bd0c419dc145372244007e253a2eced9cab69a3f
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -409,12 +404,13 @@ export class FormComponent {
     this.GetdataService.searchPowerDriver(this.powerDriverGID).subscribe(result => {
       // capturar los datos de la url
       this.powerDriverGIDResult = result.response;
+      console.log('Rutas',this.powerDriverGIDResult)
       let res = result.response;
       if (res != null) {
         this.dataPrintResult.shipmentGID = res.shipment_gid;
         if (this.driverValid(this.driverlicDate, this.fecha, this.driverStatus) &&
           this.powerValid(this.powerSoatDate, this.powerTecnoDate, this.powerStatus, this.fecha)) {
-          this.enableAvailableRoutes = true;
+          this.enableAvailableRoutes = true
         }
       } else {
         this.AlertMessages.push(8);
@@ -445,11 +441,10 @@ export class FormComponent {
 
 
   searchPowerDriver(powerDriverGID: any) {
-   
 
-    
+
+
     if (this.powerDriverGID.driverGID && this.powerDriverGID.powerGID) {
-      this.powerStatus, this.driverStatus = 'N', 'N';
       this.AlertMessages = []
       this.getDriver()
       this.getPowerUnit()
@@ -623,7 +618,7 @@ export class FormComponent {
       } else {
 
         this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-       this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+          this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
           this.orderDate, this.selectRoutesChk.source_location_gid,
           this.selectRoutesChk.dest_location_gid)
       }
@@ -654,17 +649,12 @@ export class FormComponent {
       // Calidad del PDF
       scale: 1
     }).then(function (canvas) {
-<<<<<<< HEAD
-      var imgWidth = 180;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-=======
       var imgWidth = 88;
       var imgHeight = 115;
       // var imgHeight = canvas.height * imgWidth / canvas.width;
->>>>>>> bd0c419dc145372244007e253a2eced9cab69a3f
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF('p', 'mm', 'a6');
-      doc.addImage(img, 'jpg', 10, 15, imgWidth, imgHeight,'NONE', 'FAST', 0);
+      doc.addImage(img, 'jpg', 10, 15, imgWidth, imgHeight, 'NONE', 'FAST', 0);
 
       doc.save(nombreDoc);
     });

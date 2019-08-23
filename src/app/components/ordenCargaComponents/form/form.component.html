@@ -108,19 +108,15 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                           </tr>
                         </thead>
                         <tbody>
-                          <tr  *ngFor="let powerDriverDist of powerDriverGIDResult; let i = index">
-                            <td><input (click)="otherRouteSelect(powerDriverDist)" name="column2[]" type="radio"
+                          <tr  *ngFor="let Power of powerDriverGIDResult; let i = index">
+                            <td><input (click)="otherRouteSelect(Power)" name="column2[]" type="radio"
                             value="row1-column2"></td>
-                            <td>{{  powerDriverDist.source_location_gid}}</td>
-                            <td>{{  powerDriverDist.dest_location_gid}}</td>
+                            <td>{{  Power.source_location_gid}}</td>
+                            <td>{{  Power.dest_location_gid}}</td>
                           </tr>
                           <tr>
-
                               <td><input (click)="searchDistPowerDriver(powerDriverGID)" name="column1" type="radio"
                                   value="row1-column1"></td>
-        
-                              <td colspan="2"> OTRAS RUTAS</td>
-        
                             </tr>
                           <tr>
                         </tbody>
