@@ -4,7 +4,7 @@ import * as crypto from 'crypto-js';
 import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
 import { LoginService } from '../../../service/Login/login.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
+import { environment } from 'src/environments/environment';
 
 import { Router } from '@angular/router';
 
@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
   //habilitar barra horizontal
 
   enableNavBar: boolean;
+
+
 
 
 
@@ -157,6 +159,7 @@ export class LoginComponent implements OnInit {
     });
     this.getAllUser();
 
+    console.log('environment:',environment.name);
     
   }
 

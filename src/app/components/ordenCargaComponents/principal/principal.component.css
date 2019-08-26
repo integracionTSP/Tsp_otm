@@ -4,6 +4,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   height: 100%;
+  max-width: 100%;
   padding-top: 2px;
 }
 

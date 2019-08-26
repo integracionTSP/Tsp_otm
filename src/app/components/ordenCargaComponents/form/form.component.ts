@@ -612,10 +612,10 @@ export class FormComponent {
           this.dataPrintResult = result.response[0];
           this.orderDate = this.dataPrintResult.fecha_order_release;
 
-          this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+           this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
             this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
             this.orderDate, this.selectRoutesChk.source_location_gid,
-            this.selectRoutesChk.dest_location_gid)
+             this.selectRoutesChk.dest_location_gid)
           return true
         }
       }, error => {
@@ -624,8 +624,8 @@ export class FormComponent {
       }
       );
     } else {
-      this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-        this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+         this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
         this.orderDate, this.selectRoutesChk.source_location_gid,
         this.selectRoutesChk.dest_location_gid)
     }

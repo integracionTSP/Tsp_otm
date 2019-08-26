@@ -4,41 +4,13 @@ import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 // importar el observable
 import { Observable } from 'rxjs';
 // definir la url principal produccion
+import { environment } from 'src/environments/environment';
 
-const urlPrincipalOC = 'http://172.16.3.222:3000/api/ordenCarga/';
+const urlPrincipalOC = environment.urlPrincipalOC;
 
-const urlPrincipalEM = 'http://172.16.3.222:3000/api/mail/';
-
-//const urlPrincipalOC = 'http://172.16.248.120:4000/api/ordenCarga/';
-
-//const urlPrincipalEM = 'http://172.16.248.120:4000/api/mail/';
- 
+const  urlPrincipalEM = environment.urlPrincipalEM;
 
 
-
-// definir la url principal produccion publica
- 
- //const urlPrincipalOC = 'http://190.217.96.105:3000/api/ordenCarga/';
-
- //const urlPrincipalEM = 'http://190.217.96.105:3000/api/mail/';
-
-//const urlPrincipalOC = 'http://172.16.248.185:3000/api/ordenCarga/';
-
- //const urlPrincipalEM = 'http://172.16.248.185:3000/api/mail/';
- 
- 
-
-// definir la url test
-
-// const urlPrincipalOC = 'http://192.168.1.97:3000/api/ordenCarga/';
-
-// const urlPrincipalEM = 'http://192.168.1.97:3000/api/mail/';
-
-//------------ ´PRUEBAS locales--------//
-
-//const urlPrincipalOC = 'http://localhost:3000/api/ordenCarga/';
-
-//const urlPrincipalEM = 'http://localhost:3000/api/mail/';
 
 
 @Injectable()

@@ -36,6 +36,13 @@ div.login {
   overflow: hidden;
   box-shadow: 1px 3px 12px 3px #aaa;
 }
+
+.login img {
+
+  margin-top: 18%;
+  margin-left: 48%;
+}
+
 .login .banner {
   position:absolute;
   top:0px;
@@ -178,6 +185,12 @@ div.login {
     background: #f6f6f6;
     overflow: hidden;
     box-shadow: 1px 3px 12px 3px #aaa;
+  }
+
+  .login img {
+
+    top: 0;
+   
   }
 }
 
