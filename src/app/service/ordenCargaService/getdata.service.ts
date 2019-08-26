@@ -13,8 +13,16 @@ const  urlPrincipalEM = environment.urlPrincipalEM;
 
 
 
+
+
 @Injectable()
 export class GetdataService {
+
+  //placa en mayuscula
+   upperCase(powerGID: any): string{
+    powerGID = powerGID.toUpperCase();
+    return powerGID;
+  }
 
   // inyectar el httpclient
   constructor(private httpClient: HttpClient) { }
@@ -26,21 +34,21 @@ export class GetdataService {
   }
   // rutas disponibles asociadas a la placa y conductor
   searchPowerDriver(powerDriverGID: any): Observable<any> {
-
-    return this.httpClient.get(urlPrincipalOC + `getAsociados/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`)
+    
+    return this.httpClient.get(urlPrincipalOC + `getAsociados/${this.upperCase(powerDriverGID.powerGID)}/${powerDriverGID.driverGID}`)
 
   }
 
    // otras rutas  asociadas a la placa y conductor
   searchDistPowerDriver(powerDriverGID: any): Observable<any> {
-    return this.httpClient.get(urlPrincipalOC + `getDistintos/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}`);
+    return this.httpClient.get(urlPrincipalOC + `getDistintos/${this.upperCase(powerDriverGID.powerGID)}/${powerDriverGID.driverGID}`);
   }
 
   // imprimir datos del pdf
   searchDataPrint(powerDriverGID: any, selectRoutesChk: any ): Observable<any> {
 
     // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(urlPrincipalOC + `getPrintShipment/${powerDriverGID.powerGID}/${powerDriverGID.driverGID}/${selectRoutesChk.source_location_gid}/${selectRoutesChk.dest_location_gid}`);
+    return this.httpClient.get(urlPrincipalOC + `getPrintShipment/${this.upperCase(powerDriverGID.powerGID)}/${powerDriverGID.driverGID}/${selectRoutesChk.source_location_gid}/${selectRoutesChk.dest_location_gid}`);
   }
 
 
@@ -54,14 +62,14 @@ export class GetdataService {
     // datos para validaciones placas
   powerValid(powerDriverGID : any): Observable<any> {
 
-    return this.httpClient.get(urlPrincipalOC + `getPowerValid/${powerDriverGID.powerGID}`);
+    return this.httpClient.get(urlPrincipalOC + `getPowerValid/${this.upperCase(powerDriverGID.powerGID)}`);
   }
 
 
     // datos para validaciones del conductor y placas
   powerDriverValid(powerDriverGID : any): Observable<any> {
 
-    return this.httpClient.get(urlPrincipalOC + `getPowerDriverValid/${powerDriverGID.powerGID}/${powerDriverGID.powerGID}`);
+    return this.httpClient.get(urlPrincipalOC + `getPowerDriverValid/${this.upperCase(powerDriverGID.powerGID)}/${powerDriverGID.powerGID}`);
   }
 
     
@@ -75,7 +83,7 @@ export class GetdataService {
 
   OperationReports(shipment_gid: string, driver_gid: string, power_unit_gid:string, insert_date: string ,insert_user: any, order_date:any, source_location_gid:any ,dest_location_gid:any): Observable<any>{
 
-    return this.httpClient.post(urlPrincipalOC+'saveReports',{shipment_gid, driver_gid, power_unit_gid, insert_date, insert_user,order_date,source_location_gid ,dest_location_gid});
+    return this.httpClient.post(urlPrincipalOC+'saveReports',{shipment_gid, driver_gid,power_unit_gid, insert_date, insert_user,order_date,source_location_gid ,dest_location_gid});
 
   }
 

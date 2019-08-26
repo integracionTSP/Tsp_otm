@@ -342,7 +342,7 @@ export class FormComponent {
   sendMessageMail(messageBody: string): void {
 
     let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
-    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
+    this.GetdataService.sendMail('emails', '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -441,11 +441,13 @@ export class FormComponent {
 
   }
 
-
+  
 
 
   searchPowerDriver(powerDriverGID: any) {
     
+    
+
     if (this.powerDriverGID.driverGID && this.powerDriverGID.powerGID) {
       this.powerStatus, this.driverStatus = 'N', 'N';
       this.AlertMessages = []
@@ -612,10 +614,10 @@ export class FormComponent {
           this.dataPrintResult = result.response[0];
           this.orderDate = this.dataPrintResult.fecha_order_release;
 
-           this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-            this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-            this.orderDate, this.selectRoutesChk.source_location_gid,
-             this.selectRoutesChk.dest_location_gid)
+          //  this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+          //   this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+          //   this.orderDate, this.selectRoutesChk.source_location_gid,
+          //    this.selectRoutesChk.dest_location_gid)
           return true
         }
       }, error => {
@@ -624,10 +626,10 @@ export class FormComponent {
       }
       );
     } else {
-       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-         this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-        this.orderDate, this.selectRoutesChk.source_location_gid,
-        this.selectRoutesChk.dest_location_gid)
+      //  this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+      //    this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+      //   this.orderDate, this.selectRoutesChk.source_location_gid,
+      //   this.selectRoutesChk.dest_location_gid)
     }
 
 
