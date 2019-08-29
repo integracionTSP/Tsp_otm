@@ -14,7 +14,11 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
         <div id="hoja">
           <div id="titulo" class="text-center page-header">
             <!--img src="logo1.png" alt=""-->
-            <h3 class="text-left" ><strong>   Transportes Sanchez Polo</strong></h3>
+            <section class="logo">
+              <img src="assets/img/tsp.png">
+            </section>
+            
+         
             <p class="under-line"></p>
             
           </div>
@@ -23,8 +27,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
             <p>Placa:   <span>{{powerDriverGID.powerGID}}</span> </p>
             <P>Cedula conductor: <span>{{powerDriverGID.driverGID}}</span></P> 
             <p>Conductor: <span> {{dataDriverValid[0].driver_full_name}} </span></p>
-           
-           
+
             <p *ngIf="dataPrintResult.shipment_gid">Viajes Disponibles:    <span> {{dataPrintResult.shipment_gid | slice:4}}</span> </p>
             <p *ngIf="!dataPrintResult.shipment_gid">Viajes Disponibles: <span> No dispobible</span> </p>
        
@@ -37,11 +40,7 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
              <P>Elaborado por: <span>{{user}}</span></P>
           </div>
           <div id="cuerpo">
-          
-
-           
-          
-
+        
           </div>
         </div>
 
@@ -58,8 +57,6 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
 
 
 <section class="form">
-
-  
   <div class="container pt-5 pb-5">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -73,26 +70,20 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
         
         <div class="row">
           <div class="col-md-12">
-            <form [formGroup]='formPowerDriverGID'>
+            <form >
               <div class="form-row ">
-
-
                 <div class="col-md-3">
                   <h5 class="text-left-input">Placa</h5>
-                  <input [(ngModel)]="powerDriverGID.powerGID" formControlName="powerGID" type="text"
-                    class="input-out-border" placeholder="Placa ">
+                  <input [(ngModel)]="powerDriverGID.powerGID" type="text"
+                         [ngModelOptions]="{standalone: true}"class="input-out-border" placeholder="Placa ">
                 </div>
 
                 <div class="col-md-3">
                   <h5 class="text-left-input">Identificacion</h5>
-                  <input [(ngModel)]="powerDriverGID.driverGID" formControlName="driverGID" type="text"
-                    class="input-out-border " placeholder="Identificacion">
+                  <input [(ngModel)]="powerDriverGID.driverGID" type="text"
+                         [ngModelOptions]="{standalone: true}" class="input-out-border " placeholder="Identificacion">
                 </div>
-
-
-
               </div>
-
 
               <div *ngIf="enableAvailableRoutes" class="table">
                   <h6 class="sub-tittle-mark">
@@ -126,9 +117,6 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                       </div>
 
               </div>
-
-
-
               
               <div *ngIf="enableOtherRoutes" class="table">
                   <h6 class="sub-tittle-mark">
@@ -161,14 +149,11 @@ aria-hidden="true" *ngIf="selectRoutesChk.source_location_gid">
                   </h6>
 
                   <div class="col-10 col-md-6 mx-auto col-md-offset-3" >
-                      <input [ngModelOptions]="{standalone: true}"  [(ngModel)]="orderDate"  class="form-control" type="date"  id="example-date-input"  value="{{orderDate| date:'yyyy-MM-dd'}}" required>
+                      <input [(ngModel)]="orderDate"  [ngModelOptions]="{standalone: true}"  class="form-control" type="date" value="{{orderDate}}" required>
                   </div>
-                  
-                
 
               </div>
             
-
               <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
                 <div *ngIf="enableBtnAcept" class="col-12 col-md-4 ">
                   <button (click)="searchPowerDriver(powerDriverGID)" type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>

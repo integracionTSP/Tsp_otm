@@ -10,6 +10,17 @@ div #encabezado > p >span{
   
 }
 
+/* .logo{
+  background:radial-gradient(#000066, transparent);
+
+} */
+
+.logo img{
+  max-width: 110px;
+  background:radial-gradient(#fff, transparent);
+
+}
+
 
 .form {
   background-color: #e7ecff;
@@ -63,9 +74,7 @@ div #encabezado > p >span{
     
   }
 
-
-
-    .text-left-input{
+  .text-left-input{
     color: #003399;
     margin-right: 100%;
   }
@@ -76,7 +85,7 @@ div #encabezado > p >span{
   } 
 
   .under-line{
-    border-bottom: 3px solid #000066; max-width:100mm
+    border-bottom: 3px solid #000066; max-width:115mm
   }
 
   

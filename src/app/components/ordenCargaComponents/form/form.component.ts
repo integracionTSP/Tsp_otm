@@ -27,8 +27,8 @@ export class FormComponent {
   orderDate: Date = new Date();
   d: Date;
   fecha: String = '';
-  // inicializar validaciones de formularios
-  formPowerDriverGID: FormGroup;
+
+ 
 
   //rutas disponibles 
   enableAvailableRoutes: boolean = false;
@@ -50,9 +50,9 @@ export class FormComponent {
 
   // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
-  //powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
+ // powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
- // powerDriverGID: any = { powerGID: 'TTU984', driverGID: '10305877' }
+ //powerDriverGID: any = { powerGID: 'TTU984', driverGID: '10305877' }
   
   
 
@@ -306,12 +306,7 @@ export class FormComponent {
   // mensaje del cuerpo
 
   messageBody: string;
-  constructor(private GetdataService: GetdataService, private router: Router, public fb: FormBuilder) {
-
-    this.formPowerDriverGID = this.fb.group({
-      powerGID: ['', [Validators.required]],
-      driverGID: ['', [Validators.required]]
-    });
+  constructor(private GetdataService: GetdataService, private router: Router) {
 
 
     this.d = new Date();
@@ -342,7 +337,7 @@ export class FormComponent {
   sendMessageMail(messageBody: string): void {
 
     let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
-    this.GetdataService.sendMail('emails', '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
+    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -614,10 +609,10 @@ export class FormComponent {
           this.dataPrintResult = result.response[0];
           this.orderDate = this.dataPrintResult.fecha_order_release;
 
-          //  this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-          //   this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-          //   this.orderDate, this.selectRoutesChk.source_location_gid,
-          //    this.selectRoutesChk.dest_location_gid)
+           this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+             this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+            this.orderDate, this.selectRoutesChk.source_location_gid,
+             this.selectRoutesChk.dest_location_gid)
           return true
         }
       }, error => {
@@ -626,10 +621,10 @@ export class FormComponent {
       }
       );
     } else {
-      //  this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
-      //    this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
-      //   this.orderDate, this.selectRoutesChk.source_location_gid,
-      //   this.selectRoutesChk.dest_location_gid)
+       this.OperationReports(this.dataPrintResult.shipment_gid, this.powerDriverGID.driverGID,
+         this.powerDriverGID.powerGID, this.fecha.toString(), this.userName.username,
+        this.orderDate, this.selectRoutesChk.source_location_gid,
+        this.selectRoutesChk.dest_location_gid)
     }
 
 
