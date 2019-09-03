@@ -129,12 +129,9 @@ export class LoginComponent implements OnInit {
 
     if (userCorrect == userUpper && passCorrect == pwd) {
       login.email = email;
-
       localStorage.setItem('user', JSON.stringify(login));
-     
-
       this.notifyMessageUser(userCorrect);
-      console.log('has iniciado session');
+      //console.log('has iniciado session');
       this.targetMenu(true);
       this.router.navigate(['/home']);
       
@@ -159,7 +156,7 @@ export class LoginComponent implements OnInit {
     });
     this.getAllUser();
 
-    console.log('environment:',environment.name);
+    console.log('environment:',environment['name']);
     
   }
 

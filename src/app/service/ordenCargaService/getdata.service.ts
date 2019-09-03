@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
 // definir la url principal produccion
 import { environment } from 'src/environments/environment';
 
-const urlPrincipalOC = environment.urlPrincipalOC;
+const urlPrincipalOC = environment['urlPrincipalOC'];
 
-const  urlPrincipalEM = environment.urlPrincipalEM;
+const  urlPrincipalEM = environment['urlPrincipalEM'];
 
 
 
