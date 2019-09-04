@@ -5,15 +5,16 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { DemoMaterialModule } from './material.module';
 
 // importar componentes 
-import { AppComponent } from './components/ordenCargaComponents/appComp/app.component';
-import { NavBarComponent } from './components/ordenCargaComponents/nav-bar/nav-bar.component';
-import { FormComponent } from './components/ordenCargaComponents/form/form.component';
-import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
-import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
+import { SideBarComponent } from './shared/side-bar/side-bar.component';
+import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
+import { FormComponent } from './ordenCargaModule/components/order-form/order-form.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { HomeComponent } from './shared/home/home.component';
 import { ConstComplimentFormComponent } from './constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
 
 // añadir servicio
-import { GetdataService } from './service/ordenCargaService/getdata.service';
+import { GetdataService } from './ordenCargaModule/service/getdata.service';
+import { GetAuthService } from './auth/service/auth.service';
 
 // importar el modulo http
 import { HttpClientModule } from '@angular/common/http';
@@ -34,11 +35,11 @@ import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    SideBarComponent,
     NavBarComponent,
     FormComponent,
     LoginComponent,
-    PrincipalComponent,
+    HomeComponent,
     ConstComplimentFormComponent
 
     
@@ -54,7 +55,7 @@ import { LOCALE_ID } from '@angular/core';
     HttpClientModule, // añadir el http modulo
     AppRoutingModule // modulo de rutas
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es'},  GetdataService],
-  bootstrap: [AppComponent]
+  providers: [{provide: LOCALE_ID, useValue: 'es'},  GetdataService, GetAuthService],
+  bootstrap: [NavBarComponent]
 })
 export class AppModule { }

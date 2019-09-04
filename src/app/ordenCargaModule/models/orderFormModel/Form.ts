@@ -1,4 +1,4 @@
-import { GetdataService } from "../../service/ordenCargaService/getdata.service";
+import { GetdataService } from "../../service/getdata.service";
 export class FormModel {
     // Placa y Conductor
     powerDriverGID: any = { powerGID: 'TTU591', driverGID: '10244226' };

@@ -14,14 +14,14 @@ const TREE_DATA: FoodNode[] = [
     children: [
       {
         name: 'Autorizacion',
-        route: '/form'
+        route: '/orden-carga'
       },
      
     ]
   },
   {
     name: 'Constancia Cumplido',
-    route: '/cumplido'
+    route: '/constancia-cumplido'
   },
   {
     name: 'Salir',
@@ -45,14 +45,13 @@ interface ExampleFlatNode {
  */
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  selector: 'app-side-bar',
+  templateUrl: './side-bar.component.html',
+  styleUrls: ['./side-bar.component.css']
 })
 
 
-
-export class NavBarComponent implements OnInit {
+export class SideBarComponent implements OnInit {
   ngOnInit() {
   }
   private _transformer = (node: FoodNode, level: number) => {

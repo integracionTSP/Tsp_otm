@@ -1,14 +1,16 @@
 
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, Input, OnInit} from '@angular/core';
-import {LoginService} from '../../../service/Login/login.service';
+import {LoginService} from '../../auth/service/login.service';
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
 })
-export class AppComponent implements OnDestroy, OnInit {
+
+export class NavBarComponent implements OnDestroy, OnInit {
 
   enableNavBar:boolean = false;
   isLogged:boolean;

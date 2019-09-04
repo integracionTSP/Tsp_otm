@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PrincipalComponent } from './components/ordenCargaComponents/principal/principal.component';
-import { FormComponent } from './components/ordenCargaComponents/form/form.component';
-import { LoginComponent } from './components/ordenCargaComponents/login/login.component';
+import { HomeComponent } from './shared/home/home.component';
+import { FormComponent } from './ordenCargaModule/components/order-form/order-form.component';
+import { LoginComponent } from './auth/components/login/login.component';
 import { ConstComplimentFormComponent } from './constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
 
 
@@ -14,13 +14,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   // orden de carga
-  { path: 'form', component: FormComponent },
+  { path: 'orden-carga', component: FormComponent },
 
   // constancia cumplido 
-  { path: 'cumplido', component: ConstComplimentFormComponent } ,
+  { path: 'constancia-cumplido', component: ConstComplimentFormComponent } ,
 
   // homne
-  { path: 'home', component: PrincipalComponent }
+  { path: 'home', component: HomeComponent }
 
 ];
 

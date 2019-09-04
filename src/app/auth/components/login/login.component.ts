@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, HostBinding } from '@angular/core';
 import * as crypto from 'crypto-js';
 // importar el servicio
-import { GetdataService } from './../../../service/ordenCargaService/getdata.service';
-import { LoginService } from '../../../service/Login/login.service';
+import { GetAuthService } from '../../service/auth.service';
+import { LoginService } from '../../service/login.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
 
   // inicializar el servicio en el constructor
-  constructor(private GetdataService: GetdataService, private router: Router, public loginServ: LoginService, public FormBuilder:FormBuilder) {
+  constructor(private GetAuthService: GetAuthService, private router: Router, public loginServ: LoginService, public FormBuilder:FormBuilder) {
     this.targetMenu(false);
    
 
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   //funcion traer  el servicio
   getAllUser(): void {
     // traer el servicio con callback y guardar el resultado
-    this.GetdataService.AllUser().subscribe(result => {
+    this.GetAuthService.AllUser().subscribe(result => {
 
       this.users = result.response;
       //console.log(this.users);
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
     let pwd = crypto.SHA512(login.password);
  
 
-    console.log(this.formLogin.value);
+    //console.log(this.formLogin.value);
     
    
   

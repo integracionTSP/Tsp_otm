@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // importar el servicio
-import { GetdataService } from 'src/app/service/ordenCargaService/getdata.service';
+import { GetdataService } from '../../service/getdata.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as jsPDF from 'jspdf';
@@ -15,8 +15,8 @@ class listMessageError {
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  templateUrl: './order-form.component.html',
+  styleUrls: ['./order-form.component.css']
 })
 
 
