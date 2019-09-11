@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { GetConstComplimentService } from './.././/../service/const-compliment.service'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+// importar modelo
+import { ConstComplimentEntity } from '../../models/const-compliment.entity'
+// importar las funciones util
+import { UtilFunction } from '../../../global/utils/function.utils';
+
+import { UtilMessage } from "../../../global/utils/message.utils";
+
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-const-compliment-form',
@@ -7,7 +19,83 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConstComplimentFormComponent implements OnInit {
 
-  constructor() { }
+  
+ 
+  formConstCompliment: FormGroup;
+  constComResult: ConstComplimentEntity[] = [];
+
+  // btn imprimir
+  btnPrint: Boolean = false;
+  constComView: Boolean = false;
+  selectConstCK: any = {};
+  startDate:Date;
+  endDate:Date;
+  p: number = 1;
+
+
+  constructor(private GetConstComplimentService: GetConstComplimentService, 
+              public FormBuilder: FormBuilder, private router: Router,
+              public constCompEntity:ConstComplimentEntity,
+              public fun:UtilFunction,
+              public mess:UtilMessage) {
+
+    this.formConstCompliment = this.FormBuilder.group({
+      powerUnitGID: [this.constCompEntity.powerUnitGID, [Validators.required]],
+      startDate:['', [Validators.required]],
+      endDate:['',[Validators.required]]
+    });
+
+  
+  }
+
+  getConstCompliment() {
+    this.GetConstComplimentService.searchConstcompliment(this.constCompEntity.powerUnitGID,this.startDate,this.endDate).subscribe(result => {
+      let res = result.response;
+      if (res != null) {
+        this.constComResult= res  ;
+        console.log('CONSTresult',  this.constComResult);
+        this.constComView = this.fun.enableView(this.constComView);
+      } else {
+        res = {};
+        this.fun.alertMessageError(this.mess.getMessageID(this.mess.listMessageError,9));
+        this.btnPrint= this.fun.disableView(this.btnPrint)
+        this.constComView= this.fun.disableView(this.constComView)
+
+      }
+    }, error => {
+      console.log(JSON.stringify(error));
+
+    });
+
+  }
+  searchConstcompliment(powerUnitGID: any,StartDate:Date,endDate:Date) {
+  
+    if (powerUnitGID && StartDate && endDate) {
+      this.constCompEntity.powerUnitGID = this.fun.upperCase(powerUnitGID);
+      console.log(this.constCompEntity.powerUnitGID);
+      this.getConstCompliment();
+    } else {
+      console.log('rellene los campos');
+    }
+  }
+
+  constComSelect(constCom:any){
+    this.btnPrint = this.fun.enableView(this.btnPrint);
+    this.selectConstCK = {};
+    this.selectConstCK = constCom;
+    console.log('lo seleccionado es ', this.selectConstCK);
+  }
+
+  logOut() {
+    localStorage.setItem('user', null);
+    this.router.navigate(['/login']);
+  }
+
+  generatePDF(){
+    this.fun.generarPDF();
+    this.btnPrint= this.fun.disableView(this.btnPrint)
+    this.constComView= this.fun.disableView(this.constComView)
+  }
 
   ngOnInit() {
   }

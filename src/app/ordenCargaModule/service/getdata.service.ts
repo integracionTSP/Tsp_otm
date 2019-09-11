@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { EndPoints } from "./../../global/endpoint";
 
-import { UtilFunction } from "./../../global/utils";
+import { UtilFunction } from "../../global/utils/function.utils";
 
 
 

@@ -23,17 +23,17 @@ aria-hidden="true" *ngIf="true">
             
           </div>
           <div id="encabezado">
-            <P>Tiquete de carga: <span></span></P> 
-            <p>Planilla:   <span></span> </p>
-            <p>Placa:   <span></span> </p>
-            <P>Cedula conductor: <span></span></P> 
-            <P>Ruta:   <span> </span> - <span></span></P>
-            <p>Fecha Cumplido:  <span> </span> </p>
-            <P>Peso: <span></span></P>
-            <P>Unidad: <span></span></P>
-            <P>Flete: <span></span></P>
-            <P>Anticipo: <span></span></P>
-            <P>Fecha Constancia Cumplido: <span></span></P>
+            <P>Tiquete de carga: <span>{{selectConstCK.tiquete_cargue}}</span></P> 
+            <p>Planilla:   <span> {{selectConstCK.shipment_gid}}</span> </p>
+            <p>Placa:   <span> {{selectConstCK.power_unit_gid}}</span> </p>
+            <P>Cedula conductor: <span> {{selectConstCK.driver_gid}}</span></P> 
+            <P>Ruta:   <span> {{selectConstCK.source_location_gid}}</span> - <span> {{selectConstCK.dest_location_gid}}</span></P>
+            <p>Fecha Cumplido:  <span>{{selectConstCK.fecha_cumplido}} </span> </p>
+            <P>Peso: <span> {{selectConstCK.peso_cargue}}</span></P>
+            <P>Unidad: <span> {{selectConstCK.total_weight_uom_code}}</span></P>
+            <P>Flete: <span> {{selectConstCK.flete}}</span></P>
+            <P>Anticipo: <span> {{selectConstCK.anticipo}}</span></P>
+            <P>Fecha Constancia Cumplido: <span> {{selectConstCK.fecha_constancia_cumplido}}</span></P>
 
 
           </div>
@@ -46,7 +46,7 @@ aria-hidden="true" *ngIf="true">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      <button click="" type="button" class="btn btn-primary">Descargar Pdf</button>
+      <button (click)="generatePDF()" type="button" class="btn btn-primary">Descargar Pdf</button>
     </div>
   </div>
 </div>
@@ -65,100 +65,97 @@ aria-hidden="true" *ngIf="true">
           <span class="sub-tittle">PLACA  </span>
         </h6>
         
-        
         <div class="row">
           <div class="col-md-12">
-            <form >
+            <form [formGroup]='formConstCompliment'  >
               <div class="form-row ">
                 <div class="col-md-3">
                   <h5 class="text-left-input">Placa</h5>
-                  <input  class="input-out-border" placeholder="Placa">
+                  <input  formControlName="powerUnitGID"  [(ngModel)]="constCompEntity.powerUnitGID"  class="input-out-border" placeholder="Placa" >
                 </div>
+                <div class="col-md-3">
+                    <h5 class="text-left-input">F.Inicio:</h5>
+                    <input  formControlName="startDate"  [(ngModel)]="startDate" type="date"  class="input-out-border"  >
+                  </div>
 
+                  <div class="col-md-3">
+                      <h5 class="text-left-input">F.Final:</h5>
+                      <input  formControlName="endDate"  [(ngModel)]="endDate" type="date"  class="input-out-border"  >
+                    </div>
               
               </div>
 
-              <div *ngIf="" class="table">
+              <div *ngIf="constComView" class="table">
                   <h6 class="sub-tittle-mark">
-                      <span class="sub-tittle"> RUTAS DISPONIBLES  </span>
+                      <span class="sub-tittle"> CONSTANCIA DE CUMPLIDO</span>
                     </h6>
-                    <div class="table-responsive">
-                    <table class="table col-md-8 mx-auto">
+                    <span class="sub-tittle" *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
+                    <div class="table-responsive" >
+                    <table class="table col-md-8">
                         <thead class="thead-color">
                           <tr>
-                              <th scope="col">SELECCIONAR</th>
-                            <th scope="col ">ORIGEN</th>
+                            <th scope="col">SELECCIONAR</th>
+                            <th scope="col ">PLANILLA</th>
+                            <th scope="col">PLACA</th>
+                            <th scope="col">CONDUCTOR(CC)</th>
+                            <th scope="col">ORIGEN</th>
                             <th scope="col">DESTINO</th>
+                            <th scope="col">TIQUETE</th>
+                            <th scope="col">FECHA CUMPLIDO</th>
+                            <th scope="col">PRESO</th>
+                            <th scope="col">UNIDAD</th>
+                            <th scope="col">FLETE</th>
+                            <th scope="col">ANTICIPO</th>
+                            <th scope="col">F.CONST</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr  *ngFor="let  of ; let i = index">
-                            <td><input click="" name="column" type="radio"
-                            value="row1-column2"></td>
-                            <td></td>
-                            <td></td>
-                            
-                          </tr>
-                          <tr>
-                            <td><input click="" name="column" type="radio"
-                              value="row1-column1"></td>
-                              <td colspan="2">OTRAS RUTAS</td>
-                            </tr>
-                          <tr>
-                        </tbody>
+
+                    
+                            <tbody  >
+
+                                <tr  *ngFor="let constCom of constComResult |paginate: { 
+                                                      itemsPerPage: 3,
+                                                      currentPage: p } " >
+                                  <td><input (click)="constComSelect(constCom)" name="column" type="radio"></td>
+                                  <td>{{constCom.shipment_gid}}</td>
+                                  <td>{{constCom.power_unit_gid}}</td>
+                                  <td>{{constCom.driver_gid}}</td>
+                                  <td>{{constCom.source_location_gid}} </td>
+                                  <td>{{constCom.dest_location_gid}} </td>
+                                  <td>{{constCom.tiquete_cargue}} </td>
+                                  <td>{{constCom.fecha_cumplido}}</td>
+                                  <td>{{constCom.peso_cargue}}</td>
+                                  <td>{{constCom.total_weight_uom_code}}</td>
+                                  <td>{{constCom.flete}}</td>
+                                  <td>{{constCom.anticipo}}</td>
+                                  <td>{{constCom.fecha_constancia_cumplido}}</td> 
+                                </tr>
+                               
+                              </tbody>
+                             
+                     
                       </table>
+                      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    
+               
                       </div>
 
               </div>
               
-              <div *ngIf="" class="table">
-                  <h6 class="sub-tittle-mark">
-                      <span class="sub-tittle"> OTRAS RUTAS  </span>
-                    </h6>
-                    <div class="table-responsive">
-                      
-                    <table class="table col-md-8 mx-auto">
-                      <thead class="thead-color">
-                        <tr>
-                            <th scope="col">SELECCIONAR</th>
-                          <th scope="col ">ORIGEN</th>
-                          <th scope="col">DESTINO</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr  *ngFor="let  of ; let i = index">
-                          <td><input click="" name="column2[]" type="radio"
-                          value="row1-column2"></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                      </tbody>
-                    </table>
-                  
-                  </div>
-                <h6 class="sub-tittle-mark">
-                    <span class="sub-tittle">  FECHA ORDEN  </span>
-                  </h6>
-
-                  <div class="col-10 col-md-6 mx-auto col-md-offset-3" >
-                      <input   class="form-control" type="date" value="{}" required>
-                  </div>
-
-              </div>
+           
             
               <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
-                <div *ngIf="true" class="col-12 col-md-4 ">
-                  <button click="" type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>
+                <div  class="col-12 col-md-4 ">
+                  <button  (click)="searchConstcompliment(constCompEntity.powerUnitGID,startDate,endDate)" [disabled]="formConstCompliment.invalid"  type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>
 
                 </div>
 
-                <div *ngIf="true" class="col-12 col-md-4 ">
+                <div *ngIf="btnPrint" class="col-12 col-md-4 ">
                   <button click=""  data-toggle="modal" data-target="#exampleModal" type="submit" class="btn-form">IMPRIMIR <i
                       class="fas fa-print"></i></button>
                 </div>
                 <div class="col-12 col-md-4">
-                  <button click=""   type="submit" class="btn-form">SALIR <i class="fas fa-sign-out-alt"></i></button>
+                  <button (click)="logOut()"  type="submit" class="btn-form">SALIR <i class="fas fa-sign-out-alt"></i></button>
                 </div>
 
 
@@ -171,4 +168,3 @@ aria-hidden="true" *ngIf="true">
     </div>
   </div>
 </section>
-

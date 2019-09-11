@@ -15,6 +15,7 @@ import { ConstComplimentFormComponent } from './constCumplidoModule/components/c
 // añadir servicio
 import { GetdataService } from './ordenCargaModule/service/getdata.service';
 import { GetAuthService } from './auth/service/auth.service';
+import { GetConstComplimentService } from './constCumplidoModule/service/const-compliment.service';
 
 // importar el modulo http
 import { HttpClientModule } from '@angular/common/http';
@@ -27,6 +28,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 // añadir idioma español en pipes
 import { LOCALE_ID } from '@angular/core';
+
+// pagination
+import {NgxPaginationModule} from 'ngx-pagination';
+
+// modelos 
+import { ConstComplimentEntity } from './constCumplidoModule/models/const-compliment.entity';
+//utils
+import { UtilFunction } from './global/utils/function.utils';
+import { UtilMessage } from './global/utils/message.utils';
+
 
 
 
@@ -53,9 +64,16 @@ import { LOCALE_ID } from '@angular/core';
     FormsModule, // añadir formularios y modelos
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     HttpClientModule, // añadir el http modulo
-    AppRoutingModule // modulo de rutas
+    AppRoutingModule, // modulo de rutas
+    NgxPaginationModule // paginacion
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es'},  GetdataService, GetAuthService],
+  providers: [/*{provide: LOCALE_ID, useValue: 'es'},*/ 
+  GetdataService,
+  GetAuthService,
+  GetConstComplimentService,
+  ConstComplimentEntity,
+  UtilFunction,
+  UtilMessage],
   bootstrap: [NavBarComponent]
 })
 export class AppModule { }
