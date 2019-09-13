@@ -85,14 +85,14 @@ aria-hidden="true" *ngIf="true">
               
               </div>
 
-              <div *ngIf="constComView" class="table">
+              <div *ngIf="constComView" class="table ">
                   <h6 class="sub-tittle-mark">
-                      <span class="sub-tittle"> CONSTANCIA DE CUMPLIDO</span>
+                      <span class="sub-tittle "> CONSTANCIA DE CUMPLIDO</span>
                     </h6>
-                    <span class="sub-tittle" *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
+                    <span class="sub-tittle " *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
                     <div class="table-responsive" >
-                    <table class="table col-md-8">
-                        <thead class="thead-color">
+                    <table class="table col-md-8 animated fadeIn fast">
+                        <thead class="thead-color ">
                           <tr>
                             <th scope="col">SELECCIONAR</th>
                             <th scope="col ">PLANILLA</th>
@@ -101,21 +101,21 @@ aria-hidden="true" *ngIf="true">
                             <th scope="col">ORIGEN</th>
                             <th scope="col">DESTINO</th>
                             <th scope="col">TIQUETE</th>
-                            <th scope="col">FECHA CUMPLIDO</th>
+                            <th scope="col">F.CUMPLIDO</th>
                             <th scope="col">PRESO</th>
                             <th scope="col">UNIDAD</th>
                             <th scope="col">FLETE</th>
                             <th scope="col">ANTICIPO</th>
-                            <th scope="col">F.CONST</th>
+                       
                           </tr>
                         </thead>
 
                     
                             <tbody  >
 
-                                <tr  *ngFor="let constCom of constComResult |paginate: { 
+                                <tr class="animated fadeIn" *ngFor="let constCom of constComResult |paginate: { 
                                                       itemsPerPage: 3,
-                                                      currentPage: p } " >
+                                                      currentPage: p };let i = index" >
                                   <td><input (click)="constComSelect(constCom)" name="column" type="radio"></td>
                                   <td>{{constCom.shipment_gid}}</td>
                                   <td>{{constCom.power_unit_gid}}</td>
@@ -123,12 +123,11 @@ aria-hidden="true" *ngIf="true">
                                   <td>{{constCom.source_location_gid}} </td>
                                   <td>{{constCom.dest_location_gid}} </td>
                                   <td>{{constCom.tiquete_cargue}} </td>
-                                  <td>{{constCom.fecha_cumplido}}</td>
+                                  <td>{{constCom.fecha_cumplido| date:'yyyy-MM-dd'}}</td>
                                   <td>{{constCom.peso_cargue}}</td>
                                   <td>{{constCom.total_weight_uom_code}}</td>
                                   <td>{{constCom.flete}}</td>
                                   <td>{{constCom.anticipo}}</td>
-                                  <td>{{constCom.fecha_constancia_cumplido}}</td> 
                                 </tr>
                                
                               </tbody>

@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import './app/global/animate.css'; /* Using a string */
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -206,6 +208,7 @@ div #encabezado > p{
   @media (max-width: 992px) {
   
   }
+
   
   
   

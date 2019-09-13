@@ -86,6 +86,42 @@ export class UtilFunction {
     }
 
 
+    waitingMessage(title: string): Boolean {
+      let timerInterval
+      Swal.fire({
+        title: title,
+        html: 'Esto podria tardar <strong></strong> milisegundos.',
+        timer: 500,
+        onBeforeOpen: () => {
+          Swal.showLoading()
+          timerInterval = setInterval(() => {
+            Swal.getContent().querySelector('strong')
+              .textContent = <string><unknown>Swal.getTimerLeft()
+          }, 100)
+        },
+        onClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        if (
+          /* Read more about handling dismissals below */
+          result.dismiss == Swal.DismissReason.timer
+        ) {
+  
+          return true
+        }
+      })
+      return true
+    }
+
+
+    removeUnderscore(params:any): any{
+      let str =  params
+      let sub = str.split('_');
+    
+      return sub
+    }
+
 
 
 }

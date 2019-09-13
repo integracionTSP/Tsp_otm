@@ -19,10 +19,10 @@ const TREE_DATA: FoodNode[] = [
      
     ]
   },
-  {
+   {
     name: 'Constancia Cumplido',
-    route: '/constancia-cumplido'
-  },
+     route: '/constancia-cumplido'
+   },
   {
     name: 'Salir',
     route: '/login'

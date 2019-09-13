@@ -14,7 +14,7 @@ export class GetConstComplimentService {
 
   urlPrincipalCC: string;
 
-  constructor(private httpClient: HttpClient ) {
+  constructor(private httpClient: HttpClient) {
     const endPoint = new EndPoints();
     this.urlPrincipalCC = endPoint.constCumplido;
 
@@ -23,9 +23,48 @@ export class GetConstComplimentService {
 
 
   // datos para validaciones placas
-  searchConstcompliment(powerUnitGID: any,StartDate:Date,endDate:Date): Observable<any> {
-    return this.httpClient.get(this.urlPrincipalCC + `getconstcompliment/${powerUnitGID}/${StartDate}/${endDate}`);
+  searchConstcompliment(
+    powerUnitGID: any,
+    startDate: Date,
+    endDate: Date): Observable<any> {
+
+    return this.httpClient.get(
+      this.urlPrincipalCC + `getconstcompliment/${powerUnitGID}/${startDate}/${endDate}`
+    );
   }
+
+
+  // log de ordenes de carga
+  OperationReports(
+    SHIPMENT_GID: string,
+    POWER_UNIT_GID: string, DRIVER_GID: string,
+    INSERT_DATE: string,
+    INSERT_USER: any,
+    FECHA_CONST_CUMP: Date,
+    TIQUETE_CARGUE: number,
+    SOURCE_LOCATION_GID: string,
+    DEST_LOCATION_GID: string): Observable<any> {
+
+
+    return this.httpClient.post(
+      this.urlPrincipalCC + 'addConstReport',
+      {
+        SHIPMENT_GID,
+        POWER_UNIT_GID,
+        DRIVER_GID,
+        INSERT_DATE,
+        INSERT_USER,
+        FECHA_CONST_CUMP,
+        TIQUETE_CARGUE,
+        SOURCE_LOCATION_GID,
+        DEST_LOCATION_GID
+      }
+
+    );
+
+  }
+
+
 
 
 

@@ -40,7 +40,12 @@ export class UtilMessage {
       {
         id: 9,
         message: 'No hay coincidencias con la busqueda'
-      }
+      },
+      {
+        id: 10,
+        message: 'Validando credenciales...'
+      },
+
       ];
 
 
