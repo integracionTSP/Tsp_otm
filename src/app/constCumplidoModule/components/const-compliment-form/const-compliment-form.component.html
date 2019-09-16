@@ -1,7 +1,7 @@
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade  bd-example-modal-md" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true" *ngIf="true">
-<div class="modal-dialog modal-lg-3" role="document">
+<div class="modal-dialog modal-md" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Reporte Constancia de Cumplido</h5>
@@ -75,12 +75,12 @@ aria-hidden="true" *ngIf="true">
                 </div>
                 <div class="col-md-3">
                     <h5 class="text-left-input">F.Inicio:</h5>
-                    <input  formControlName="startDate"  [(ngModel)]="startDate" type="date"  class="input-out-border"  >
+                    <input  formControlName="startDate"  [(ngModel)]="startDate" type="date"  class="input-out-border" value="{{2019-08-01}}"  >
                   </div>
 
                   <div class="col-md-3">
                       <h5 class="text-left-input">F.Final:</h5>
-                      <input  formControlName="endDate"  [(ngModel)]="endDate" type="date"  class="input-out-border"  >
+                      <input  formControlName="endDate"  [(ngModel)]="endDate" type="date"  class="input-out-border" value="{{2019-09-16}}" >
                     </div>
               
               </div>
@@ -135,22 +135,21 @@ aria-hidden="true" *ngIf="true">
                               <tfoot >
                                 <tr  class="mx-auto" >
                                     <td colspan="10" >
-                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                        <pagination-controls  
+                                        previousLabel="Anterior"
+                                        nextLabel="Siguiente"
+                                        directionLinks="true"
+                                        autoHide="true"
+                                        responsive="true"
+                                        (pageChange)="p = $event"></pagination-controls>
                                         <span class="text-muted font-weight-light " *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
                                         
                                     </td>
-            
-            
                                 </tr>
                             </tfoot>
-                             
-                     
                       </table>
-
-                    
                
                       </div>
-
               </div>
               
            
