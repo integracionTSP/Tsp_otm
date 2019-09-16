@@ -89,7 +89,7 @@ aria-hidden="true" *ngIf="true">
                   <h6 class="sub-tittle-mark">
                       <span class="sub-tittle "> CONSTANCIA DE CUMPLIDO</span>
                     </h6>
-                    <span class="sub-tittle " *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
+
                     <div class="table-responsive" >
                     <table class="table col-md-8 animated fadeIn fast">
                         <thead class="thead-color ">
@@ -104,8 +104,8 @@ aria-hidden="true" *ngIf="true">
                             <th scope="col">F.CUMPLIDO</th>
                             <th scope="col">PRESO</th>
                             <th scope="col">UNIDAD</th>
-                            <th scope="col">FLETE</th>
-                            <th scope="col">ANTICIPO</th>
+                            <!-- <th scope="col">FLETE</th>
+                            <th scope="col">ANTICIPO</th> -->
                        
                           </tr>
                         </thead>
@@ -126,15 +126,27 @@ aria-hidden="true" *ngIf="true">
                                   <td>{{constCom.fecha_cumplido| date:'yyyy-MM-dd'}}</td>
                                   <td>{{constCom.peso_cargue}}</td>
                                   <td>{{constCom.total_weight_uom_code}}</td>
-                                  <td>{{constCom.flete}}</td>
-                                  <td>{{constCom.anticipo}}</td>
+                                  <!-- <td>{{constCom.flete}}</td>
+                                  <td>{{constCom.anticipo}}</td> -->
                                 </tr>
                                
                               </tbody>
+
+                              <tfoot >
+                                <tr  class="mx-auto" >
+                                    <td colspan="10" >
+                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                        <span class="text-muted font-weight-light " *ngIf="constCompEntity.length">{{constComResult.length}} Resultados</span>
+                                        
+                                    </td>
+            
+            
+                                </tr>
+                            </tfoot>
                              
                      
                       </table>
-                      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
                     
                
                       </div>

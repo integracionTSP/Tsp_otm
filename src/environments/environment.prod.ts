@@ -1,3 +1,5 @@
+
+import { GetAuthService } from './../app/auth/service/auth.service';
 export const environment = {
   production: true,
   name: '(PROD)',

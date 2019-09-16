@@ -24,6 +24,11 @@ export class GetAuthService {
 
   }
 
+  getUrlEndPoint(): Observable<any> {
+    return this.httpClient.get(this.urlPrincipalAU + 'getUrlEnpoints');
+
+  }
+
 }
 
 
