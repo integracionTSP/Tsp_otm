@@ -33,6 +33,8 @@ export class ConstComplimentFormComponent implements OnInit {
   p: number = 1;
 
 
+
+
   constructor(private GetConstComplimentService: GetConstComplimentService, 
               public FormBuilder: FormBuilder, private router: Router,
               public constCompEntity: ConstComplimentEntity,
@@ -73,7 +75,7 @@ export class ConstComplimentFormComponent implements OnInit {
 
   }
   searchConstcompliment(powerUnitGID: any, startDate: Date, endDate: Date) {
-  
+ 
     if (powerUnitGID && startDate && endDate) {
       this.constCompEntity.powerUnitGID = this.fun.upperCase(powerUnitGID);
       console.log(this.constCompEntity.powerUnitGID);
@@ -95,6 +97,8 @@ export class ConstComplimentFormComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+
+
   generatePDF(){
 
     this.fun.generarPDF();
@@ -106,11 +110,13 @@ export class ConstComplimentFormComponent implements OnInit {
                           this.userName['username'],
                           this.selectConstCK['fecha_constancia_cumplido'],
                           this.selectConstCK['tiquete_cargue'],
-                          this.selectConstCK['SOURCE_LOCATION_GID'],
-                          this.selectConstCK['DEST_LOCATION_GID']);
+                          this.selectConstCK['source_location_gid'],
+                          this.selectConstCK['dest_location_gid']);
 
     this.btnPrint= this.fun.disableView(this.btnPrint)
     this.constComView= this.fun.disableView(this.constComView)
+ 
+   
   }
 
   OperationReports( 

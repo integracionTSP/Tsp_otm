@@ -337,7 +337,7 @@ export class FormComponent {
   sendMessageMail(messageBody: string): void {
 
     let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
-    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
+    this.GetdataService.sendMail('emails', '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));

@@ -37,7 +37,8 @@ export class GetConstComplimentService {
   // log de ordenes de carga
   OperationReports(
     SHIPMENT_GID: string,
-    POWER_UNIT_GID: string, DRIVER_GID: string,
+    POWER_UNIT_GID: string,
+    DRIVER_GID: string,
     INSERT_DATE: string,
     INSERT_USER: any,
     FECHA_CONST_CUMP: Date,
