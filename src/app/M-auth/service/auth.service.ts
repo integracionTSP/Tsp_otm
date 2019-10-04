@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 // importar el observable
 import { Observable } from 'rxjs';
-import { EndPoints } from "./../../global/endpoint";
+import { EndPoints } from "../../global/endpoint";
 
 
 

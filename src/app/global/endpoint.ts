@@ -8,6 +8,7 @@ export class EndPoints {
     mail = environment['urlPrincipal'] + 'mail/';
     constCumplido = environment['urlPrincipal'] + 'constCumplido/';
     auth = environment['urlPrincipal'] + 'auth/';
+    genPedido = environment['urlPrincipal'] + 'genPedido/';  
 
 
 }

@@ -7,15 +7,15 @@ import { DemoMaterialModule } from './material.module';
 // importar componentes 
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
-import { FormComponent } from './ordenCargaModule/components/order-form/order-form.component';
-import { LoginComponent } from './auth/components/login/login.component';
+import { FormComponent } from './M-ordenCargaModule/components/order-form/order-form.component';
+import { LoginComponent } from './M-auth/components/login/login.component';
 import { HomeComponent } from './shared/home/home.component';
-import { ConstComplimentFormComponent } from './constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
+import { ConstComplimentFormComponent } from './M-constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
 
 // añadir servicio
-import { GetdataService } from './ordenCargaModule/service/getdata.service';
-import { GetAuthService } from './auth/service/auth.service';
-import { GetConstComplimentService } from './constCumplidoModule/service/const-compliment.service';
+import { GetdataService } from './M-ordenCargaModule/service/getdata.service';
+import { GetAuthService } from './M-auth/service/auth.service';
+import { GetConstComplimentService } from './M-constCumplidoModule/service/const-compliment.service';
 
 // importar el modulo http
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +33,7 @@ import { LOCALE_ID } from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 // modelos 
-import { ConstComplimentEntity } from './constCumplidoModule/models/const-compliment.entity';
+import { ConstComplimentEntity } from './M-constCumplidoModule/models/const-compliment.entity';
 //utils
 import { UtilFunction } from './global/utils/function.utils';
 import { UtilMessage } from './global/utils/message.utils';

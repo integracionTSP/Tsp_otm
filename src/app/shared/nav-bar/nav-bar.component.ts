@@ -1,7 +1,7 @@
 
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, Input, OnInit} from '@angular/core';
-import {LoginService} from '../../auth/service/login.service';
+import {LoginService} from '../../M-auth/service/login.service';
 
 
 @Component({

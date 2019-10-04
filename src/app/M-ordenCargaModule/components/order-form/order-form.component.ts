@@ -105,6 +105,8 @@ export class FormComponent {
   driverStatus: any = '';
 
 
+  genOrderResult: any = []
+
   /* Placa y Conductor
   powerDriverGID: any = { powerGID: 'TTU591', driverGID: '10244226' };
   // Placa Detalle
@@ -329,15 +331,10 @@ export class FormComponent {
 
   // envio de correos
 
-
-
-
-
-
   sendMessageMail(messageBody: string): void {
 
     let emails= 'ajhen217@gmail.com,auxsmcincocero@sanchezpolo.com, adonoso@sanchezpolo.com'
-    this.GetdataService.sendMail('emails', '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
+    this.GetdataService.sendMail(emails, '¡Alerta! novedades orden de carga', messageBody).subscribe(() => {
 
     }, error => {
       console.log(JSON.stringify(error));
@@ -676,6 +673,16 @@ export class FormComponent {
     this.GetdataService.OperationReports(shipmentGID, driverGID, powerGID, insertDate, insertUser,
       orderDate, sourceLocationGID, destLocationGID).subscribe(result => {
         this.consecutivo = result.data.order_id;
+
+        this.GetdataService.genPedido( this.consecutivo).subscribe(result => {
+
+          this.genOrderResult = result;
+
+          console.log('RESULTADO DE LA GEN DE LA ORDEN',this.genOrderResult);
+          
+        }, error => {
+          console.log(JSON.stringify(error));
+        });
         
 
       }, error => {

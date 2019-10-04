@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 // importar el observable
 import { Observable } from 'rxjs';
 
-import { EndPoints } from "./../../global/endpoint";
+import { EndPoints } from "../../global/endpoint";
 
 import { UtilFunction } from "../../global/utils/function.utils";
 
@@ -19,11 +19,13 @@ export class GetdataService {
 
   urlPrincipalOC: string;
   urlPrincipalEM: string;
+  urlPrincipalGP: string 
   // inyectar el httpclient
   constructor(private httpClient: HttpClient) {
     const endPoint = new EndPoints();
     this.urlPrincipalOC = endPoint.ordenCarga
     this.urlPrincipalEM = endPoint.mail
+    this.urlPrincipalGP = endPoint.genPedido
   }
 
 
@@ -87,6 +89,13 @@ export class GetdataService {
     return this.httpClient.post(this.urlPrincipalOC + 'saveReports', { shipment_gid, driver_gid, power_unit_gid, insert_date, insert_user, order_date, source_location_gid, dest_location_gid });
 
   }
+
+
+   genPedido(consecutivo : number): Observable<any> {
+
+    return this.httpClient.get(this.urlPrincipalGP + `getGenPedido/${consecutivo}`);
+  }
+
 
 
 }

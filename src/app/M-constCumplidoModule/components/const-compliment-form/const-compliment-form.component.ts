@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetConstComplimentService } from './.././/../service/const-compliment.service'
+import { GetConstComplimentService } from '../../service/const-compliment.service'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 // importar modelo
 import { ConstComplimentEntity } from '../../models/const-compliment.entity'
