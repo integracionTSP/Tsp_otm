@@ -34,6 +34,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 // modelos 
 import { ConstComplimentEntity } from './M-constCumplidoModule/models/const-compliment.entity';
+
 //utils
 import { UtilFunction } from './global/utils/function.utils';
 import { UtilMessage } from './global/utils/message.utils';
