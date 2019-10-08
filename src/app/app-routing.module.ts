@@ -11,6 +11,7 @@ const routes: Routes = [
 
   // login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  
   { path: 'login', component: LoginComponent },
 
   // orden de carga
@@ -18,6 +19,9 @@ const routes: Routes = [
 
   // constancia cumplido 
   { path: 'constancia-cumplido', component: ConstComplimentFormComponent } ,
+
+  // 
+  { path: 'cheque-otm', component: HomeComponent },
 
   // homne
   { path: 'home', component: HomeComponent }

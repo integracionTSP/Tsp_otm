@@ -23,13 +23,7 @@ export class LoginComponent implements OnInit {
   // todos usuarios traidos del servicio
   users: any ;
 
-  //habilitar btn
-  disabledBtn: boolean = true;
-  //Valor del check
-  checkBtn: boolean = false;
-
-  //habilitar barra horizontal
-
+  // habilitar barra horizontal
   enableNavBar: boolean;
 
 
@@ -142,14 +136,9 @@ export class LoginComponent implements OnInit {
 
     }
   }
-  // mostrar el boton de ingresar
-  checkvalidation(): void {
-    this.disabledBtn = this.checkBtn;
-
-  }
-
-
-  //inicializar
+ 
+  // inicializar
+  
   ngOnInit() {
     this.loginServ.sendEnviableState.subscribe(response => {
       this.enableNavBar = response;
