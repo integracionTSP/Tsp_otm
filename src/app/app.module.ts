@@ -38,6 +38,7 @@ import { ConstComplimentEntity } from './M-constCumplidoModule/models/const-comp
 //utils
 import { UtilFunction } from './global/utils/function.utils';
 import { UtilMessage } from './global/utils/message.utils';
+import { ChequeOtmFormComponent } from './M-operacion/cheque-otm-form/cheque-otm-form.component';
 
 
 
@@ -52,7 +53,8 @@ import { UtilMessage } from './global/utils/message.utils';
     FormComponent,
     LoginComponent,
     HomeComponent,
-    ConstComplimentFormComponent
+    ConstComplimentFormComponent,
+    ChequeOtmFormComponent
 
     
 
