@@ -180,7 +180,7 @@ div #encabezado > p{
       height: 30px;
       text-transform:uppercase;
       background: none;
-      
+      text-decoration: underline;
       width: 86%;
       color:#000066;
       cursor:pointer;
