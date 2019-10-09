@@ -1,0 +1,16 @@
+.form {
+    background-color: #e7ecff;
+    box-shadow: 1px 3px 12px 3px rgb(70,70,70);
+    font-style: italic;
+    font-weight: bold;
+    font-family: 'Cairo', sans-serif;
+    max-width: 89%;
+    margin-left: 5%;
+    margin-top: 3%;
+    }
+  
+    .form-row{
+      margin-left: 0%;
+      margin-bottom: 2%;
+    } 
+  

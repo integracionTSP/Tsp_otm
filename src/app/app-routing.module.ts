@@ -4,6 +4,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { FormComponent } from './M-ordenCargaModule/components/order-form/order-form.component';
 import { LoginComponent } from './M-auth/components/login/login.component';
 import { ConstComplimentFormComponent } from './M-constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
+import { ChequeOtmFormComponent } from './M-operacion/components/cheque-otm-form/cheque-otm-form.component';
 
 
 
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'constancia-cumplido', component: ConstComplimentFormComponent } ,
 
   // 
-  { path: 'cheque-otm', component: HomeComponent },
+  { path: 'cheque-otm', component: ChequeOtmFormComponent },
 
   // homne
   { path: 'home', component: HomeComponent }

@@ -11,7 +11,7 @@ import { FormComponent } from './M-ordenCargaModule/components/order-form/order-
 import { LoginComponent } from './M-auth/components/login/login.component';
 import { HomeComponent } from './shared/home/home.component';
 import { ConstComplimentFormComponent } from './M-constCumplidoModule/components/const-compliment-form/const-compliment-form.component';
-
+import { ChequeOtmFormComponent } from './M-operacion/components/cheque-otm-form/cheque-otm-form.component';
 // añadir servicio
 import { GetdataService } from './M-ordenCargaModule/service/getdata.service';
 import { GetAuthService } from './M-auth/service/auth.service';
@@ -34,11 +34,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 // modelos 
 import { ConstComplimentEntity } from './M-constCumplidoModule/models/const-compliment.entity';
+import { OperationEntity } from './M-operacion/models/operation.entity';
 
 //utils
 import { UtilFunction } from './global/utils/function.utils';
 import { UtilMessage } from './global/utils/message.utils';
-import { ChequeOtmFormComponent } from './M-operacion/cheque-otm-form/cheque-otm-form.component';
+
 
 
 
@@ -75,6 +76,7 @@ import { ChequeOtmFormComponent } from './M-operacion/cheque-otm-form/cheque-otm
   GetAuthService,
   GetConstComplimentService,
   ConstComplimentEntity,
+  OperationEntity,
   UtilFunction,
   UtilMessage],
   bootstrap: [NavBarComponent]

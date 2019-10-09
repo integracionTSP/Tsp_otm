@@ -152,6 +152,40 @@ div #encabezado > p{
       -webkit-animation-duration: 0.5s; 
     }
   
+    .btn-table {
+  
+      margin-top: 0px;
+      font-size: 12px;
+      color: rgb(100,100,100);
+      border: none;
+      outline: none;
+      height: 30px;
+      text-transform: uppercase;
+      background: none;
+      width: 86%;
+      color: #395581;
+      cursor: pointer;
+      border-radius: 0px 9px 0px 8px;
+  
+    }
+  
+    
+    .btn-table:hover {
+  
+      margin-top: 0px;
+      font-size: 12px;
+     
+      border:none;
+      outline:none;
+      height: 30px;
+      text-transform:uppercase;
+      background: none;
+      
+      width: 86%;
+      color:#000066;
+      cursor:pointer;
+    
+    }
   
 
   

@@ -1,0 +1,198 @@
+<div class="modal fade  bd-example-modal-md" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reporte Cheque OTM</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="pdf" class="container">
+          <div id="hoja">
+            <div id="titulo" class="text-center page-header">
+              <!--img src="logo1.png" alt=""-->
+              <section class="logo">
+                <img src="assets/img/tsp.png">
+              </section>
+
+
+              <p class="under-line"></p>
+
+            </div>
+            <div id="encabezado">
+              <P>Tiquete de carga: <span>.</span></P>
+              <p>Planilla: <span> .</span> </p>
+              <p>Placa: <span>.</span> </p>
+              <P>Cedula conductor: <span> .</span></P>
+              <P>Ruta: <span> </span> - <span> .</span></P>
+              <p>Fecha Cumplido: <span>. </span> </p>
+              <P>Peso: <span> .</span></P>
+              <P>Unidad: <span> .</span></P>
+              <P>Flete: <span> .</span></P>
+              <P>Anticipo: <span> .</span></P>
+              <P>Fecha Constancia Cumplido: <span>.</span></P>
+            </div>
+            <div id="cuerpo">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Descargar Pdf</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Section Form -->
+
+
+<section class="form">
+  <div class="container pt-5 pb-5 ">
+    <div class="row">
+      <div class="col-md-12 text-center ">
+        <h3 class="tittle-mark ">
+          <span class="tittle">CHEQUE OTM</span>
+        </h3>
+
+        <div class="row">
+          <div class="col-md-12">
+            <form [formGroup]='formCheckOTM'>
+
+              <div *ngIf="true" class="table ">
+                <h6 class="sub-tittle-mark">
+                  <span class="sub-tittle "> LISTA DE CHEQUES</span>
+                </h6>
+
+                <div class="table-responsive">
+                  <table class="table col-md-8 animated fadeIn fast">
+                    <thead class="thead-color ">
+                      <tr>
+
+
+                        <th scope="col">AUTORIZADO</th>
+                        <th scope="col ">No</th>
+                        <th scope="col"><span style="font-size: 18px; color: #dee2e6;"><i class="fas fa-print"></i></span> </th>
+                        <th scope="col">PLANILLA/VALOR</th>
+                        <th scope="col">BENEFICIARIO</th>
+                        <th scope="col">VLR CHEQUE</th>
+                        <th scope="col">MONEDA</th>
+                        <th scope="col">BANCO</th>
+                        <th scope="col">LASER</th>
+                        <th scope="col">USUARIO</th>
+                        <th scope="col">AGENCIA</th>
+                        <th scope="col">TIPO ANTICIPO</th>
+                        <th scope="col">PROV ANTICIPO</th>
+                        <th scope="col">CUENTAS</th>
+                        <th scope="col"></th>
+
+
+
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <tr class="animated fadeIn">
+                        <td> </td>
+                        <td>1 </td>
+                        <td><input name="column" type="radio"></td>
+                        <td>06595847464,000.00</td>
+                        <td colspan="1">LINDER FRANK TAPIAS GONZALEZ</td>
+                        <td>200.000.00</td>
+                        <td>PES </td>
+                        <td>CREDITO/OF PPAL ROTATIVO</td>
+                        <td>
+                          <div class="input-group " style="width: 60px;">
+                            <select class="custom-select">
+                              <option value="1">Si</option>
+                              <option value="2">No</option>
+                            </select>
+                          </div>
+                        </td>
+                        <td>KREALES</td>
+
+                        <td>OFICINA PRINCIPAL</td>
+
+                        <td>
+
+                          <div class="input-group " style="width: 200px;">
+                            <select class="custom-select">
+                              <option value="1">Transferencia - Efectivo </option>
+                              <option value="2">No</option>
+                            </select>
+                          </div>
+
+
+                        </td>
+                        <td>
+                          <div class="input-group " style="width: 200px;">
+                            <select class="custom-select">
+                              <option value="1">Seleccionar</option>
+                              <option value="2">No</option>
+                            </select>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="col-12 col-md-4 ">
+                            <button type="submit" class="btn-table">GESTION DE CUENTAS</button>
+
+                          </div>
+                        </td>
+                        <td>
+                                <div class="col-12 col-md-4 ">
+                                        <button type="submit" class="btn-table">CAMBIAR DE BANCO </button>
+            
+                                      </div>
+                        </td>
+
+
+                      </tr>
+
+                    </tbody>
+
+                    <tfoot>
+                      <tr class="mx-auto">
+                        <td colspan="10">
+
+                          <span class="text-muted font-weight-light " *ngIf="true"> Resultados</span>
+
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+
+                </div>
+              </div>
+
+
+
+              <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
+                <div class="col-12 col-md-4 ">
+                  <button type="submit" class="btn-form">GENERAR <i class="far fa-check-circle"></i></button>
+
+                </div>
+
+                <div *ngIf="false" class="col-12 col-md-4 ">
+                  <button data-toggle="modal" data-target="#exampleModal" type="submit" class="btn-form">IMPRIMIR <i
+                      class="fas fa-print"></i></button>
+                </div>
+                <div class="col-12 col-md-4">
+                  <button (click)="logOut()" type="submit" class="btn-form">SALIR <i
+                      class="fas fa-sign-out-alt"></i></button>
+                </div>
+
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

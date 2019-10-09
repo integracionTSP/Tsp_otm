@@ -1,10 +1,5 @@
 export class ConstComplimentEntity {
 
-
-  length(arg0: string, length: any) {
-    throw new Error("Method not implemented.");
-  }
-
   shipmentGID: string;
   powerUnitGID: string;
   driverGID: string;
@@ -17,4 +12,9 @@ export class ConstComplimentEntity {
   flete: number;
   anticipo: number;
   fechaConstCumplido: Date;
+
+  length(arg0: string, length: any) {
+    throw new Error('Method not implemented.');
+  }
+
 }
