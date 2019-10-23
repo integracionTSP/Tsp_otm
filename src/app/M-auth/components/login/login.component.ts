@@ -28,9 +28,6 @@ export class LoginComponent implements OnInit {
 
 
 
-
-
-
   // inicializar el servicio en el constructor
   constructor(private GetAuthService: GetAuthService, private router: Router, public loginServ: LoginService, public FormBuilder:FormBuilder) {
     this.targetMenu(false);
@@ -99,7 +96,9 @@ export class LoginComponent implements OnInit {
     let userUpper = login.username.toString().toUpperCase()
     let userCorrect: string;
     let passCorrect: string;
+    let agencyID; String;
     let email: string;
+
     // Encrypt password provide for user
     let pwd = crypto.SHA512(login.password);
  
@@ -115,6 +114,7 @@ export class LoginComponent implements OnInit {
         userCorrect = this.users[i].idusuario;
         passCorrect = this.users[i].angular_password;
         email = this.users[i].email;
+        agencyID = this.users[i].id_agencia
         //console.log('usuario correcto', userCorrect);
 
       }
@@ -123,6 +123,7 @@ export class LoginComponent implements OnInit {
 
     if (userCorrect == userUpper && passCorrect == pwd) {
       login.email = email;
+      login.id_agencia = agencyID
       localStorage.setItem('user', JSON.stringify(login));
       this.notifyMessageUser(userCorrect);
       //console.log('has iniciado session');
@@ -130,12 +131,15 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
       
     } else {
-      localStorage.setItem('user', '{"username":"","password":"","email":""}');
+      localStorage.setItem('user', '{"username":"","password":"","id_agencia":""}');
       this.alertMessageError('Usuario y/o contraseña incorrecto');
      // console.log('usuario y/o contraseña incorrecto');
 
     }
   }
+
+
+
  
   // inicializar
   

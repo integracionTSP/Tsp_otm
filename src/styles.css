@@ -76,10 +76,18 @@ div #encabezado > p{
      
       
     }
-  
-    .text-left-input{
+    
+    .my-tooltip {
+      white-space: pre-line;
+  }
+    /* .text-left-input{
       color: #003399;
       margin-right: 100%;
+    } */
+
+    .text-left-input{
+      text-align: left !important;
+      color: #003399;
     }
   
     .text-input-uppercase{

@@ -36,7 +36,8 @@ export class ConstComplimentFormComponent implements OnInit {
 
 
   constructor(private GetConstComplimentService: GetConstComplimentService, 
-              public FormBuilder: FormBuilder, private router: Router,
+              public FormBuilder: FormBuilder, 
+              private router: Router,
               public constCompEntity: ConstComplimentEntity,
               public fun: UtilFunction,
               public mess: UtilMessage) {

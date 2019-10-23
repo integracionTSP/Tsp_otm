@@ -16,7 +16,7 @@ import { ChequeOtmFormComponent } from './M-operacion/components/cheque-otm-form
 import { GetdataService } from './M-ordenCargaModule/service/getdata.service';
 import { GetAuthService } from './M-auth/service/auth.service';
 import { GetConstComplimentService } from './M-constCumplidoModule/service/const-compliment.service';
-
+import { GetChequeOtmService } from './M-operacion/service/cheque-otm.service';
 // importar el modulo http
 import { HttpClientModule } from '@angular/common/http';
 
@@ -34,7 +34,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 // modelos 
 import { ConstComplimentEntity } from './M-constCumplidoModule/models/const-compliment.entity';
-import { OperationEntity } from './M-operacion/models/operation.entity';
+import { checkOTMEntity } from './M-operacion/models/operation.entity';
 
 //utils
 import { UtilFunction } from './global/utils/function.utils';
@@ -56,9 +56,6 @@ import { UtilMessage } from './global/utils/message.utils';
     HomeComponent,
     ConstComplimentFormComponent,
     ChequeOtmFormComponent
-
-    
-
   ],
   imports: [
     BrowserModule,
@@ -75,8 +72,9 @@ import { UtilMessage } from './global/utils/message.utils';
   GetdataService,
   GetAuthService,
   GetConstComplimentService,
+  GetChequeOtmService,
   ConstComplimentEntity,
-  OperationEntity,
+  checkOTMEntity,
   UtilFunction,
   UtilMessage],
   bootstrap: [NavBarComponent]

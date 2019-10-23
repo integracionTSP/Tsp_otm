@@ -9,6 +9,7 @@ export class EndPoints {
     constCumplido = environment['urlPrincipal'] + 'constCumplido/';
     auth = environment['urlPrincipal'] + 'auth/';
     genPedido = environment['urlPrincipal'] + 'genPedido/';  
+    chequeOTM =  environment['urlPrincipal'] + 'chequeOTM/';  
 
 
 }

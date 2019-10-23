@@ -1,11 +1,23 @@
-export class OperationEntity {
+export class checkOTMEntity {
 
-    shipmentGID: string ;
-
-
-    length(arg0: string, length: any) {
-      throw new Error('Method not implemented.');
-    }
-
+  length(arg0: string, length: any) {
+    throw new Error('Method not implemented.');
   }
+  
+  shipmentGID: string;
+  idUser: String;
+  agencyID: String;
+  regStatus : String
+  dstrct: String;
+  accountID: Number;
+  accountName: String;
+  bank: String;
+  accountNumber: Number;
+  accountType : String;
+  accountNit : String;
+  
+  
+
+
+}
 

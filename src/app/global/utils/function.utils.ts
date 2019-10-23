@@ -115,6 +115,38 @@ export class UtilFunction {
     }
 
 
+    notifyMessageUser(userLoged){
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      
+      Toast.fire({
+        type: 'success',
+        title: `Bienvenido ${userLoged} `
+      })
+    }
+
+
+    
+    notifyMessageUpdate(){
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      
+      Toast.fire({
+        type: 'success',
+        title: `Registro actualizado `
+      })
+    }
+
     removeUnderscore(params:any): any{
       let str =  params
       let sub = str.split('_');

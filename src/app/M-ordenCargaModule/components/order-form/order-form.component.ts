@@ -46,9 +46,9 @@ export class FormComponent {
 
 
   // captura de datos de los input
-  //powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
+ // powerDriverGID: any = { powerGID: 'SXV600', driverGID: '84457569' }
 
-  // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
+ // powerDriverGID: any = { powerGID: 'TTU985', driverGID: '1067862970' }
 
  // powerDriverGID: any = { powerGID: 'TTU991', driverGID: '5136074' }
 
@@ -58,15 +58,8 @@ export class FormComponent {
 
 
 
-  /* ¡Atención! Se le informa que para combinacion,
-  Placa: powerDriverGID.powerGID
-  Conducto: powerDriverGID.driverGID
-  Se presentaron los siguientes errores:
-  messageToString() */
-
   powerDriverGID: any = { powerGID: '', driverGID: '' }
 
-  // mensaje no encontrado
 
 
   //resultados de la busqueda
