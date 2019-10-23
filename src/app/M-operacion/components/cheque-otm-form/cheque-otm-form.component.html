@@ -34,7 +34,6 @@
                         <th scope="col">VLR CHEQUE</th>
                         <th scope="col">MONEDA</th>
                         <th scope="col">BANCO</th>
-
                         <th scope="col">USUARIO</th>
                         <th scope="col">AGENCIA</th>
                         <th scope="col">TIPO ANTICIPO</th>
@@ -241,16 +240,10 @@
                               <button (click)="Updateadvanced(checkOTMEntity)" [disabled]="formCheckOTM.invalid" data-toggle="modal" data-target="#exampleModal" type="submit" class="btn-form">Aceptar <i
                                   class="far fa-check-circle"></i></button>
                             </div>
-                            <div *ngIf="false" class="col-12 col-md-6 ">
-                              <button  (click)="addAccount(checkOTMEntity)"  [disabled]="formCheckOTM.invalid"  type="submit" class="btn-form">Nuevo <i class="far fa-check-circle"></i></button>
+                            <div *ngIf="true" class="col-12 col-md-6 ">
+                              <button  (click)="addAccount()"  [disabled]="formCheckOTM.invalid"  type="submit" class="btn-form">Nuevo <i class="far fa-check-circle"></i></button>
             
-                            </div>
-
-                     
-
-
-                         
-                   
+                            </div>  
             
                           </div>
             

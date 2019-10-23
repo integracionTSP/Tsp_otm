@@ -144,7 +144,7 @@ export class UtilFunction {
 
 
     
-    notifyMessageUpdate(){
+    notifyMessageUpdate(message){
 
       const Toast = Swal.mixin({
         toast: true,
@@ -155,7 +155,7 @@ export class UtilFunction {
       
       Toast.fire({
         type: 'success',
-        title: `Registro actualizado `
+        title: `${message} `
       })
     }
 

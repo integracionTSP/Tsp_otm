@@ -106,18 +106,20 @@ export class GetChequeOtmService {
 
   
   AddAcount(
+    regStatus: String,
     dstrct: String,
-    accountNit: Number,
+    accountNit : String,
     bank: String,
     accountNumber: Number,
     accountType : String,
     accountName : String,
-    accountID: Number
+    accountID: Number,
+    idUser: String
 
     ): Observable<any> {
 
       return this.httpClient.post(this.urlPrincipalCO + 'AddAcount',
-       {  dstrct,accountNit, bank, accountNumber, accountType,accountName, accountID  });
+       { regStatus, dstrct,accountNit, bank, accountNumber, accountType,accountName, accountID,idUser  });
   }
 
 

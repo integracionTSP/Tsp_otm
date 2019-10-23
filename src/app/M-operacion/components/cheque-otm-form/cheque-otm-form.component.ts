@@ -267,10 +267,40 @@ export class ChequeOtmFormComponent implements OnInit {
   }
 
 
-  addAccount(checkOTMEntity: any){
+  addAccount(){
 
-    console.log('nuevos registro ',checkOTMEntity);
+    let regStatus = this.checkOTMEntity.regStatus
+    let dstrct = this.checkOTMEntity.dstrct;
+    let accountNit = this.checkOTMEntity.accountNit;
+    let bank = this.checkOTMEntity.bank;
+    let accountNumber = this.checkOTMEntity.accountNumber;
+    let accountType = this.checkOTMEntity.accountType;
+    let accountName = this.checkOTMEntity.accountName;
+    let accountID = this.checkOTMEntity.accountID;
+    let idUser = this.idUser;
+  
+    console.log(regStatus,dstrct , accountNit,bank, accountNumber,accountType,accountName,accountID,idUser);
     
+   // this.GetChequeOtmService.AddAcount()
+   this.GetChequeOtmService.AddAcount(regStatus,dstrct , accountNit,bank, accountNumber,accountType,accountName,accountID,idUser).subscribe(result => {
+    let res = result.response;
+    if (res != null) {
+        console.log(res);
+        this.fun.notifyMessageUpdate('Cuenta creada');
+        this.searchByID();
+        this.backCheckList();
+    } else {
+      res = {};
+    }
+  }, error => {
+    console.log(JSON.stringify(error));
+
+  });
+
+
+
+
+
 
   }
 
@@ -296,7 +326,7 @@ export class ChequeOtmFormComponent implements OnInit {
       let res = result.response;
       if (res != null) {
           console.log(res);
-          this.fun.notifyMessageUpdate();
+          this.fun.notifyMessageUpdate('Cuenta Actualizada');
           this.searchByID();
           this.backCheckList();
       } else {
