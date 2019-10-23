@@ -130,6 +130,18 @@ export class UtilFunction {
       })
     }
 
+    notifyData(params){
+
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Anticipo Realizado',
+        showConfirmButton: true,
+       
+      })
+    }
+
+
 
     
     notifyMessageUpdate(){
@@ -138,7 +150,7 @@ export class UtilFunction {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 2000
+        timer: 5000
       })
       
       Toast.fire({

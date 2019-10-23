@@ -40,7 +40,7 @@
                         <th scope="col">TIPO ANTICIPO</th>
                         <th scope="col">PROV ANTICIPO</th>
                         <th scope="col">CUENTAS</th>
-                        <th scope="col"></th>
+                        <!-- <th scope="col"></th> -->
                       </tr>
                     </thead>
 
@@ -101,12 +101,12 @@
 
                           </div>
                         </td>
-                        <td>
+                        <!-- <td>
                           <div class="col-12 col-md-4 ">
                             <button type="submit" class="btn-table">CAMBIAR DE BANCO </button>
 
                           </div>
-                        </td>
+                        </td> -->
 
 
                       </tr>
@@ -237,11 +237,11 @@
                           <div class="row justify-content-center" style="padding-top: 1%; padding-bottom: 1%;">
 
 
-                          <div  class="col-12 col-md-6 ">
+                          <div  class="col-12 col-md-6 mx-auto">
                               <button (click)="Updateadvanced(checkOTMEntity)" [disabled]="formCheckOTM.invalid" data-toggle="modal" data-target="#exampleModal" type="submit" class="btn-form">Aceptar <i
                                   class="far fa-check-circle"></i></button>
                             </div>
-                            <div  class="col-12 col-md-6 ">
+                            <div *ngIf="false" class="col-12 col-md-6 ">
                               <button  (click)="addAccount(checkOTMEntity)"  [disabled]="formCheckOTM.invalid"  type="submit" class="btn-form">Nuevo <i class="far fa-check-circle"></i></button>
             
                             </div>

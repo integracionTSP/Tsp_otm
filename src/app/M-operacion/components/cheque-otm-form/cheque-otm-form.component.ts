@@ -69,6 +69,8 @@ export class ChequeOtmFormComponent implements OnInit {
     });
   }
 
+
+  
   captureSelect() {
 
     console.log('select tipo anticipo:',this.advancedTypeSelect );
@@ -138,7 +140,7 @@ export class ChequeOtmFormComponent implements OnInit {
       let res = result.response;
 
       if (res != null) {
-        this.fun.waitingMessage(this.mess.getMessageID(this.mess.listMessageError, 10));
+       // this.fun.waitingMessage(this.mess.getMessageID(this.mess.listMessageError, 10));
         this.checkListResult = res;
         console.log('datos de la table-->', this.checkListResult);
 
@@ -224,6 +226,7 @@ export class ChequeOtmFormComponent implements OnInit {
     this.accountDescView = this.fun.disableView(this.accountDescView);
     this.btnBackCheckList = this.fun.disableView(this.backCheckList);
     this.btnAcept = this.fun.disableView(this.btnAcept);
+    this.btnAdvanced = this.fun.disableView(this.btnAdvanced)
   }
 
 
@@ -321,7 +324,7 @@ export class ChequeOtmFormComponent implements OnInit {
       let res = result.response;
       if (res != null) {
           console.log(res);
-          this.fun.notifyMessageUpdate();
+          this.fun.notifyData(this.advancedSelect);
           this.searchByID();
           this.backCheckList();
           this.btnAdvanced = this.fun.disableView(this.btnAdvanced)
